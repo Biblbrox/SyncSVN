@@ -1,0 +1,9 @@
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\x64\Debug\SyncSVN.dll
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\x64\Debug\SyncSVN.pdb
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\x64\Debug\SharpSvn.dll
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\x64\Debug\SharpSvn.xml
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\x64\Debug\SharpPlink-Win32.svnExe
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\x64\Debug\SyncSVN.csproj.CoreCompileInputs.cache
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\x64\Debug\SyncSVN.csproj.CopyComplete
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\x64\Debug\SyncSVN.dll
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\x64\Debug\SyncSVN.pdb
