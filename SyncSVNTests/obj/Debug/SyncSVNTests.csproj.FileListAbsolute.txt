@@ -15,10 +15,12 @@ C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\SyncSVN.dll.config
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\SharpSvn.xml
-C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\SharpPlink-Win32.svnExe
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\obj\Debug\SyncSVNTests.csprojAssemblyReference.cache
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\obj\Debug\SyncSVNTests.csproj.CoreCompileInputs.cache
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\obj\Debug\SyncSVNTests.csproj.CopyComplete
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\obj\Debug\SyncSVNTests.dll
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\obj\Debug\SyncSVNTests.pdb
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\SyncSVNTests.dll.config
+C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\SharpPlink-Win32.svnExe
+C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\SharpSvn.UI.dll
+C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\SharpSvn.UI.xml

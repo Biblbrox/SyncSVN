@@ -16,4 +16,6 @@ C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\x86\Debug\SyncSVN.csproj.CoreCom
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\x86\Debug\SyncSVN.csproj.CopyComplete
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\x86\Debug\SyncSVN.dll
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\x86\Debug\SyncSVN.pdb
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\x86\Debug\SharpSvn.UI.dll
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\x86\Debug\SharpSvn.UI.xml
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\x86\Debug\SyncSVN.csprojAssemblyReference.cache

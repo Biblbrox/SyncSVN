@@ -50,7 +50,7 @@ namespace RepositoryLib
 
         [Category("Место хранения")]
         [DisplayName("Локальная папка")]
-        public string RootPath { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments), "RVRFiles");[Category("Место хранения")]
+        //public string RootPath { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments), "RVRFiles");[Category("Место хранения")]
         //[DisplayName("Удаленная папка")]
         //public string SvnUrl { get; set; } = @"https://DESKTOP-TR8E3OJ/svn/test_repo/";
         //[Category("Авторизация")]
@@ -91,7 +91,7 @@ namespace RepositoryLib
         {
             lock (client)
             {
-                var svnFolder = Config.RootPath;
+                var svnFolder = Config.configData["RootPath"];
                 var svnUrl = Config.configData["SvnUrl"];
                 if (!Directory.Exists(svnFolder))
                     Directory.CreateDirectory(svnFolder);
@@ -143,7 +143,7 @@ namespace RepositoryLib
         {
             lock (client)
             {
-                var svnFolder = Config.RootPath;
+                var svnFolder = Config.configData["RootPath"];
                 var svnUrl = Config.configData["SvnUrl"];
                 if (!Directory.Exists(svnFolder))
                     Directory.CreateDirectory(svnFolder);
@@ -173,14 +173,13 @@ namespace RepositoryLib
         {
             lock (client)
             {
-                var svnFolder = Config.RootPath;
+                var svnFolder = Config.configData["RootPath"];
                 var svnUrl = Config.configData["SvnUrl"];
                 if (!Directory.Exists(svnFolder))
                     Directory.CreateDirectory(svnFolder);
 
                 var checkoutArgs = new SvnCheckOutArgs { /*Depth = SvnDepth.Empty*/ };
-                try
-                {
+                try {
                     if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0)
                     {
                         //                        client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
@@ -216,23 +215,20 @@ namespace RepositoryLib
 
         public void Push()
         {
-            lock (client)
-            {
-                var svnFolder = Config.RootPath;
+            lock (client) {
+                var svnFolder = Config.configData["RootPath"];
                 var svnUrl = Config.configData["SvnUrl"];
                 if (!Directory.Exists(svnFolder))
                     Directory.CreateDirectory(svnFolder);
 
                 var checkoutArgs = new SvnCheckOutArgs { /*Depth = SvnDepth.Empty*/ };
-                try
-                {
-                    if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0)
-                    {
+                try {
+                    if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0) {
                         //                        client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
 
                         SvnUpdateArgs args = new SvnUpdateArgs();
                         args.Revision = SvnRevision.Head;
-                        Console.Write("Pull changes to directory " + svnFolder + " with revision " + args.Revision + "\n");
+                        Console.Write("Push changes to directory remote repository" + "\n");
 
 
                         client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
@@ -241,22 +237,18 @@ namespace RepositoryLib
 
                     client.Log(
                         svnFolder,
-                        new SvnLogArgs
-                        {
+                        new SvnLogArgs {
                             Range = new SvnRevisionRange(9999, 9999)
                         },
-                        (o, e) =>
-                        {
-                            foreach (var changeItem in e.ChangedPaths)
-                            {
+                        (o, e) => {
+                            foreach (var changeItem in e.ChangedPaths) {
                                 Console.WriteLine(string.Format( "{0} {1} {2} {3}", changeItem.Action,
-                                       changeItem.CopyFromRevision,
-                                       changeItem.CopyFromPath));
+                                    changeItem.CopyFromRevision,
+                                    changeItem.CopyFromPath));
                             }
                         });
                 }
-                catch
-                {
+                catch {
                     throw new Exception("Unable to pull content from repository");
                 }
             }
