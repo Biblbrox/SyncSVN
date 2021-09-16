@@ -62,9 +62,75 @@ namespace RepositoryLib.Tests
             return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
         }
 
+
         public void PullTestRec(string DirUrl, string DirLocalPath)
         {
+            List<string> files = new List<string>();
+            List<string> directories = new List<string>();
+            using (SvnClient svnClient = new SvnClient()) {
+                SvnInfoEventArgs info;
+                Uri repos = new Uri(DirUrl);
+                svnClient.GetInfo(repos, out info);
 
+                Collection<SvnListEventArgs> contents;
+                SvnListArgs arg = new SvnListArgs();
+                arg.Revision = new SvnRevision(info.Revision); //the revision you want to check
+                arg.RetrieveEntries = SvnDirEntryItems.AllFieldsV15;
+                if (svnClient.GetList(new Uri(DirUrl), arg, out contents)) {
+                    foreach (SvnListEventArgs item in contents) {
+                        if (item.Entry.NodeKind == SvnNodeKind.Directory)
+                            directories.Add(item.Path);
+                        else if (item.Entry.NodeKind == SvnNodeKind.File)
+                            files.Add(item.Path);
+                    }
+                }
+            }
+
+            directories = directories.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+            directories.Sort();
+            foreach (var dir in directories)
+                PullTestRec(Path.Combine(DirUrl, dir), Path.Combine(DirLocalPath, dir));
+
+            files.Sort();
+
+            repo.Pull();
+
+            string rootPath = DirLocalPath;
+            List<string> localFiles = Directory.GetFiles(rootPath)
+                    .OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(rootPath)
+                .OfType<string>().ToList();
+
+            for (int i = 0; i < localFiles.Count; ++i)
+                localFiles[i] = GetRelativePath(localFiles[i], rootPath);
+
+            for (int i = 0; i < localDirectories.Count; ++i)
+                localDirectories[i] = GetRelativePath(localDirectories[i], rootPath);
+
+            localDirectories.RemoveAll(dir => dir == ".svn");
+            localDirectories.Sort();
+            localFiles.Sort();
+
+
+            Console.WriteLine("Remote files");
+            foreach (var file in files)
+                Console.WriteLine(file);
+            Console.WriteLine("Remote directories");
+            foreach (var dir in directories)
+                Console.WriteLine(dir);
+
+
+            Console.WriteLine("Local files");
+            foreach (var file in localFiles)
+                Console.WriteLine(file);
+            Console.WriteLine("Local directories");
+            foreach (var dir in localDirectories)
+                Console.WriteLine(dir);
+
+            Assert.AreEqual(localFiles.Count, files.Count);
+            Assert.AreEqual(localDirectories.Count, directories.Count);
+            CollectionAssert.AreEqual(localFiles, files);
+            CollectionAssert.AreEqual(localDirectories, directories);
         }
 
         [TestCleanup]
@@ -78,9 +144,10 @@ namespace RepositoryLib.Tests
             }
         }
 
-        /**
-         * Test download specific file
-         */
+
+        /// <summary>
+        /// Test download specific file
+        /// </summary>
         [TestMethod()]
         public void DownloadTest()
         {
@@ -96,75 +163,14 @@ namespace RepositoryLib.Tests
             }
         }
 
-        /**
-         * Test pull content from remove repository
-         */
+        /// <summary>
+        /// Test pull content from remove repository recursively
+        /// Test compare each directory or file name in remote repository with local
+        /// </summary>
         [TestMethod()]
         public void PullTest()
         {
-            List<string> files = new List<string>();
-            List<string> directories = new List<string>();
-            using (SvnClient svnClient = new SvnClient()) {
-                SvnInfoEventArgs info;
-                Uri repos = new Uri(config.configData["SvnUrl"]);
-                svnClient.GetInfo(repos, out info);
-                
-                Collection<SvnListEventArgs> contents;
-                SvnListArgs arg = new SvnListArgs();
-                arg.Revision = new SvnRevision(info.Revision); //the revision you want to check
-                arg.RetrieveEntries = SvnDirEntryItems.AllFieldsV15;
-                if (svnClient.GetList(new Uri(config.configData["SvnUrl"]), arg, out contents)) {
-                    foreach (SvnListEventArgs item in contents) {
-                        if (item.Entry.NodeKind == SvnNodeKind.Directory)
-                            directories.Add(item.Path);
-                        else if (item.Entry.NodeKind == SvnNodeKind.File)
-                            files.Add(item.Path);
-                        }
-                }
-            }
-
-            directories = directories.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
-            directories.Sort();
-            files.Sort();
-            
-            repo.Pull();
-            
-            string rootPath = config.configData["RootPath"];
-            List<string> localFiles = Directory.GetFiles(rootPath)
-                    .OfType<string>().ToList();
-            List<string> localDirectories = Directory.GetDirectories(rootPath)
-                .OfType<string>().ToList();
-            
-            for (int i = 0; i < localFiles.Count; ++i)
-                localFiles[i] = GetRelativePath(localFiles[i], rootPath);
-            
-            for (int i = 0; i < localDirectories.Count; ++i)
-                localDirectories[i] = GetRelativePath(localDirectories[i], rootPath);
-            
-            localDirectories.RemoveAll(dir => dir == ".svn");
-            localDirectories.Sort();
-            localFiles.Sort();
-            
-            
-            Console.WriteLine("Remote files");
-            foreach(var file in files)
-                Console.WriteLine(file);
-            Console.WriteLine("Remote directories");
-            foreach (var dir in directories)
-                Console.WriteLine(dir);
-            
-            
-            Console.WriteLine("Local files");
-            foreach (var file in localFiles)
-                Console.WriteLine(file);
-            Console.WriteLine("Local directories");
-            foreach (var dir in localDirectories)
-                Console.WriteLine(dir);
-
-            Assert.AreEqual(localFiles.Count, files.Count);
-            Assert.AreEqual(localDirectories.Count, directories.Count);
-            CollectionAssert.AreEqual(localFiles, files);
-            CollectionAssert.AreEqual(localDirectories, directories);
+            PullTestRec(config.configData["SvnUrl"], config.configData["RootPath"]);
         }
         
         [TestMethod()]
