@@ -1,4 +1,3 @@
-C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\Debug\SyncSVN.csprojAssemblyReference.cache
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\Debug\SyncSVN.csproj.CoreCompileInputs.cache
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\SyncSVN.dll
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\SyncSVN.pdb
@@ -8,3 +7,14 @@ C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\SharpPlink-Win32.svnExe
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\Debug\SyncSVN.csproj.CopyComplete
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\Debug\SyncSVN.dll
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\Debug\SyncSVN.pdb
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\SyncSVN.dll.config
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\SharpSvn.UI.dll
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Security.AccessControl.dll
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Security.Permissions.dll
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\SharpSvn.UI.xml
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Security.AccessControl.xml
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Security.Permissions.xml
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Security.Principal.Windows.xml

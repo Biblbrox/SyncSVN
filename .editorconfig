@@ -1,0 +1,7 @@
+# All files
+[*]
+guidelines = 100
+
+# C# or VB files
+[*.{cs,vb}]
+guidelines = 100, 120

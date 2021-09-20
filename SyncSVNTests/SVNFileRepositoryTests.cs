@@ -17,6 +17,14 @@ namespace RepositoryLib.Tests
         private SVNFileRepository repo { get; set; }
         private SVNFileRepositoryConfig config { get; set; }
 
+        private void cleanRepo()
+        {
+            // Delete all files in a working directory    
+            string[] files = Directory.GetFiles(config.configData["RootPath"]);
+            foreach (string file in files)
+                File.Delete(file);
+        }
+
         [TestInitialize]
         public void TestInitialize()
         {
@@ -32,9 +40,7 @@ namespace RepositoryLib.Tests
 
 
                 // Delete all files in a working directory    
-                string[] files = Directory.GetFiles(config.configData["RootPath"]);
-                foreach (string file in files)
-                    File.Delete(file);
+                cleanRepo();
 
                 repo = new RepositoryLib.SVNFileRepository(config);
             } catch (Exception e) {
@@ -55,9 +61,9 @@ namespace RepositoryLib.Tests
         {
             Uri pathUri = new Uri(filespec);
             // Folders must end in a slash
-            if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString())) {
+            if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
                 folder += Path.DirectorySeparatorChar;
-            }
+
             Uri folderUri = new Uri(folder);
             return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
         }
@@ -164,7 +170,7 @@ namespace RepositoryLib.Tests
         }
 
         /// <summary>
-        /// Test pull content from remove repository recursively
+        /// Test pull content from remote repository recursively
         /// Test compare each directory or file name in remote repository with local
         /// </summary>
         [TestMethod()]
@@ -172,16 +178,77 @@ namespace RepositoryLib.Tests
         {
             PullTestRec(config.configData["SvnUrl"], config.configData["RootPath"]);
         }
-        
+
+        /// <summary>
+        /// Test push content to remote repository recursively
+        /// 
+        /// </summary>
         [TestMethod()]
         public void PushTest()
         {
-            try {
-                // Test pull repository
-                repo.Push();
-            } catch (Exception e) {
-                Assert.Fail("Exception occured: " + e.Message + "\n");  
-            }
+            Console.WriteLine("PushTest");
+            string rootPath = config.configData["RootPath"];
+            string svnPath = config.configData["SvnUrl"];
+
+            // Fetch Repository con
+            repo.Pull();
+
+            // Create directory
+            string dirName = "dir_name_that_must_be_free_for_usage";
+            string dirPath = Path.Combine(rootPath, dirName);
+            Directory.CreateDirectory(dirPath);
+            // Add file in that directory
+            File.Create(Path.Combine(dirPath, "file_name_that_must_be_free_for_usage.txt")).Close();
+
+            // Push changes
+            repo.Push();
+
+
+            // Remember local dirs and files
+            List<string> localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(rootPath)
+                .OfType<string>().ToList();
+
+            for (int i = 0; i < localFiles.Count; ++i)
+                localFiles[i] = GetRelativePath(localFiles[i], rootPath);
+
+            for (int i = 0; i < localDirectories.Count; ++i)
+                localDirectories[i] = GetRelativePath(localDirectories[i], rootPath);
+
+            localDirectories.RemoveAll(dir => dir == ".svn");
+            localDirectories.Sort();
+            localFiles.Sort();
+
+
+            // Clean local files
+            cleanRepo();
+
+            // Fetch repo with new dir and file
+            repo.Pull();
+
+
+            // Store new lical dirs and files
+            List<string> newLocalFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
+            List<string> newLocalDirectories = Directory.GetDirectories(rootPath)
+                .OfType<string>().ToList();
+
+            for (int i = 0; i < newLocalFiles.Count; ++i)
+                newLocalFiles[i] = GetRelativePath(newLocalFiles[i], rootPath);
+
+            for (int i = 0; i < newLocalDirectories.Count; ++i)
+                newLocalDirectories[i] = GetRelativePath(newLocalDirectories[i], rootPath);
+
+            newLocalDirectories.RemoveAll(dir => dir == ".svn");
+            newLocalDirectories.Sort();
+            newLocalFiles.Sort();
+
+
+            // Check that content before commit and after clean pull is the same
+
+            Assert.AreEqual(localFiles.Count, newLocalFiles.Count);
+            Assert.AreEqual(localDirectories.Count, newLocalDirectories.Count);
+            CollectionAssert.AreEqual(localFiles, newLocalFiles);
+            CollectionAssert.AreEqual(localDirectories, newLocalDirectories);
         }
     }
 }

@@ -87,6 +87,28 @@ namespace RepositoryLib
             client = InitSvnClient();
         }
 
+        private string GetRelativePath(string filespec, string folder)
+        {
+            Uri pathUri = new Uri(filespec);
+            // Folders must end in a slash
+            if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
+                folder += Path.DirectorySeparatorChar;
+
+            Uri folderUri = new Uri(folder);
+            return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
+        }
+
+        public bool ContainsSubPath(string pathToFile, string subPath)
+        {
+            return pathToFile.Contains(string.Format(@"{0}\", subPath));
+        }
+
+        private List<string> GetAllFilesAndDirs(string dirPath)
+        {
+            string[] entries = Directory.GetFileSystemEntries(dirPath, "*", SearchOption.AllDirectories);
+            return new List<string>(entries);
+        }
+
         public string Download(string id)
         {
             lock (client)
@@ -171,6 +193,7 @@ namespace RepositoryLib
 
         public void Pull()
         {
+            // TODO: if status is empty do nothing
             lock (client)
             {
                 var svnFolder = Config.configData["RootPath"];
@@ -186,7 +209,8 @@ namespace RepositoryLib
 
                         SvnUpdateArgs args = new SvnUpdateArgs();
                         args.Revision = SvnRevision.Head;
-                        Console.Write("Pull changes to directory " + svnFolder + " with revision " + args.Revision + "\n");
+                        Console.Write("Pull changes to directory " + svnFolder + " with revision "
+                            + args.Revision + "\n");
 
 
                         client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
@@ -196,11 +220,11 @@ namespace RepositoryLib
                     List<string> files = new List<string>();
                     System.Collections.ObjectModel.Collection<SvnListEventArgs> list;
                     gotList = client.GetList(svnFolder, out list);
-                    if (gotList)
-                    {
+                    if (gotList) {
                         foreach (SvnListEventArgs item in list)
                         {
-                            client.Update(Path.Combine(svnFolder, item.Path), new SvnUpdateArgs() { UpdateParents = true });
+                            client.Update(Path.Combine(svnFolder, item.Path), new SvnUpdateArgs() 
+                            { UpdateParents = true });
                             files.Add(item.Path);
                         }
                     }
@@ -221,37 +245,55 @@ namespace RepositoryLib
                 if (!Directory.Exists(svnFolder))
                     Directory.CreateDirectory(svnFolder);
 
+                Console.Write("Local directory: " + svnFolder);
                 var checkoutArgs = new SvnCheckOutArgs { /*Depth = SvnDepth.Empty*/ };
                 try {
                     if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0) {
-                        //                        client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
-
                         SvnUpdateArgs args = new SvnUpdateArgs();
                         args.Revision = SvnRevision.Head;
                         Console.Write("Push changes to directory remote repository" + "\n");
-
-
-                        client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
+                        client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);                
                     }
 
 
-                    client.Log(
-                        svnFolder,
-                        new SvnLogArgs {
-                            Range = new SvnRevisionRange(9999, 9999)
-                        },
-                        (o, e) => {
-                            foreach (var changeItem in e.ChangedPaths) {
-                                Console.WriteLine(string.Format( "{0} {1} {2} {3}", changeItem.Action,
-                                    changeItem.CopyFromRevision,
-                                    changeItem.CopyFromPath));
-                            }
-                        });
+                    // TODO: customize commit message
+                    var commitArgs = new SvnCommitArgs { LogMessage = $"Commit message" };
+
+                    List<string> localEntries = GetAllFilesAndDirs(svnFolder);
+                    localEntries.RemoveAll(dir => dir.Trim().EndsWith(".svn"));
+                    localEntries.RemoveAll(dir => ContainsSubPath(dir, ".svn"));
+                    //localDirs.Sort();
+                    //localFiles.Sort();
+
+                    try {
+                        if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0)
+                            client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
+                        foreach (var dir in localEntries)
+                            if (!underSvnControl(dir))
+                                client.Add(dir);
+
+                        foreach (var file in localEntries)
+                            if (!underSvnControl(file))
+                                client.Add(file);
+
+                        client.Commit(svnFolder, commitArgs);
+                    } catch (Exception e) {
+                        throw new Exception("Unable to push content to repository: " + e.Message);
+                    }
                 }
-                catch {
-                    throw new Exception("Unable to pull content from repository");
+                catch (Exception e){
+                    throw new Exception("Unable to push content to repository: " + e.Message);
                 }
             }
+        }
+
+        public bool underSvnControl(string filePath)
+        {
+            // use ThrowOnError = false to avoid exception in case the path does
+            // not point to a versioned item
+            SvnInfoArgs svnInfoArgs = new SvnInfoArgs() { ThrowOnError = false };
+            System.Collections.ObjectModel.Collection<SvnInfoEventArgs> svnInfo;
+            return client.GetInfo(SvnTarget.FromString(filePath), svnInfoArgs, out svnInfo);
         }
 
         public void Dispose()
