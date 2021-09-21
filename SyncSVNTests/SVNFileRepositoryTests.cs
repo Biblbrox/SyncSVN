@@ -242,13 +242,123 @@ namespace RepositoryLib.Tests
             newLocalDirectories.Sort();
             newLocalFiles.Sort();
 
-
             // Check that content before commit and after clean pull is the same
 
             Assert.AreEqual(localFiles.Count, newLocalFiles.Count);
             Assert.AreEqual(localDirectories.Count, newLocalDirectories.Count);
             CollectionAssert.AreEqual(localFiles, newLocalFiles);
             CollectionAssert.AreEqual(localDirectories, newLocalDirectories);
+        }
+
+        /// <summary>
+        /// Test resolving conflicts while pull changes from repository
+        /// </summary>
+        [TestMethod()]
+        public void TestConflictPull()
+        {
+            string rootPath = config.configData["RootPath"];
+            string svnPath = config.configData["SvnUrl"];
+
+            repo.Pull();
+
+            // Simulate another user
+            string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
+            Directory.CreateDirectory(testRootPath);
+            config.configData["RootPath"] = testRootPath;
+
+            // Delete all files in a test working directory    
+            cleanRepo();
+
+            var anotherRepo = new RepositoryLib.SVNFileRepository(config);
+
+            anotherRepo.Pull();
+
+            List<string> localFiles = Directory.GetFiles(config.configData["RootPath"]).OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(config.configData["RootPath"])
+                .OfType<string>().ToList();
+
+            // Modify content of some file
+            string conflictFile = localFiles[0];
+            using (StreamWriter sr = File.AppendText(conflictFile)) {
+                sr.WriteLine("Add new line to file");
+            }
+
+            anotherRepo.Push();
+            // End of another user session
+
+            // Make changes via default user
+            config.configData["RootPath"] = rootPath;
+            localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
+            localDirectories = Directory.GetDirectories(rootPath).OfType<string>().ToList();
+
+            // Modify content of some file
+            conflictFile = localFiles[0];
+            using (StreamWriter sr = File.AppendText(conflictFile)) {
+                sr.WriteLine("Add another new line to file");
+            }
+
+            // Now this file changed by another user and local user both.
+            // Try to pull changes from repo
+            repo.Pull();
+
+            // TODO: write asserts
+        }
+
+        /// <summary>
+        /// Test resolving conflicts while push changes from repository
+        /// </summary>
+        [TestMethod()]
+        public void TestConflictPush()
+        {
+            string rootPath = config.configData["RootPath"];
+            string svnPath = config.configData["SvnUrl"];
+
+            repo.Pull();
+
+
+            // Simulate another user
+            string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
+            Directory.CreateDirectory(testRootPath);
+            config.configData["RootPath"] = testRootPath;
+
+            // Delete all files in test working directory    
+            cleanRepo();
+
+            var anotherRepo = new SVNFileRepository(config);
+
+            anotherRepo.Pull();
+
+            List<string> localFiles =
+                Directory.GetFiles(config.configData["RootPath"]).OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(config.configData["RootPath"])
+                .OfType<string>().ToList();
+
+            // Modify content of some file
+            string conflictFile = localFiles[0];
+            using (StreamWriter sr = File.AppendText(conflictFile)) {
+                sr.WriteLine("Add new line to file");
+            }
+
+            anotherRepo.Push();
+            // End of another user session
+
+
+            // Make changes via default user
+            config.configData["RootPath"] = rootPath;
+            localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
+            localDirectories = Directory.GetDirectories(rootPath).OfType<string>().ToList();
+
+            // Modify content of some file
+            conflictFile = localFiles[0];
+            using (StreamWriter sr = File.AppendText(conflictFile)) {
+                sr.WriteLine("Add another new line to file");
+            }
+
+            // Now this file changed by another user and local user both.
+            // Try to pull changes from repo
+            repo.Push();
+
+            // TODO: write asserts
         }
     }
 }

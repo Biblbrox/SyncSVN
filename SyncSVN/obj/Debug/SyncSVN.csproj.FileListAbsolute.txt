@@ -18,3 +18,4 @@ C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Configuration.Confi
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Security.AccessControl.xml
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Security.Permissions.xml
 C:\Users\belya\source\repos\SyncSVN\SyncSVN\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\belya\source\repos\SyncSVN\SyncSVN\obj\Debug\SyncSVN.csprojAssemblyReference.cache

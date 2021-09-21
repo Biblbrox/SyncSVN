@@ -26,39 +26,19 @@ namespace RepositoryLib
 
         public void parseConfigFile()
         {
-            try
-            {
+            try {
                 var appSettings = ConfigurationManager.AppSettings;
 
                 if (appSettings.Count == 0)
-                {
                     throw new ConfigurationErrorsException("Application settings file doesn't exists");
-                }
                 else
-                {
-                    foreach (var key in appSettings.AllKeys)
-                    {
+                    foreach (var key in appSettings.AllKeys) 
                         configData.Add(key, appSettings[key].ToString());
-                    }
-                }
-            }
-            catch (ConfigurationException e)
-            {
+            } catch (ConfigurationException e) {
                 throw new ConfigurationErrorsException("Error reading app settings: " + e.Message);
             }
         }
 
-        [Category("Место хранения")]
-        [DisplayName("Локальная папка")]
-        //public string RootPath { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments), "RVRFiles");[Category("Место хранения")]
-        //[DisplayName("Удаленная папка")]
-        //public string SvnUrl { get; set; } = @"https://DESKTOP-TR8E3OJ/svn/test_repo/";
-        //[Category("Авторизация")]
-        //[DisplayName("Имя пользователя")]
-        //public string SvnUser { get; set; } = "aleksey";
-        //[Category("Авторизация")]
-        //[DisplayName("Пароль пользователя")]
-        //public string SvnPassword { get; set; } = "82348234";
         public SortedDictionary<string, string> configData { get; set; }
     }
 
@@ -111,8 +91,7 @@ namespace RepositoryLib
 
         public string Download(string id)
         {
-            lock (client)
-            {
+            lock (client) {
                 var svnFolder = Config.configData["RootPath"];
                 var svnUrl = Config.configData["SvnUrl"];
                 if (!Directory.Exists(svnFolder))
@@ -124,16 +103,12 @@ namespace RepositoryLib
                 var checkoutArgs = new SvnCheckOutArgs {/* Depth = SvnDepth.Empty*/ };
                 //using (var client = InitSvnClient())
                 //{
-                try
-                {
-                    if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0)
-                    {
+                try {
+                    if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0) {
                         client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
                     }
                     client.Update(svnPath);
-                }
-                catch
-                {
+                } catch {
                     throw new Exception("Unable to fetch content from repository");
                 }
                 return svnPath;
@@ -143,18 +118,14 @@ namespace RepositoryLib
         public SvnClient InitSvnClient()
         {
             SvnClient client = null;
-            try
-            {
+            try {
                 client = new SvnClient();
                 client.Authentication.ForceCredentials(Config.configData["SvnUser"], Config.configData["SvnPassword"]);
-                client.Authentication.SslServerTrustHandlers += (s, e) =>
-                {
+                client.Authentication.SslServerTrustHandlers += (s, e) => {
                     e.AcceptedFailures = e.Failures;
                     e.Save = true;
                 };
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 throw new Exception("Unable to connect to svn server: " + e.Message);
             }
 
@@ -163,8 +134,7 @@ namespace RepositoryLib
 
         public string Upload(string path)
         {
-            lock (client)
-            {
+            lock (client) {
                 var svnFolder = Config.configData["RootPath"];
                 var svnUrl = Config.configData["SvnUrl"];
                 if (!Directory.Exists(svnFolder))
@@ -178,14 +148,12 @@ namespace RepositoryLib
                 File.Copy(path, svnPath);
                 //using (var client = InitSvnClient())
                 //{
-                try
-                {
+                try {
                     if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0)
                         client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
                     client.Add(svnPath);
                     client.Commit(svnFolder, commitArgs);
-                }
-                catch { }
+                } catch { }
                 return fileName;
                 //}
             }
@@ -194,8 +162,7 @@ namespace RepositoryLib
         public void Pull()
         {
             // TODO: if status is empty do nothing
-            lock (client)
-            {
+            lock (client) {
                 var svnFolder = Config.configData["RootPath"];
                 var svnUrl = Config.configData["SvnUrl"];
                 if (!Directory.Exists(svnFolder))
@@ -203,36 +170,104 @@ namespace RepositoryLib
 
                 var checkoutArgs = new SvnCheckOutArgs { /*Depth = SvnDepth.Empty*/ };
                 try {
-                    if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0)
-                    {
-                        //                        client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
+                    if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0) {
+                        // Restore local changes
+                        if (Convert.ToBoolean(Config.configData["ForceRemote"])) {
+                            var localFiles =
+                                Directory.GetFiles(svnFolder).OfType<string>().ToList();
+                            var localDirectories =
+                                Directory.GetDirectories(svnFolder).OfType<string>().ToList();
+
+                            Func<string, bool> restoreChanges = filePath => {
+                                var statusArgs = new SvnStatusArgs();
+                                statusArgs.Depth = SvnDepth.Infinity;
+                                statusArgs.RetrieveAllEntries = true;
+                                System.Collections.ObjectModel.Collection<SvnStatusEventArgs> statuses;
+                                client.GetStatus(filePath, statusArgs, out statuses);
+
+                                // Check statuses
+                                foreach (SvnStatusEventArgs statusEventArgs in statuses) {
+                                    if (statusEventArgs.LocalContentStatus == SvnStatus.Modified) {
+                                        var revertArgs = new SvnRevertArgs() {
+                                            Depth = SvnDepth.Infinity,
+                                        };
+                                        client.Revert(statusEventArgs.Path, revertArgs);
+                                    }
+                                }
+
+                                return true;
+                            };
+
+                            foreach (var file in localFiles)
+                                restoreChanges(file);
+
+                            foreach (var dir in localDirectories)
+                                restoreChanges(dir);
+                        }
+
 
                         SvnUpdateArgs args = new SvnUpdateArgs();
                         args.Revision = SvnRevision.Head;
                         Console.Write("Pull changes to directory " + svnFolder + " with revision "
                             + args.Revision + "\n");
 
-
                         client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
                     }
-
+                    //                    SvnAccept.
+                    /*
                     bool gotList;
                     List<string> files = new List<string>();
                     System.Collections.ObjectModel.Collection<SvnListEventArgs> list;
                     gotList = client.GetList(svnFolder, out list);
                     if (gotList) {
-                        foreach (SvnListEventArgs item in list)
-                        {
+                        foreach (SvnListEventArgs item in list) {
                             client.Update(Path.Combine(svnFolder, item.Path), new SvnUpdateArgs() 
                             { UpdateParents = true });
                             files.Add(item.Path);
                         }
                     }
-                    client.Update(svnFolder, new SvnUpdateArgs() { UpdateParents = true });
-                }
-                catch
-                {
-                    throw new Exception("Unable to pull content from repository");
+
+                    // Restore local changes
+                    if (Convert.ToBoolean(Config.configData["ForceRemote"])) {
+                        var localFiles = 
+                            Directory.GetFiles(svnFolder).OfType<string>().ToList();
+                        var localDirectories = 
+                            Directory.GetDirectories(svnFolder).OfType<string>().ToList();
+
+                        Func<string, bool> restoreChanges = filePath => {
+                            var statusArgs = new SvnStatusArgs();
+                            statusArgs.Depth = SvnDepth.Infinity;
+                            statusArgs.RetrieveAllEntries = true;
+                            System.Collections.ObjectModel.Collection<SvnStatusEventArgs> statuses;
+                            client.GetStatus(filePath, statusArgs, out statuses);
+
+                            // Check statuses
+                            foreach (SvnStatusEventArgs statusEventArgs in statuses) {
+                                if (statusEventArgs.LocalContentStatus == SvnStatus.Modified) {
+                                    var revertArgs = new SvnRevertArgs() {
+                                        Depth = SvnDepth.Infinity,
+                                    };
+                                    client.Revert(statusEventArgs.Path, revertArgs);
+                                }
+                            }
+
+                            return true;
+                        };
+
+                        foreach (var file in localFiles)
+                            restoreChanges(file);
+
+                        foreach (var dir in localDirectories)
+                            restoreChanges(dir);
+
+
+                    }
+
+                    var updateArgs = new SvnUpdateArgs() { UpdateParents = true };
+                    client.Update(svnFolder, updateArgs);
+                    */
+                } catch (Exception e) {
+                    throw new Exception("Unable to pull content from repository: " + e.Message);
                 }
             }
         }
@@ -249,10 +284,44 @@ namespace RepositoryLib
                 var checkoutArgs = new SvnCheckOutArgs { /*Depth = SvnDepth.Empty*/ };
                 try {
                     if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0) {
+                        // Restore local changes
+                        /*if (Convert.ToBoolean(Config.configData["ForceRemote"])) {
+                            var localFiles =
+                                Directory.GetFiles(svnFolder).OfType<string>().ToList();
+                            var localDirectories =
+                                Directory.GetDirectories(svnFolder).OfType<string>().ToList();
+
+                            Func<string, bool> restoreChanges = filePath => {
+                                var statusArgs = new SvnStatusArgs();
+                                statusArgs.Depth = SvnDepth.Infinity;
+                                statusArgs.RetrieveAllEntries = true;
+                                System.Collections.ObjectModel.Collection<SvnStatusEventArgs> statuses;
+                                client.GetStatus(filePath, statusArgs, out statuses);
+
+                                // Check statuses
+                                foreach (SvnStatusEventArgs statusEventArgs in statuses) {
+                                    if (statusEventArgs.LocalContentStatus == SvnStatus.Modified) {
+                                        var revertArgs = new SvnRevertArgs() {
+                                            Depth = SvnDepth.Infinity,
+                                        };
+                                        client.Revert(statusEventArgs.Path, revertArgs);
+                                    }
+                                }
+
+                                return true;
+                            };
+
+                            foreach (var file in localFiles)
+                                restoreChanges(file);
+
+                            foreach (var dir in localDirectories)
+                                restoreChanges(dir);
+                        }*/
+
                         SvnUpdateArgs args = new SvnUpdateArgs();
                         args.Revision = SvnRevision.Head;
                         Console.Write("Push changes to directory remote repository" + "\n");
-                        client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);                
+                        client.CheckOut(new SvnUriTarget(svnUrl), svnFolder, checkoutArgs);
                     }
 
 
@@ -262,8 +331,6 @@ namespace RepositoryLib
                     List<string> localEntries = GetAllFilesAndDirs(svnFolder);
                     localEntries.RemoveAll(dir => dir.Trim().EndsWith(".svn"));
                     localEntries.RemoveAll(dir => ContainsSubPath(dir, ".svn"));
-                    //localDirs.Sort();
-                    //localFiles.Sort();
 
                     try {
                         if (client.GetUrl(svnFolder).IndexOf(svnUrl) < 0)
@@ -280,8 +347,7 @@ namespace RepositoryLib
                     } catch (Exception e) {
                         throw new Exception("Unable to push content to repository: " + e.Message);
                     }
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     throw new Exception("Unable to push content to repository: " + e.Message);
                 }
             }
@@ -305,8 +371,7 @@ namespace RepositoryLib
     {
         public static string GetUrl(this SvnClient client, string folder)
         {
-            if (client != null)
-            {
+            if (client != null) {
                 var svnUri = client.GetUriFromWorkingCopy(folder);
                 if (svnUri == null) return string.Empty;
                 return svnUri.AbsoluteUri;
