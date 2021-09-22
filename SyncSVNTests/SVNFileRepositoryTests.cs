@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpSvn;
+using SyncSVNTestForms;
+using System.Windows.Forms;
 
 namespace RepositoryLib.Tests
 {
@@ -25,6 +27,7 @@ namespace RepositoryLib.Tests
                 File.Delete(file);
         }
 
+        [STAThread]
         [TestInitialize]
         public void TestInitialize()
         {
@@ -261,6 +264,7 @@ namespace RepositoryLib.Tests
 
             repo.Pull();
 
+
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             Directory.CreateDirectory(testRootPath);
@@ -269,11 +273,12 @@ namespace RepositoryLib.Tests
             // Delete all files in a test working directory    
             cleanRepo();
 
-            var anotherRepo = new RepositoryLib.SVNFileRepository(config);
+            var anotherRepo = new SVNFileRepository(config);
 
             anotherRepo.Pull();
 
-            List<string> localFiles = Directory.GetFiles(config.configData["RootPath"]).OfType<string>().ToList();
+            List<string> localFiles =
+                Directory.GetFiles(config.configData["RootPath"]).OfType<string>().ToList();
             List<string> localDirectories = Directory.GetDirectories(config.configData["RootPath"])
                 .OfType<string>().ToList();
 
@@ -285,6 +290,7 @@ namespace RepositoryLib.Tests
 
             anotherRepo.Push();
             // End of another user session
+
 
             // Make changes via default user
             config.configData["RootPath"] = rootPath;
@@ -299,9 +305,46 @@ namespace RepositoryLib.Tests
 
             // Now this file changed by another user and local user both.
             // Try to pull changes from repo
-            repo.Pull();
+            Func<List<string>, List<bool>> resolveConflict = conflictList => {
+                string msg = "В следующих удаленных файлах были сделаны изменения."
+                + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
+                SyncSVNTestForm form = new SyncSVNTestForm(msg, conflictList);
 
-            // TODO: write asserts
+                List<bool> result = new List<bool>();
+                form.checkedListBox1.ItemCheck += (sender, e) => {
+                    SortedDictionary<string, bool> resolved = new SortedDictionary<string, bool>();
+
+                    List<string> checkedItems = new List<string>();
+                    foreach (var item in form.checkedListBox1.CheckedItems)
+                        checkedItems.Add(item.ToString());
+
+                    if (e.NewValue == CheckState.Checked)
+                        checkedItems.Add(form.checkedListBox1.Items[e.Index].ToString());
+                    else
+                        checkedItems.Remove(form.checkedListBox1.Items[e.Index].ToString());
+
+                    foreach (string item in checkedItems)
+                        resolved[item] = true;
+
+                    foreach (KeyValuePair<string, bool> pair in resolved)
+                        result.Add(pair.Value);
+                };
+
+                form.button1.Click += (sender, e) => {
+                    Application.Exit();
+                };
+
+                Application.EnableVisualStyles();
+                Application.Run(form);
+
+                return result;
+            };
+
+
+            repo.Pull(resolveConflict);
+
+            // Check that conflict resolved
+            Assert.IsTrue(!File.Exists(conflictFile + ".mine"), "Conflicts must be resolved");
         }
 
         /// <summary>
@@ -346,7 +389,6 @@ namespace RepositoryLib.Tests
             // Make changes via default user
             config.configData["RootPath"] = rootPath;
             localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
-            localDirectories = Directory.GetDirectories(rootPath).OfType<string>().ToList();
 
             // Modify content of some file
             conflictFile = localFiles[0];
@@ -356,9 +398,52 @@ namespace RepositoryLib.Tests
 
             // Now this file changed by another user and local user both.
             // Try to pull changes from repo
-            repo.Push();
+
+            Func<List<string>, List<bool>> resolveConflict = conflictList => {
+                string msg = "В следующих удаленных файлах были сделаны изменения."
+                + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
+                SyncSVNTestForm form = new SyncSVNTestForm(msg, conflictList);
+
+                List<bool> result = new List<bool>();
+                form.checkedListBox1.ItemCheck += (sender, e) => {
+                    SortedDictionary<string, bool> resolved = new SortedDictionary<string, bool>();
+
+                    List<string> checkedItems = new List<string>();
+                    foreach (var item in form.checkedListBox1.CheckedItems)
+                        checkedItems.Add(item.ToString());
+
+                    if (e.NewValue == CheckState.Checked)
+                        checkedItems.Add(form.checkedListBox1.Items[e.Index].ToString());
+                    else
+                        checkedItems.Remove(form.checkedListBox1.Items[e.Index].ToString());
+
+                    foreach (string item in checkedItems)
+                        resolved[item] = true;
+
+                    foreach (KeyValuePair<string, bool> pair in resolved)
+                        result.Add(pair.Value);
+                };
+
+                form.button1.Click += (sender, e) => {
+                    Application.Exit();
+                };
+
+                Application.EnableVisualStyles();
+                Application.Run(form);
+
+                return result;
+            };
+
+            repo.Push(resolveConflict);
 
             // TODO: write asserts
+        }
+
+        [TestMethod()]
+        public void DeleteTest()
+        {
+
+            Assert.Fail();
         }
     }
 }

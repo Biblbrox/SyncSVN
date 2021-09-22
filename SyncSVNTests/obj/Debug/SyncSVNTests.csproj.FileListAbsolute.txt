@@ -24,3 +24,5 @@ C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\SyncSVNTests.dll.conf
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\SharpPlink-Win32.svnExe
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\SharpSvn.UI.dll
 C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\bin\Debug\SharpSvn.UI.xml
+C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\obj\Debug\SyncSVNTestForms.SyncSVNTestForm.resources
+C:\Users\belya\source\repos\SyncSVN\SyncSVNTests\obj\Debug\SyncSVNTests.csproj.GenerateResource.cache
