@@ -45,7 +45,7 @@ namespace RepositoryLib.Tests
                 // Delete all files in a working directory    
                 cleanRepo();
 
-                repo = new RepositoryLib.SVNFileRepository(config);
+                repo = new SVNFileRepository(config);
             } catch (Exception e) {
                 Assert.Fail("Unable to init repository: " + e.Message + "\n");
             }
@@ -358,7 +358,6 @@ namespace RepositoryLib.Tests
 
             repo.Pull();
 
-
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             Directory.CreateDirectory(testRootPath);
@@ -398,7 +397,6 @@ namespace RepositoryLib.Tests
 
             // Now this file changed by another user and local user both.
             // Try to pull changes from repo
-
             Func<List<string>, List<bool>> resolveConflict = conflictList => {
                 string msg = "В следующих удаленных файлах были сделаны изменения."
                 + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
@@ -436,14 +434,32 @@ namespace RepositoryLib.Tests
 
             repo.Push(resolveConflict);
 
-            // TODO: write asserts
+            // Check that conflict resolved
+            Assert.IsTrue(!File.Exists(conflictFile + ".mine"), "Conflicts must be resolved");
         }
 
         [TestMethod()]
-        public void DeleteTest()
+        public void UplodaAndDeleteTest()
         {
+            // Init repo
+            string rootPath = config.configData["RootPath"];
+            string svnPath = config.configData["SvnUrl"];
 
-            Assert.Fail();
+            repo.Checkout();
+
+            // Create local file
+            string uniqueFileName = $@"Guid.NewGuid().txt";
+            string uniqueFilePath = Path.Combine(rootPath, uniqueFileName);
+
+            var f = File.Create(uniqueFilePath);
+            f.Close();
+            // Push local file
+            repo.Upload(uniqueFilePath);
+
+            // Remove file from server
+            repo.Delete(uniqueFilePath);
+
+            Assert.IsFalse(File.Exists(uniqueFilePath));
         }
     }
 }
