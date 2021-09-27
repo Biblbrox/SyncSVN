@@ -5,13 +5,12 @@ using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SharpSvn;
 using SyncSVNTestForms;
 using System.Windows.Forms;
+using static SyncSVNTests.TestUtils;
 
-namespace RepositoryLib.Tests
+namespace SyncSVNTests
 {
     [TestClass()]
     public class SVNFileRepositoryTests
@@ -49,26 +48,6 @@ namespace RepositoryLib.Tests
             } catch (Exception e) {
                 Assert.Fail("Unable to init repository: " + e.Message + "\n");
             }
-        }
-
-        private void setAttributesNormal(DirectoryInfo dir)
-        {
-            foreach (var subDir in dir.GetDirectories())
-                setAttributesNormal(subDir);
-            foreach (var file in dir.GetFiles()) {
-                file.Attributes = FileAttributes.Normal;
-            }
-        }
-
-        private string GetRelativePath(string filespec, string folder)
-        {
-            Uri pathUri = new Uri(filespec);
-            // Folders must end in a slash
-            if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
-                folder += Path.DirectorySeparatorChar;
-
-            Uri folderUri = new Uri(folder);
-            return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
         }
 
 
@@ -267,7 +246,7 @@ namespace RepositoryLib.Tests
 
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
-            Directory.CreateDirectory(testRootPath);
+            CreateEmptyFolder(testRootPath);
             config.configData["RootPath"] = testRootPath;
 
             // Delete all files in a test working directory    
@@ -284,9 +263,7 @@ namespace RepositoryLib.Tests
 
             // Modify content of some file
             string conflictFile = localFiles[0];
-            using (StreamWriter sr = File.AppendText(conflictFile)) {
-                sr.WriteLine("Add new line to file");
-            }
+            WriteToFile(conflictFile, "Add new line to file\n");
 
             anotherRepo.Push();
             // End of another user session
@@ -299,49 +276,13 @@ namespace RepositoryLib.Tests
 
             // Modify content of some file
             conflictFile = localFiles[0];
-            using (StreamWriter sr = File.AppendText(conflictFile)) {
-                sr.WriteLine("Add another new line to file");
-            }
+            WriteToFile(conflictFile, "Add another new line to file\n");
 
             // Now this file changed by another user and local user both.
             // Try to pull changes from repo
-            Func<List<string>, List<bool>> resolveConflict = conflictList => {
-                string msg = "В следующих удаленных файлах были сделаны изменения."
+            string msg = "В следующих удаленных файлах были сделаны изменения."
                 + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
-                SyncSVNTestForm form = new SyncSVNTestForm(msg, conflictList);
-
-                List<bool> result = new List<bool>();
-                form.checkedListBox1.ItemCheck += (sender, e) => {
-                    SortedDictionary<string, bool> resolved = new SortedDictionary<string, bool>();
-
-                    List<string> checkedItems = new List<string>();
-                    foreach (var item in form.checkedListBox1.CheckedItems)
-                        checkedItems.Add(item.ToString());
-
-                    if (e.NewValue == CheckState.Checked)
-                        checkedItems.Add(form.checkedListBox1.Items[e.Index].ToString());
-                    else
-                        checkedItems.Remove(form.checkedListBox1.Items[e.Index].ToString());
-
-                    foreach (string item in checkedItems)
-                        resolved[item] = true;
-
-                    foreach (KeyValuePair<string, bool> pair in resolved)
-                        result.Add(pair.Value);
-                };
-
-                form.button1.Click += (sender, e) => {
-                    Application.Exit();
-                };
-
-                Application.EnableVisualStyles();
-                Application.Run(form);
-
-                return result;
-            };
-
-
-            repo.Pull(resolveConflict);
+            repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
 
             // Check that conflict resolved
             Assert.IsTrue(!File.Exists(conflictFile + ".mine"), "Conflicts must be resolved");
@@ -360,7 +301,7 @@ namespace RepositoryLib.Tests
 
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
-            Directory.CreateDirectory(testRootPath);
+            CreateEmptyFolder(testRootPath);
             config.configData["RootPath"] = testRootPath;
 
             // Delete all files in test working directory    
@@ -377,9 +318,7 @@ namespace RepositoryLib.Tests
 
             // Modify content of some file
             string conflictFile = localFiles[0];
-            using (StreamWriter sr = File.AppendText(conflictFile)) {
-                sr.WriteLine("Add new line to file");
-            }
+            WriteToFile(conflictFile, "Add new line to file\n");
 
             anotherRepo.Push();
             // End of another user session
@@ -391,55 +330,20 @@ namespace RepositoryLib.Tests
 
             // Modify content of some file
             conflictFile = localFiles[0];
-            using (StreamWriter sr = File.AppendText(conflictFile)) {
-                sr.WriteLine("Add another new line to file");
-            }
+            WriteToFile(conflictFile, "Add another new line to file\n");
 
             // Now this file changed by another user and local user both.
             // Try to pull changes from repo
-            Func<List<string>, List<bool>> resolveConflict = conflictList => {
-                string msg = "В следующих удаленных файлах были сделаны изменения."
+            string msg = "В следующих удаленных файлах были сделаны изменения."
                 + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
-                SyncSVNTestForm form = new SyncSVNTestForm(msg, conflictList);
-
-                List<bool> result = new List<bool>();
-                form.checkedListBox1.ItemCheck += (sender, e) => {
-                    SortedDictionary<string, bool> resolved = new SortedDictionary<string, bool>();
-
-                    List<string> checkedItems = new List<string>();
-                    foreach (var item in form.checkedListBox1.CheckedItems)
-                        checkedItems.Add(item.ToString());
-
-                    if (e.NewValue == CheckState.Checked)
-                        checkedItems.Add(form.checkedListBox1.Items[e.Index].ToString());
-                    else
-                        checkedItems.Remove(form.checkedListBox1.Items[e.Index].ToString());
-
-                    foreach (string item in checkedItems)
-                        resolved[item] = true;
-
-                    foreach (KeyValuePair<string, bool> pair in resolved)
-                        result.Add(pair.Value);
-                };
-
-                form.button1.Click += (sender, e) => {
-                    Application.Exit();
-                };
-
-                Application.EnableVisualStyles();
-                Application.Run(form);
-
-                return result;
-            };
-
-            repo.Push(resolveConflict);
+            repo.Push((List<string> list) => ResolveConflictsPull(msg, list));
 
             // Check that conflict resolved
             Assert.IsTrue(!File.Exists(conflictFile + ".mine"), "Conflicts must be resolved");
         }
 
         [TestMethod()]
-        public void UplodaAndDeleteTest()
+        public void UploadAndDeleteTest()
         {
             // Init repo
             string rootPath = config.configData["RootPath"];
@@ -460,6 +364,58 @@ namespace RepositoryLib.Tests
             repo.Delete(uniqueFilePath);
 
             Assert.IsFalse(File.Exists(uniqueFilePath));
+        }
+
+
+        /// <summary>
+        /// Check for conflicts when edit deleted remotely local file
+        /// </summary>
+        [TestMethod()]
+        public void UploadAndDeleteConflictEditDeletedRemoteTest()
+        {
+            // User 1 actions
+            // Init repo
+            string rootPath = config.configData["RootPath"];
+            string svnPath = config.configData["SvnUrl"];
+
+            repo.Checkout();
+
+            // Create local file
+            string uniqueFileName = $@"{Guid.NewGuid()}.txt";
+            string uniqueFilePath = Path.Combine(rootPath, uniqueFileName);
+
+            var f = File.Create(uniqueFilePath);
+            f.Close();
+            // Push local file
+            repo.Upload(uniqueFilePath);
+            // User 1 actions done
+
+
+            // User 2 actions
+            string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
+            CreateEmptyFolder(testRootPath);
+            config.configData["RootPath"] = testRootPath;
+            repo.Checkout();
+            // Edit created file
+            WriteToFile(Path.Combine(testRootPath, uniqueFileName), "Local edit content\n");
+            // User 2 actions done
+
+
+            // Again, user 1 actions
+            config.configData["RootPath"] = rootPath;
+            // Delete created file
+            repo.Delete(uniqueFilePath);
+            // User 1 actions done
+
+
+            // Again, user 2 actions
+            config.configData["RootPath"] = testRootPath;
+            // Pull changes
+            string msg = "В следующих удаленных файлах были сделаны изменения."
+                + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
+            repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
+
+//            Assert.IsFalse(File.Exists(uniqueFilePath));
         }
     }
 }

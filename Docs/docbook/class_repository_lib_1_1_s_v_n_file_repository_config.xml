@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_repository_lib_1_1_s_v_n_file_repository_config" xml:lang="en-US">
+<title>RepositoryLib.SVNFileRepositoryConfig Class Reference</title>
+<indexterm><primary>RepositoryLib.SVNFileRepositoryConfig</primary></indexterm>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_config_1a7d6de437eba4a63759330551d3b7a555"/>void <emphasis role="strong">parseConfigFile</emphasis> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Properties    </title>
+        <itemizedlist>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_config_1aefa5c9ccc01656e3fbacf1dffce00207"/>SortedDictionary&lt; string, string &gt; <emphasis role="strong">configData</emphasis><computeroutput> [getset]</computeroutput>
+</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<para>
+The documentation for this class was generated from the following file:</para>
+C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs</section>

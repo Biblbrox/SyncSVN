@@ -47,6 +47,8 @@ namespace RepositoryLib
         // Indicate whether conflict occured.
         public bool IsConflict;
         public SvnConflictType Type;
+        public SvnConflictAction Action;
+        public SvnConflictReason Reason;
         public List<string> ConflictEntries;
 
         public ConflictData()
@@ -180,7 +182,7 @@ namespace RepositoryLib
 
                         for (int i = 0; i < resolve.Count(); ++i)
                             client.Resolve(Conflict.ConflictEntries[i],
-                                resolve[i] ? SvnAccept.Mine : SvnAccept.Theirs);
+                                resolve[i] ? SvnAccept.MineFull : SvnAccept.TheirsFull);
                     }
                 } catch {
                     throw new Exception("Unable to fetch content from repository");
@@ -282,7 +284,7 @@ namespace RepositoryLib
 
                         for (int i = 0; i < resolve.Count(); ++i)
                             client.Resolve(Conflict.ConflictEntries[i],
-                                resolve[i] ? SvnAccept.Mine : SvnAccept.Theirs);
+                                resolve[i] ? SvnAccept.MineFull : SvnAccept.TheirsFull);
                     }
 
                     if (!underSvnControl(filePath))
@@ -334,10 +336,20 @@ namespace RepositoryLib
                         else // Force local changes by default
                             resolve = Enumerable.Repeat(true,
                                 Conflict.ConflictEntries.Count).ToList();
-                        
-                        for (int i = 0; i < resolve.Count(); ++i)
-                            client.Resolve(Conflict.ConflictEntries[i],
-                                resolve[i] ? SvnAccept.Mine : SvnAccept.Theirs);
+
+                        for (int i = 0; i < resolve.Count(); ++i) {
+                            if (Conflict.Action == SvnConflictAction.Delete &&
+                                Conflict.Reason == SvnConflictReason.Edited) {
+                                if (resolve[i]) {
+                                    client.Resolve(Conflict.ConflictEntries[i], SvnAccept.Working);
+                                } else {
+                                    SvnExt.DeleteEntry(Conflict.ConflictEntries[i]);
+                                }
+                            } else {
+                                client.Resolve(Conflict.ConflictEntries[i],
+                                    resolve[i] ? SvnAccept.MineFull : SvnAccept.TheirsFull);
+                            }
+                        }
                     }
                     
                 } catch (Exception e) {
@@ -359,6 +371,16 @@ namespace RepositoryLib
 
         private void setConflict(object sender, SvnConflictEventArgs e)
         {
+            Conflict.IsConflict = true;
+            if (e.ConflictAction == SvnConflictAction.Delete &&
+                e.ConflictReason == SvnConflictReason.Edited) {
+                Conflict.ConflictEntries.Add(Path.Combine(Config.configData["RootPath"], e.Path));
+                Conflict.Action = SvnConflictAction.Delete;
+                Conflict.Reason = SvnConflictReason.Edited;
+                return;
+            }
+
+
             Conflict.IsConflict = true;
             Conflict.ConflictEntries.Add(e.MergedFile);
         }
@@ -490,6 +512,15 @@ namespace RepositoryLib
             return "";
         }
 
+        public static void DeleteEntry(string entryPath)
+        {
+            FileAttributes attr = File.GetAttributes(entryPath);
+            if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+                Directory.Delete(entryPath, true);
+            else
+                File.Delete(entryPath);
+        }
+
         /// <summary>
         /// Check if local folder is working copy of repository
         /// </summary>
@@ -502,14 +533,22 @@ namespace RepositoryLib
             return uri != null;
         }
 
+        /// <summary>
+        /// Check if remote file exists
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="relPath"></param>
+        /// <returns></returns>
         public static bool RemoteExists(this SvnClient client, string relPath)
         {
-/*                Uri targetUri = new Uri(client., relPath);
-                var target = SvnTarget.FromUri(targetUri);
-                Collection<SvnInfoEventArgs> info;
-                bool result = client.GetInfo(target, new SvnInfoArgs { ThrowOnError = false }, out info);
-                Assert.That(result, Is.False);
-                Assert.That(info, Is.Empty);*/
+            /*                Uri targetUri = new Uri(client., relPath);
+                            var target = SvnTarget.FromUri(targetUri);
+                            Collection<SvnInfoEventArgs> info;
+                            bool result = client.GetInfo(target, new SvnInfoArgs { ThrowOnError = false }, out info);
+                            Assert.That(result, Is.False);
+                            Assert.That(info, Is.Empty);*/
+
+            return false;
         }
     }
 }

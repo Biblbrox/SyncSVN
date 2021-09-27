@@ -1,0 +1,523 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="class_repository_lib_1_1_s_v_n_file_repository" kind="class" language="C#" prot="public">
+    <compoundname>RepositoryLib::SVNFileRepository</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_repository_lib_1_1_s_v_n_file_repository_1aa5cf306e7e7bf1f4d88016e4addddd7a" prot="private" static="no" mutable="no">
+        <type>SvnClient</type>
+        <definition>SvnClient RepositoryLib.SVNFileRepository.client</definition>
+        <argsstring></argsstring>
+        <name>client</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="61" column="27" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_repository_lib_1_1_s_v_n_file_repository_1a6db015b912b29e2b0c1d0b0070501af8" prot="public" static="no" readable="no" writable="no" gettable="yes" privategettable="no" protectedgettable="no" settable="no" privatesettable="yes" protectedsettable="no">
+        <type><ref refid="class_repository_lib_1_1_s_v_n_file_repository_config" kindref="compound">SVNFileRepositoryConfig</ref></type>
+        <definition>SVNFileRepositoryConfig RepositoryLib.SVNFileRepository.Config</definition>
+        <argsstring></argsstring>
+        <name>Config</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="63" column="40" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="property" id="class_repository_lib_1_1_s_v_n_file_repository_1a7cbaf71b240883207dfa64dc52618ca4" prot="private" static="no" readable="no" writable="no" gettable="yes" privategettable="no" protectedgettable="no" settable="yes" privatesettable="no" protectedsettable="no">
+        <type><ref refid="class_repository_lib_1_1_conflict_data" kindref="compound">ConflictData</ref></type>
+        <definition>ConflictData RepositoryLib.SVNFileRepository.Conflict</definition>
+        <argsstring></argsstring>
+        <name>Conflict</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="65" column="30" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="65" bodyend="65"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1a7a5e8e36d27f042453b0e414cb685342" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>static string RepositoryLib.SVNFileRepository.GenerateFilename</definition>
+        <argsstring>(string path)</argsstring>
+        <name>GenerateFilename</name>
+        <param>
+          <type>string</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="72" column="30" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="72" bodyend="77"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1a1a14d7e753a170ef18c701e4243b8039" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RepositoryLib.SVNFileRepository.SVNFileRepository</definition>
+        <argsstring>(SVNFileRepositoryConfig config)</argsstring>
+        <name>SVNFileRepository</name>
+        <param>
+          <type><ref refid="class_repository_lib_1_1_s_v_n_file_repository_config" kindref="compound">SVNFileRepositoryConfig</ref></type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>Init repository classx </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="84" column="16" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="84" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1a0f2044e2e8625796bc786160e7b6723a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RepositoryLib.SVNFileRepository.ContainsSubPath</definition>
+        <argsstring>(string pathToFile, string subPath)</argsstring>
+        <name>ContainsSubPath</name>
+        <param>
+          <type>string</type>
+          <declname>pathToFile</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>subPath</declname>
+        </param>
+        <briefdescription>
+<para>Check if path contain subpath </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pathToFile</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>subPath</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="115" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="115" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1a07798acd56492fc9c40ae32e4111776f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RepositoryLib.SVNFileRepository.Checkout</definition>
+        <argsstring>()</argsstring>
+        <name>Checkout</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="131" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="131" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1a18624c1e1fbf259be20bceb8dd37760a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string RepositoryLib.SVNFileRepository.Download</definition>
+        <argsstring>(string id, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</argsstring>
+        <name>Download</name>
+        <param>
+          <type>string</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt;</type>
+          <declname>onConflict</declname>
+          <defval>null</defval>
+        </param>
+        <briefdescription>
+<para>Download file from repository If onConflict is null all local changes will be overwriten by remote changes If onConflict is set then all entries marked as true will not be overwriten </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>onConflict</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="148" column="23" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="148" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1a7d77a19f0b97e0a8ad668cbfe04c0533" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SvnClient</type>
+        <definition>SvnClient RepositoryLib.SVNFileRepository.InitSvnClient</definition>
+        <argsstring>()</argsstring>
+        <name>InitSvnClient</name>
+        <briefdescription>
+<para>Initialize svn client </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="196" column="26" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="196" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1afceee5dd6c7a39b96ef2ce93358779c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RepositoryLib.SVNFileRepository.Delete</definition>
+        <argsstring>(string path, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</argsstring>
+        <name>Delete</name>
+        <param>
+          <type>string</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt;</type>
+          <declname>onConflict</declname>
+          <defval>null</defval>
+        </param>
+        <briefdescription>
+<para>Delete file entry from repository </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="218" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="218" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1af85d771c1a6a742c07db25c6e4098f66" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string RepositoryLib.SVNFileRepository.Upload</definition>
+        <argsstring>(string filePath, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</argsstring>
+        <name>Upload</name>
+        <param>
+          <type>string</type>
+          <declname>filePath</declname>
+        </param>
+        <param>
+          <type>Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt;</type>
+          <declname>onConflict</declname>
+          <defval>null</defval>
+        </param>
+        <briefdescription>
+<para>Upload file to svn server </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="241" column="23" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="241" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1a8868d109ae99ac8d7d925284f371b123" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RepositoryLib.SVNFileRepository.Pull</definition>
+        <argsstring>(Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</argsstring>
+        <name>Pull</name>
+        <param>
+          <type>Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt;</type>
+          <declname>onConflict</declname>
+          <defval>null</defval>
+        </param>
+        <briefdescription>
+<para>Pull changes from svn server. If onConflict is null all local changes will be overwriten by remote changes If onConflict is set then all entries which marked as true will not be overwriten by remote changes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="306" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="306" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1aed16c002ba67155cae7ec95fff77864d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RepositoryLib.SVNFileRepository.Push</definition>
+        <argsstring>(Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</argsstring>
+        <name>Push</name>
+        <param>
+          <type>Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt;</type>
+          <declname>onConflict</declname>
+          <defval>null</defval>
+        </param>
+        <briefdescription>
+<para>Push changes to svn repository. If conflicts occurs onConflict will be called. All local entities marked as true will overwrite remote entities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>onConflict</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="394" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="394" bodyend="457"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1a05f9ec0fa14ef3493962e67ac4ae7f17" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RepositoryLib.SVNFileRepository.underSvnControl</definition>
+        <argsstring>(string filePath)</argsstring>
+        <name>underSvnControl</name>
+        <param>
+          <type>string</type>
+          <declname>filePath</declname>
+        </param>
+        <briefdescription>
+<para>Check if file is under svn </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filePath</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="464" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="464" bodyend="471"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1abb2d09255391481a1b16925b8736dbdd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RepositoryLib.SVNFileRepository.Dispose</definition>
+        <argsstring>()</argsstring>
+        <name>Dispose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="473" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="473" bodyend="476"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1aa51954e313721b94c72e5bcc4260a6ba" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string RepositoryLib.SVNFileRepository.GetRelativePath</definition>
+        <argsstring>(string filespec, string folder)</argsstring>
+        <name>GetRelativePath</name>
+        <param>
+          <type>string</type>
+          <declname>filespec</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>folder</declname>
+        </param>
+        <briefdescription>
+<para>Get relative path to entry folder </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filespec</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>folder</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="98" column="24" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="98" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1a6cc2e8a75e002dd2ead27a36d3d9f3b8" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>List&lt; string &gt;</type>
+        <definition>List&lt; string &gt; RepositoryLib.SVNFileRepository.GetAllFilesAndDirs</definition>
+        <argsstring>(string dirPath)</argsstring>
+        <name>GetAllFilesAndDirs</name>
+        <param>
+          <type>string</type>
+          <declname>dirPath</declname>
+        </param>
+        <briefdescription>
+<para>Get all files and directories from folder dirPath </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dirPath</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="125" column="22" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="125" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1ad96f7f5f034266a2346f889659032554" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SvnRevision</type>
+        <definition>SvnRevision RepositoryLib.SVNFileRepository.getLatestRevision</definition>
+        <argsstring>()</argsstring>
+        <name>getLatestRevision</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="349" column="29" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="349" bodyend="358"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1a75bc7eff0eed1eb88266129525662a8b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RepositoryLib.SVNFileRepository.setConflict</definition>
+        <argsstring>(object sender, SvnConflictEventArgs e)</argsstring>
+        <name>setConflict</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>SvnConflictEventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="360" column="22" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="360" bodyend="364"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_1a47c823923a37201fa63b6f384ccdd9ee" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>List&lt; string &gt;</type>
+        <definition>List&lt; string &gt; RepositoryLib.SVNFileRepository.getModifiedEntries</definition>
+        <argsstring>(string path)</argsstring>
+        <name>getModifiedEntries</name>
+        <param>
+          <type>string</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="366" column="22" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="366" bodyend="385"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="59" column="11" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="60" bodyend="477"/>
+    <listofallmembers>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a07798acd56492fc9c40ae32e4111776f" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>Checkout</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1aa5cf306e7e7bf1f4d88016e4addddd7a" prot="private" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>client</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a6db015b912b29e2b0c1d0b0070501af8" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>Config</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a7cbaf71b240883207dfa64dc52618ca4" prot="private" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>Conflict</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a0f2044e2e8625796bc786160e7b6723a" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>ContainsSubPath</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1afceee5dd6c7a39b96ef2ce93358779c1" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>Delete</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1abb2d09255391481a1b16925b8736dbdd" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>Dispose</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a18624c1e1fbf259be20bceb8dd37760a" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>Download</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a7a5e8e36d27f042453b0e414cb685342" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>GenerateFilename</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a6cc2e8a75e002dd2ead27a36d3d9f3b8" prot="private" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>GetAllFilesAndDirs</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1ad96f7f5f034266a2346f889659032554" prot="private" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>getLatestRevision</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a47c823923a37201fa63b6f384ccdd9ee" prot="private" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>getModifiedEntries</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1aa51954e313721b94c72e5bcc4260a6ba" prot="private" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>GetRelativePath</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a7d77a19f0b97e0a8ad668cbfe04c0533" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>InitSvnClient</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a8868d109ae99ac8d7d925284f371b123" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>Pull</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1aed16c002ba67155cae7ec95fff77864d" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>Push</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a75bc7eff0eed1eb88266129525662a8b" prot="private" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>setConflict</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a1a14d7e753a170ef18c701e4243b8039" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>SVNFileRepository</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a05f9ec0fa14ef3493962e67ac4ae7f17" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>underSvnControl</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_1af85d771c1a6a742c07db25c6e4098f66" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepository</scope><name>Upload</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

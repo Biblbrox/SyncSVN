@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="class_repository_lib_1_1_svn_ext" kind="class" language="C#" prot="public">
+    <compoundname>RepositoryLib::SvnExt</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_repository_lib_1_1_svn_ext_1afb88df31bc3e43183e94ccc34c500061" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>static string RepositoryLib.SvnExt.GetUrl</definition>
+        <argsstring>(this SvnClient client, string folder)</argsstring>
+        <name>GetUrl</name>
+        <param>
+          <type>this SvnClient</type>
+          <declname>client</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>folder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="480" column="30" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="480" bodyend="491"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_svn_ext_1a5502b80e96961e2548097455711ccd12" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool RepositoryLib.SvnExt.IsWorkingCopy</definition>
+        <argsstring>(this SvnClient client, string path)</argsstring>
+        <name>IsWorkingCopy</name>
+        <param>
+          <type>this SvnClient</type>
+          <declname>client</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Check if local folder is working copy of repository </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>client</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="499" column="28" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="499" bodyend="503"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_svn_ext_1aab97df8a915c0ac59081667a79868868" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool RepositoryLib.SvnExt.RemoteExists</definition>
+        <argsstring>(this SvnClient client, string relPath)</argsstring>
+        <name>RemoteExists</name>
+        <param>
+          <type>this SvnClient</type>
+          <declname>client</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>relPath</declname>
+        </param>
+        <briefdescription>
+<para>Check if remote file exists </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>client</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>relPath</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="511" column="28" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="511" bodyend="521"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="478" column="19" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="479" bodyend="522"/>
+    <listofallmembers>
+      <member refid="class_repository_lib_1_1_svn_ext_1afb88df31bc3e43183e94ccc34c500061" prot="public" virt="non-virtual"><scope>RepositoryLib::SvnExt</scope><name>GetUrl</name></member>
+      <member refid="class_repository_lib_1_1_svn_ext_1a5502b80e96961e2548097455711ccd12" prot="public" virt="non-virtual"><scope>RepositoryLib::SvnExt</scope><name>IsWorkingCopy</name></member>
+      <member refid="class_repository_lib_1_1_svn_ext_1aab97df8a915c0ac59081667a79868868" prot="public" virt="non-virtual"><scope>RepositoryLib::SvnExt</scope><name>RemoteExists</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

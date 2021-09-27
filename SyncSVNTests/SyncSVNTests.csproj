@@ -72,6 +72,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="TestUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SVNFileRepositoryTests.cs" />
     <Compile Include="SyncSVNTestForm.cs">

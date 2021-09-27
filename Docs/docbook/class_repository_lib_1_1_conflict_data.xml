@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_repository_lib_1_1_conflict_data" xml:lang="en-US">
+<title>RepositoryLib.ConflictData Class Reference</title>
+<indexterm><primary>RepositoryLib.ConflictData</primary></indexterm>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_conflict_data_1a647ad5f95d8b1395399b4d3c7160bf40"/>bool <emphasis role="strong">IsConflict</emphasis></para>
+</listitem>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_conflict_data_1a8202691af8fb63bc8dde6584959ff8ed"/>SvnConflictType <emphasis role="strong">Type</emphasis></para>
+</listitem>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_conflict_data_1ae463dd5e47666aac8deb8c46a594f546"/>List&lt; string &gt; <emphasis role="strong">ConflictEntries</emphasis></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<para>
+The documentation for this class was generated from the following file:</para>
+C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs</section>

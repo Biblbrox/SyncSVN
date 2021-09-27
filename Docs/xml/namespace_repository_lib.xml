@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="namespace_repository_lib" kind="namespace" language="C#">
+    <compoundname>RepositoryLib</compoundname>
+    <innerclass refid="class_repository_lib_1_1_conflict_data" prot="public">RepositoryLib::ConflictData</innerclass>
+    <innerclass refid="class_repository_lib_1_1_svn_ext" prot="public">RepositoryLib::SvnExt</innerclass>
+    <innerclass refid="class_repository_lib_1_1_s_v_n_file_repository" prot="public">RepositoryLib::SVNFileRepository</innerclass>
+    <innerclass refid="class_repository_lib_1_1_s_v_n_file_repository_config" prot="public">RepositoryLib::SVNFileRepositoryConfig</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="15" column="1"/>
+  </compounddef>
+</doxygen>

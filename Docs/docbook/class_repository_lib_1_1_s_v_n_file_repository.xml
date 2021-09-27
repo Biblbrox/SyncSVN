@@ -1,0 +1,348 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_repository_lib_1_1_s_v_n_file_repository" xml:lang="en-US">
+<title>RepositoryLib.SVNFileRepository Class Reference</title>
+<indexterm><primary>RepositoryLib.SVNFileRepository</primary></indexterm>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_repository_lib_1_1_s_v_n_file_repository_1a1a14d7e753a170ef18c701e4243b8039">SVNFileRepository</link> (<link linkend="_class_repository_lib_1_1_s_v_n_file_repository_config">SVNFileRepositoryConfig</link> config)</para>
+
+<para>Init repository classx </para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_repository_lib_1_1_s_v_n_file_repository_1a0f2044e2e8625796bc786160e7b6723a">ContainsSubPath</link> (string pathToFile, string subPath)</para>
+
+<para>Check if path contain subpath </para>
+</listitem>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1a07798acd56492fc9c40ae32e4111776f"/>void <emphasis role="strong">Checkout</emphasis> ()</para>
+</listitem>
+            <listitem><para>string <link linkend="_class_repository_lib_1_1_s_v_n_file_repository_1a18624c1e1fbf259be20bceb8dd37760a">Download</link> (string id, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</para>
+
+<para>Download file from repository If onConflict is null all local changes will be overwriten by remote changes If onConflict is set then all entries marked as true will not be overwriten </para>
+</listitem>
+            <listitem><para>SvnClient <link linkend="_class_repository_lib_1_1_s_v_n_file_repository_1a7d77a19f0b97e0a8ad668cbfe04c0533">InitSvnClient</link> ()</para>
+
+<para>Initialize svn client </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_repository_lib_1_1_s_v_n_file_repository_1afceee5dd6c7a39b96ef2ce93358779c1">Delete</link> (string path, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</para>
+
+<para>Delete file entry from repository </para>
+</listitem>
+            <listitem><para>string <link linkend="_class_repository_lib_1_1_s_v_n_file_repository_1af85d771c1a6a742c07db25c6e4098f66">Upload</link> (string filePath, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</para>
+
+<para>Upload file to svn server </para>
+</listitem>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1a8868d109ae99ac8d7d925284f371b123"/>void <emphasis role="strong">Pull</emphasis> (Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</para>
+
+<para>Pull changes from svn server. If onConflict is null all local changes will be overwriten by remote changes If onConflict is set then all entries which marked as true will not be overwriten by remote changes. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_repository_lib_1_1_s_v_n_file_repository_1aed16c002ba67155cae7ec95fff77864d">Push</link> (Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</para>
+
+<para>Push changes to svn repository. If conflicts occurs onConflict will be called. All local entities marked as true will overwrite remote entities. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_repository_lib_1_1_s_v_n_file_repository_1a05f9ec0fa14ef3493962e67ac4ae7f17">underSvnControl</link> (string filePath)</para>
+
+<para>Check if file is under svn </para>
+</listitem>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1abb2d09255391481a1b16925b8736dbdd"/>void <emphasis role="strong">Dispose</emphasis> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static string <link linkend="_class_repository_lib_1_1_s_v_n_file_repository_1a7a5e8e36d27f042453b0e414cb685342">GenerateFilename</link> (string path)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Properties    </title>
+        <itemizedlist>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1a6db015b912b29e2b0c1d0b0070501af8"/><link linkend="_class_repository_lib_1_1_s_v_n_file_repository_config">SVNFileRepositoryConfig</link> <emphasis role="strong">Config</emphasis><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1a1a14d7e753a170ef18c701e4243b8039"/><section>
+    <title>SVNFileRepository()</title>
+<indexterm><primary>SVNFileRepository</primary><secondary>RepositoryLib.SVNFileRepository</secondary></indexterm>
+<indexterm><primary>RepositoryLib.SVNFileRepository</primary><secondary>SVNFileRepository</secondary></indexterm>
+<para><computeroutput>RepositoryLib.SVNFileRepository.SVNFileRepository (<link linkend="_class_repository_lib_1_1_s_v_n_file_repository_config">SVNFileRepositoryConfig</link> config)</computeroutput></para><para>
+
+<para>Init repository classx </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>config</entry><entry></entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1a0f2044e2e8625796bc786160e7b6723a"/><section>
+    <title>ContainsSubPath()</title>
+<indexterm><primary>ContainsSubPath</primary><secondary>RepositoryLib.SVNFileRepository</secondary></indexterm>
+<indexterm><primary>RepositoryLib.SVNFileRepository</primary><secondary>ContainsSubPath</secondary></indexterm>
+<para><computeroutput>bool RepositoryLib.SVNFileRepository.ContainsSubPath (string pathToFile, string subPath)</computeroutput></para><para>
+
+<para>Check if path contain subpath </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>pathToFile</entry><entry></entry>
+                            </row>
+                            <row>
+<entry>subPath</entry><entry></entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para></para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1afceee5dd6c7a39b96ef2ce93358779c1"/><section>
+    <title>Delete()</title>
+<indexterm><primary>Delete</primary><secondary>RepositoryLib.SVNFileRepository</secondary></indexterm>
+<indexterm><primary>RepositoryLib.SVNFileRepository</primary><secondary>Delete</secondary></indexterm>
+<para><computeroutput>void RepositoryLib.SVNFileRepository.Delete (string path, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict = <computeroutput>null</computeroutput>
+)</computeroutput></para><para>
+
+<para>Delete file entry from repository </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>path</entry><entry></entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1a18624c1e1fbf259be20bceb8dd37760a"/><section>
+    <title>Download()</title>
+<indexterm><primary>Download</primary><secondary>RepositoryLib.SVNFileRepository</secondary></indexterm>
+<indexterm><primary>RepositoryLib.SVNFileRepository</primary><secondary>Download</secondary></indexterm>
+<para><computeroutput>string RepositoryLib.SVNFileRepository.Download (string id, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict = <computeroutput>null</computeroutput>
+)</computeroutput></para><para>
+
+<para>Download file from repository If onConflict is null all local changes will be overwriten by remote changes If onConflict is set then all entries marked as true will not be overwriten </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>id</entry><entry></entry>
+                            </row>
+                            <row>
+<entry>onConflict</entry><entry></entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para></para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1a7a5e8e36d27f042453b0e414cb685342"/><section>
+    <title>GenerateFilename()</title>
+<indexterm><primary>GenerateFilename</primary><secondary>RepositoryLib.SVNFileRepository</secondary></indexterm>
+<indexterm><primary>RepositoryLib.SVNFileRepository</primary><secondary>GenerateFilename</secondary></indexterm>
+<para><computeroutput>static string RepositoryLib.SVNFileRepository.GenerateFilename (string path)<computeroutput>[static]</computeroutput></computeroutput></para><para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>path</entry><entry></entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para></para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1a7d77a19f0b97e0a8ad668cbfe04c0533"/><section>
+    <title>InitSvnClient()</title>
+<indexterm><primary>InitSvnClient</primary><secondary>RepositoryLib.SVNFileRepository</secondary></indexterm>
+<indexterm><primary>RepositoryLib.SVNFileRepository</primary><secondary>InitSvnClient</secondary></indexterm>
+<para><computeroutput>SvnClient RepositoryLib.SVNFileRepository.InitSvnClient ( )</computeroutput></para><para>
+
+<para>Initialize svn client </para>
+</para>
+
+<para><formalpara><title>Returns</title>
+
+<para></para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1aed16c002ba67155cae7ec95fff77864d"/><section>
+    <title>Push()</title>
+<indexterm><primary>Push</primary><secondary>RepositoryLib.SVNFileRepository</secondary></indexterm>
+<indexterm><primary>RepositoryLib.SVNFileRepository</primary><secondary>Push</secondary></indexterm>
+<para><computeroutput>void RepositoryLib.SVNFileRepository.Push (Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict = <computeroutput>null</computeroutput>
+)</computeroutput></para><para>
+
+<para>Push changes to svn repository. If conflicts occurs onConflict will be called. All local entities marked as true will overwrite remote entities. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>onConflict</entry><entry></entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1a05f9ec0fa14ef3493962e67ac4ae7f17"/><section>
+    <title>underSvnControl()</title>
+<indexterm><primary>underSvnControl</primary><secondary>RepositoryLib.SVNFileRepository</secondary></indexterm>
+<indexterm><primary>RepositoryLib.SVNFileRepository</primary><secondary>underSvnControl</secondary></indexterm>
+<para><computeroutput>bool RepositoryLib.SVNFileRepository.underSvnControl (string filePath)</computeroutput></para><para>
+
+<para>Check if file is under svn </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>filePath</entry><entry></entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para></para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1af85d771c1a6a742c07db25c6e4098f66"/><section>
+    <title>Upload()</title>
+<indexterm><primary>Upload</primary><secondary>RepositoryLib.SVNFileRepository</secondary></indexterm>
+<indexterm><primary>RepositoryLib.SVNFileRepository</primary><secondary>Upload</secondary></indexterm>
+<para><computeroutput>string RepositoryLib.SVNFileRepository.Upload (string filePath, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict = <computeroutput>null</computeroutput>
+)</computeroutput></para><para>
+
+<para>Upload file to svn server </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>path</entry><entry></entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para></para>
+</formalpara>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs</section>
+</section>

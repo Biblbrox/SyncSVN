@@ -1,0 +1,204 @@
+\hypertarget{class_repository_lib_1_1_s_v_n_file_repository}{}\doxysection{Repository\+Lib.\+SVNFile\+Repository Class Reference}
+\label{class_repository_lib_1_1_s_v_n_file_repository}\index{RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_a1a14d7e753a170ef18c701e4243b8039}{SVNFile\+Repository}} (\mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_config}{SVNFile\+Repository\+Config}} config)
+\begin{DoxyCompactList}\small\item\em Init repository classx \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_a0f2044e2e8625796bc786160e7b6723a}{Contains\+Sub\+Path}} (string path\+To\+File, string sub\+Path)
+\begin{DoxyCompactList}\small\item\em Check if path contain subpath \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_a07798acd56492fc9c40ae32e4111776f}\label{class_repository_lib_1_1_s_v_n_file_repository_a07798acd56492fc9c40ae32e4111776f}} 
+void {\bfseries Checkout} ()
+\item 
+string \mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_a18624c1e1fbf259be20bceb8dd37760a}{Download}} (string id, Func$<$ List$<$ string $>$, List$<$ bool $>$ $>$ on\+Conflict=null)
+\begin{DoxyCompactList}\small\item\em Download file from repository If on\+Conflict is null all local changes will be overwriten by remote changes If on\+Conflict is set then all entries marked as true will not be overwriten \end{DoxyCompactList}\item 
+Svn\+Client \mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_a7d77a19f0b97e0a8ad668cbfe04c0533}{Init\+Svn\+Client}} ()
+\begin{DoxyCompactList}\small\item\em Initialize svn client \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_afceee5dd6c7a39b96ef2ce93358779c1}{Delete}} (string path, Func$<$ List$<$ string $>$, List$<$ bool $>$ $>$ on\+Conflict=null)
+\begin{DoxyCompactList}\small\item\em Delete file entry from repository \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_af85d771c1a6a742c07db25c6e4098f66}{Upload}} (string file\+Path, Func$<$ List$<$ string $>$, List$<$ bool $>$ $>$ on\+Conflict=null)
+\begin{DoxyCompactList}\small\item\em Upload file to svn server \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_a8868d109ae99ac8d7d925284f371b123}\label{class_repository_lib_1_1_s_v_n_file_repository_a8868d109ae99ac8d7d925284f371b123}} 
+void {\bfseries Pull} (Func$<$ List$<$ string $>$, List$<$ bool $>$ $>$ on\+Conflict=null)
+\begin{DoxyCompactList}\small\item\em Pull changes from svn server. If on\+Conflict is null all local changes will be overwriten by remote changes If on\+Conflict is set then all entries which marked as true will not be overwriten by remote changes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_aed16c002ba67155cae7ec95fff77864d}{Push}} (Func$<$ List$<$ string $>$, List$<$ bool $>$ $>$ on\+Conflict=null)
+\begin{DoxyCompactList}\small\item\em Push changes to svn repository. If conflicts occurs on\+Conflict will be called. All local entities marked as true will overwrite remote entities. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_a05f9ec0fa14ef3493962e67ac4ae7f17}{under\+Svn\+Control}} (string file\+Path)
+\begin{DoxyCompactList}\small\item\em Check if file is under svn \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_abb2d09255391481a1b16925b8736dbdd}\label{class_repository_lib_1_1_s_v_n_file_repository_abb2d09255391481a1b16925b8736dbdd}} 
+void {\bfseries Dispose} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static string \mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_a7a5e8e36d27f042453b0e414cb685342}{Generate\+Filename}} (string path)
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_a6db015b912b29e2b0c1d0b0070501af8}\label{class_repository_lib_1_1_s_v_n_file_repository_a6db015b912b29e2b0c1d0b0070501af8}} 
+\mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_config}{SVNFile\+Repository\+Config}} {\bfseries Config}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_a1a14d7e753a170ef18c701e4243b8039}\label{class_repository_lib_1_1_s_v_n_file_repository_a1a14d7e753a170ef18c701e4243b8039}} 
+\index{RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}!SVNFileRepository@{SVNFileRepository}}
+\index{SVNFileRepository@{SVNFileRepository}!RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}}
+\doxysubsubsection{\texorpdfstring{SVNFileRepository()}{SVNFileRepository()}}
+{\footnotesize\ttfamily Repository\+Lib.\+SVNFile\+Repository.\+SVNFile\+Repository (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_config}{SVNFile\+Repository\+Config}}}]{config }\end{DoxyParamCaption})}
+
+
+
+Init repository classx 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_a0f2044e2e8625796bc786160e7b6723a}\label{class_repository_lib_1_1_s_v_n_file_repository_a0f2044e2e8625796bc786160e7b6723a}} 
+\index{RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}!ContainsSubPath@{ContainsSubPath}}
+\index{ContainsSubPath@{ContainsSubPath}!RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}}
+\doxysubsubsection{\texorpdfstring{ContainsSubPath()}{ContainsSubPath()}}
+{\footnotesize\ttfamily bool Repository\+Lib.\+SVNFile\+Repository.\+Contains\+Sub\+Path (\begin{DoxyParamCaption}\item[{string}]{path\+To\+File,  }\item[{string}]{sub\+Path }\end{DoxyParamCaption})}
+
+
+
+Check if path contain subpath 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+To\+File} & \\
+\hline
+{\em sub\+Path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_afceee5dd6c7a39b96ef2ce93358779c1}\label{class_repository_lib_1_1_s_v_n_file_repository_afceee5dd6c7a39b96ef2ce93358779c1}} 
+\index{RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}!Delete@{Delete}}
+\index{Delete@{Delete}!RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}}
+\doxysubsubsection{\texorpdfstring{Delete()}{Delete()}}
+{\footnotesize\ttfamily void Repository\+Lib.\+SVNFile\+Repository.\+Delete (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{Func$<$ List$<$ string $>$, List$<$ bool $>$ $>$}]{on\+Conflict = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Delete file entry from repository 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_a18624c1e1fbf259be20bceb8dd37760a}\label{class_repository_lib_1_1_s_v_n_file_repository_a18624c1e1fbf259be20bceb8dd37760a}} 
+\index{RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}!Download@{Download}}
+\index{Download@{Download}!RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}}
+\doxysubsubsection{\texorpdfstring{Download()}{Download()}}
+{\footnotesize\ttfamily string Repository\+Lib.\+SVNFile\+Repository.\+Download (\begin{DoxyParamCaption}\item[{string}]{id,  }\item[{Func$<$ List$<$ string $>$, List$<$ bool $>$ $>$}]{on\+Conflict = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Download file from repository If on\+Conflict is null all local changes will be overwriten by remote changes If on\+Conflict is set then all entries marked as true will not be overwriten 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \\
+\hline
+{\em on\+Conflict} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_a7a5e8e36d27f042453b0e414cb685342}\label{class_repository_lib_1_1_s_v_n_file_repository_a7a5e8e36d27f042453b0e414cb685342}} 
+\index{RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}!GenerateFilename@{GenerateFilename}}
+\index{GenerateFilename@{GenerateFilename}!RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}}
+\doxysubsubsection{\texorpdfstring{GenerateFilename()}{GenerateFilename()}}
+{\footnotesize\ttfamily static string Repository\+Lib.\+SVNFile\+Repository.\+Generate\+Filename (\begin{DoxyParamCaption}\item[{string}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_a7d77a19f0b97e0a8ad668cbfe04c0533}\label{class_repository_lib_1_1_s_v_n_file_repository_a7d77a19f0b97e0a8ad668cbfe04c0533}} 
+\index{RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}!InitSvnClient@{InitSvnClient}}
+\index{InitSvnClient@{InitSvnClient}!RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}}
+\doxysubsubsection{\texorpdfstring{InitSvnClient()}{InitSvnClient()}}
+{\footnotesize\ttfamily Svn\+Client Repository\+Lib.\+SVNFile\+Repository.\+Init\+Svn\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initialize svn client 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_aed16c002ba67155cae7ec95fff77864d}\label{class_repository_lib_1_1_s_v_n_file_repository_aed16c002ba67155cae7ec95fff77864d}} 
+\index{RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}!Push@{Push}}
+\index{Push@{Push}!RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}}
+\doxysubsubsection{\texorpdfstring{Push()}{Push()}}
+{\footnotesize\ttfamily void Repository\+Lib.\+SVNFile\+Repository.\+Push (\begin{DoxyParamCaption}\item[{Func$<$ List$<$ string $>$, List$<$ bool $>$ $>$}]{on\+Conflict = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Push changes to svn repository. If conflicts occurs on\+Conflict will be called. All local entities marked as true will overwrite remote entities. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em on\+Conflict} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_a05f9ec0fa14ef3493962e67ac4ae7f17}\label{class_repository_lib_1_1_s_v_n_file_repository_a05f9ec0fa14ef3493962e67ac4ae7f17}} 
+\index{RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}!underSvnControl@{underSvnControl}}
+\index{underSvnControl@{underSvnControl}!RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}}
+\doxysubsubsection{\texorpdfstring{underSvnControl()}{underSvnControl()}}
+{\footnotesize\ttfamily bool Repository\+Lib.\+SVNFile\+Repository.\+under\+Svn\+Control (\begin{DoxyParamCaption}\item[{string}]{file\+Path }\end{DoxyParamCaption})}
+
+
+
+Check if file is under svn 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_repository_lib_1_1_s_v_n_file_repository_af85d771c1a6a742c07db25c6e4098f66}\label{class_repository_lib_1_1_s_v_n_file_repository_af85d771c1a6a742c07db25c6e4098f66}} 
+\index{RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}!Upload@{Upload}}
+\index{Upload@{Upload}!RepositoryLib.SVNFileRepository@{RepositoryLib.SVNFileRepository}}
+\doxysubsubsection{\texorpdfstring{Upload()}{Upload()}}
+{\footnotesize\ttfamily string Repository\+Lib.\+SVNFile\+Repository.\+Upload (\begin{DoxyParamCaption}\item[{string}]{file\+Path,  }\item[{Func$<$ List$<$ string $>$, List$<$ bool $>$ $>$}]{on\+Conflict = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Upload file to svn server 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/belya/source/repos/\+Sync\+SVN/\+Sync\+SVN/syncsvn.\+cs\end{DoxyCompactItemize}
