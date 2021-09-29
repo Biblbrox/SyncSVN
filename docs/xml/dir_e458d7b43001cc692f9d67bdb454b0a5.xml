@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="dir_e458d7b43001cc692f9d67bdb454b0a5" kind="dir">
+    <compoundname>obj</compoundname>
+    <innerdir refid="dir_b109bbe0af043e8e617ed60f4142b82d">Debug</innerdir>
+    <innerdir refid="dir_20b3a751dc148e4db974888265d11bec">Release</innerdir>
+    <innerdir refid="dir_5390456ccd11d0b18e4044834d0a2f59">x64</innerdir>
+    <innerdir refid="dir_4d29ff3e500622203e8109301b0a794e">x86</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/obj/"/>
+  </compounddef>
+</doxygen>

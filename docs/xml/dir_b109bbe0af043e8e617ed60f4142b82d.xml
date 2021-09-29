@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="dir_b109bbe0af043e8e617ed60f4142b82d" kind="dir">
+    <compoundname>Debug</compoundname>
+    <innerfile refid="_8_n_e_t_framework_00_version_0av4_87_82_8_assembly_attributes_8cs">.NETFramework,Version=v4.7.2.AssemblyAttributes.cs</innerfile>
+    <innerfile refid="_debug_2_8_n_e_t_framework_00_version_0av4_88_8_assembly_attributes_8cs">Debug/.NETFramework,Version=v4.8.AssemblyAttributes.cs</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/obj/Debug/"/>
+  </compounddef>
+</doxygen>

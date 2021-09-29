@@ -22,7 +22,34 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="480" column="30" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="480" bodyend="491"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="519" column="30" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="519" bodyend="530"/>
+      </memberdef>
+      <memberdef kind="function" id="class_repository_lib_1_1_svn_ext_1a70b47ab82e79003e48fe6aefe2b1838e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void RepositoryLib.SvnExt.DeleteEntry</definition>
+        <argsstring>(string entryPath)</argsstring>
+        <name>DeleteEntry</name>
+        <param>
+          <type>string</type>
+          <declname>entryPath</declname>
+        </param>
+        <briefdescription>
+<para>Delete entry(dir or folder). If folder delete recursively </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entryPath</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="536" column="28" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="536" bodyend="543"/>
       </memberdef>
       <memberdef kind="function" id="class_repository_lib_1_1_svn_ext_1a5502b80e96961e2548097455711ccd12" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -62,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="499" column="28" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="499" bodyend="503"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="551" column="28" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="551" bodyend="555"/>
       </memberdef>
       <memberdef kind="function" id="class_repository_lib_1_1_svn_ext_1aab97df8a915c0ac59081667a79868868" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -102,15 +129,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="511" column="28" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="511" bodyend="521"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="563" column="28" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="563" bodyend="573"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="478" column="19" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="479" bodyend="522"/>
+    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="517" column="19" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="518" bodyend="574"/>
     <listofallmembers>
+      <member refid="class_repository_lib_1_1_svn_ext_1a70b47ab82e79003e48fe6aefe2b1838e" prot="public" virt="non-virtual"><scope>RepositoryLib::SvnExt</scope><name>DeleteEntry</name></member>
       <member refid="class_repository_lib_1_1_svn_ext_1afb88df31bc3e43183e94ccc34c500061" prot="public" virt="non-virtual"><scope>RepositoryLib::SvnExt</scope><name>GetUrl</name></member>
       <member refid="class_repository_lib_1_1_svn_ext_1a5502b80e96961e2548097455711ccd12" prot="public" virt="non-virtual"><scope>RepositoryLib::SvnExt</scope><name>IsWorkingCopy</name></member>
       <member refid="class_repository_lib_1_1_svn_ext_1aab97df8a915c0ac59081667a79868868" prot="public" virt="non-virtual"><scope>RepositoryLib::SvnExt</scope><name>RemoteExists</name></member>

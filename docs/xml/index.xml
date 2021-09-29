@@ -3,11 +3,14 @@
   <compound refid="class_repository_lib_1_1_conflict_data" kind="class"><name>RepositoryLib::ConflictData</name>
     <member refid="class_repository_lib_1_1_conflict_data_1a647ad5f95d8b1395399b4d3c7160bf40" kind="variable"><name>IsConflict</name></member>
     <member refid="class_repository_lib_1_1_conflict_data_1a8202691af8fb63bc8dde6584959ff8ed" kind="variable"><name>Type</name></member>
+    <member refid="class_repository_lib_1_1_conflict_data_1a1bff02dfdf93ec9cc29d6be09e3815e1" kind="variable"><name>Action</name></member>
+    <member refid="class_repository_lib_1_1_conflict_data_1ae1e02134aeefde02e55feafad4529a2b" kind="variable"><name>Reason</name></member>
     <member refid="class_repository_lib_1_1_conflict_data_1ae463dd5e47666aac8deb8c46a594f546" kind="variable"><name>ConflictEntries</name></member>
     <member refid="class_repository_lib_1_1_conflict_data_1a61da4f65a9c740e3347d50adcbb23ade" kind="function"><name>ConflictData</name></member>
   </compound>
   <compound refid="class_repository_lib_1_1_svn_ext" kind="class"><name>RepositoryLib::SvnExt</name>
     <member refid="class_repository_lib_1_1_svn_ext_1afb88df31bc3e43183e94ccc34c500061" kind="function"><name>GetUrl</name></member>
+    <member refid="class_repository_lib_1_1_svn_ext_1a70b47ab82e79003e48fe6aefe2b1838e" kind="function"><name>DeleteEntry</name></member>
     <member refid="class_repository_lib_1_1_svn_ext_1a5502b80e96961e2548097455711ccd12" kind="function"><name>IsWorkingCopy</name></member>
     <member refid="class_repository_lib_1_1_svn_ext_1aab97df8a915c0ac59081667a79868868" kind="function"><name>RemoteExists</name></member>
   </compound>
@@ -56,22 +59,50 @@
   </compound>
   <compound refid="namespace_system_1_1_linq" kind="namespace"><name>System::Linq</name>
   </compound>
+  <compound refid="namespace_system_1_1_reflection" kind="namespace"><name>System::Reflection</name>
+  </compound>
+  <compound refid="namespace_system_1_1_runtime_1_1_compiler_services" kind="namespace"><name>System::Runtime::CompilerServices</name>
+  </compound>
+  <compound refid="namespace_system_1_1_runtime_1_1_interop_services" kind="namespace"><name>System::Runtime::InteropServices</name>
+  </compound>
   <compound refid="namespace_system_1_1_text" kind="namespace"><name>System::Text</name>
   </compound>
   <compound refid="namespace_system_1_1_threading_1_1_tasks" kind="namespace"><name>System::Threading::Tasks</name>
   </compound>
+  <compound refid="_8_n_e_t_framework_00_version_0av4_87_82_8_assembly_attributes_8cs" kind="file"><name>.NETFramework,Version=v4.7.2.AssemblyAttributes.cs</name>
+  </compound>
+  <compound refid="_debug_2_8_n_e_t_framework_00_version_0av4_88_8_assembly_attributes_8cs" kind="file"><name>Debug/.NETFramework,Version=v4.8.AssemblyAttributes.cs</name>
+  </compound>
+  <compound refid="_release_2_8_n_e_t_framework_00_version_0av4_88_8_assembly_attributes_8cs" kind="file"><name>Release/.NETFramework,Version=v4.8.AssemblyAttributes.cs</name>
+  </compound>
+  <compound refid="x64_2_debug_2_8_n_e_t_framework_00_version_0av4_88_8_assembly_attributes_8cs" kind="file"><name>x64/Debug/.NETFramework,Version=v4.8.AssemblyAttributes.cs</name>
+  </compound>
+  <compound refid="x86_2_debug_2_8_n_e_t_framework_00_version_0av4_88_8_assembly_attributes_8cs" kind="file"><name>x86/Debug/.NETFramework,Version=v4.8.AssemblyAttributes.cs</name>
+  </compound>
+  <compound refid="x86_2_release_2_8_n_e_t_framework_00_version_0av4_88_8_assembly_attributes_8cs" kind="file"><name>x86/Release/.NETFramework,Version=v4.8.AssemblyAttributes.cs</name>
+  </compound>
+  <compound refid="_assembly_info_8cs" kind="file"><name>AssemblyInfo.cs</name>
+  </compound>
   <compound refid="syncsvn_8cs" kind="file"><name>syncsvn.cs</name>
   </compound>
-  <compound refid="dir_e1b6561293b9a4fab756ee8fa0665d45" kind="dir"><name>C:/Users/belya</name>
+  <compound refid="dir_b109bbe0af043e8e617ed60f4142b82d" kind="dir"><name>Debug</name>
   </compound>
-  <compound refid="dir_cc6038dc52cb36581f50d40e3262a7c4" kind="dir"><name>C:/Users/belya/source/repos</name>
+  <compound refid="dir_ba928f21ff6710a89cf75a927bb7b585" kind="dir"><name>Debug</name>
   </compound>
-  <compound refid="dir_69fb36b0f6a8bc61fd556ec9bb0268fd" kind="dir"><name>C:/Users/belya/source</name>
+  <compound refid="dir_495d840d67b3777a36dcef745b047889" kind="dir"><name>Debug</name>
   </compound>
-  <compound refid="dir_cbeda7168ab376d9b5ceb8ffd71e6de0" kind="dir"><name>C:/Users/belya/source/repos/SyncSVN</name>
+  <compound refid="dir_e458d7b43001cc692f9d67bdb454b0a5" kind="dir"><name>obj</name>
   </compound>
-  <compound refid="dir_355429e3227f811e9a41eedb47ff7a5e" kind="dir"><name>C:/Users/belya/source/repos/SyncSVN/SyncSVN</name>
+  <compound refid="dir_054ca50b66a7403f8d257afddede5bca" kind="dir"><name>Properties</name>
   </compound>
-  <compound refid="dir_d522931ffa1371640980b621734a4381" kind="dir"><name>C:/Users</name>
+  <compound refid="dir_20b3a751dc148e4db974888265d11bec" kind="dir"><name>Release</name>
+  </compound>
+  <compound refid="dir_3fcdda66f0cedaf4fa539f58777ba2c1" kind="dir"><name>Release</name>
+  </compound>
+  <compound refid="dir_23201437cd921df78e4fff589f1d3063" kind="dir"><name>SyncSVN</name>
+  </compound>
+  <compound refid="dir_5390456ccd11d0b18e4044834d0a2f59" kind="dir"><name>x64</name>
+  </compound>
+  <compound refid="dir_4d29ff3e500622203e8109301b0a794e" kind="dir"><name>x86</name>
   </compound>
 </doxygenindex>

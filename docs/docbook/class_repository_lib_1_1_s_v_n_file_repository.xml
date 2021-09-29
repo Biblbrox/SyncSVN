@@ -14,6 +14,8 @@
 <para>Check if path contain subpath </para>
 </listitem>
             <listitem><para><anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_1a07798acd56492fc9c40ae32e4111776f"/>void <emphasis role="strong">Checkout</emphasis> ()</para>
+
+<para>Checkout last revision of remote repository </para>
 </listitem>
             <listitem><para>string <link linkend="_class_repository_lib_1_1_s_v_n_file_repository_1a18624c1e1fbf259be20bceb8dd37760a">Download</link> (string id, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</para>
 
@@ -344,5 +346,5 @@ Parameters</title>
 </section>
 <para>
 The documentation for this class was generated from the following file:</para>
-C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs</section>
+syncsvn.cs</section>
 </section>
