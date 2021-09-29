@@ -9,10 +9,14 @@
 </listitem>
             <listitem><para><anchor xml:id="_class_repository_lib_1_1_conflict_data_1a8202691af8fb63bc8dde6584959ff8ed"/>SvnConflictType <emphasis role="strong">Type</emphasis></para>
 </listitem>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_conflict_data_1a1bff02dfdf93ec9cc29d6be09e3815e1"/>SvnConflictAction <emphasis role="strong">Action</emphasis></para>
+</listitem>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_conflict_data_1ae1e02134aeefde02e55feafad4529a2b"/>SvnConflictReason <emphasis role="strong">Reason</emphasis></para>
+</listitem>
             <listitem><para><anchor xml:id="_class_repository_lib_1_1_conflict_data_1ae463dd5e47666aac8deb8c46a594f546"/>List&lt; string &gt; <emphasis role="strong">ConflictEntries</emphasis></para>
 </listitem>
         </itemizedlist>
 </simplesect>
 <para>
 The documentation for this class was generated from the following file:</para>
-C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs</section>
+syncsvn.cs</section>

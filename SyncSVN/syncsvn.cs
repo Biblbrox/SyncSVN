@@ -105,7 +105,8 @@ namespace RepositoryLib
                 folder += Path.DirectorySeparatorChar;
 
             Uri folderUri = new Uri(folder);
-            return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
+            return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString()
+                .Replace('/', Path.DirectorySeparatorChar));
         }
 
         /// <summary>
@@ -126,10 +127,14 @@ namespace RepositoryLib
         /// <returns></returns>
         private List<string> GetAllFilesAndDirs(string dirPath)
         {
-            string[] entries = Directory.GetFileSystemEntries(dirPath, "*", SearchOption.AllDirectories);
+            string[] entries = Directory.GetFileSystemEntries(dirPath, "*", 
+                SearchOption.AllDirectories);
             return new List<string>(entries);
         }
 
+        /// <summary>
+        /// Checkout last revision of remote repository
+        /// </summary>
         public void Checkout()
         {
             var svnFolder = Config.configData["RootPath"];
@@ -187,6 +192,7 @@ namespace RepositoryLib
                 } catch {
                     throw new Exception("Unable to fetch content from repository");
                 }
+
                 return svnPath;
             }
         }
@@ -358,6 +364,10 @@ namespace RepositoryLib
             }
         }
 
+        /// <summary>
+        /// Get last revision number
+        /// </summary>
+        /// <returns></returns>
         private SvnRevision getLatestRevision()
         {
             SvnInfoEventArgs info;
@@ -369,6 +379,11 @@ namespace RepositoryLib
             return info.Revision;
         }
 
+        /// <summary>
+        /// Set conflict data to Conflict member
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void setConflict(object sender, SvnConflictEventArgs e)
         {
             Conflict.IsConflict = true;
@@ -385,6 +400,11 @@ namespace RepositoryLib
             Conflict.ConflictEntries.Add(e.MergedFile);
         }
 
+        /// <summary>
+        /// Get all entries(dirs and folders) which was modified compore to remote revision
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         private List<string> getModifiedEntries(string path)
         {
             List<string> entries = new List<string>();
@@ -512,6 +532,10 @@ namespace RepositoryLib
             return "";
         }
 
+        /// <summary>
+        /// Delete entry(dir or folder). If folder delete recursively
+        /// </summary>
+        /// <param name="entryPath"></param>
         public static void DeleteEntry(string entryPath)
         {
             FileAttributes attr = File.GetAttributes(entryPath);
