@@ -512,7 +512,7 @@ namespace SyncSVNTests
 
             // Again, user 1 actions
             config.configData["RootPath"] = rootPath;
-            // Delete created file
+            // Delete created file 
             repo.Delete(uniqueFilePath);
             // User 1 actions done
 
@@ -525,6 +525,68 @@ namespace SyncSVNTests
             repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
 
 //            Assert.IsFalse(File.Exists(uniqueFilePath));
+        }
+
+        /// <summary>
+        /// Check for conflicts when edit deleted remotely local file
+        /// </summary>
+        [TestMethod()]
+        public void UploadAndDeleteConflictEditMultipleDeletedRemoteTest()
+        {
+            // User 1 actions
+            // Init repo
+            string rootPath = config.configData["RootPath"];
+            string svnPath = config.configData["SvnUrl"];
+
+            repo.Checkout();
+
+            // Create local file
+            List<string> uniqueFileNames = new List<string>() {
+                $@"{Guid.NewGuid()}.txt", $@"{Guid.NewGuid()}.txt",
+                $@"{Guid.NewGuid()}.txt"
+            };
+
+            List<string> uniqueFilePaths = new List<string>();
+            // TODO: fix this
+            uniqueFileNames.ForEach(f => uniqueFilePaths.Add(Path.Combine(rootPath, f)));
+
+            foreach (var path in uniqueFilePaths) {
+                var f = File.Create(path);
+                f.Close();
+                // Push local file
+                repo.Upload(path);
+            }
+
+            // User 1 actions done
+
+
+            // User 2 actions
+            string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
+            CreateEmptyFolder(testRootPath);
+            config.configData["RootPath"] = testRootPath;
+            repo.Checkout();
+            // Edit created file
+            uniqueFileNames.ForEach(f => {
+                WriteToFile(Path.Combine(testRootPath, f), "Local edit content\n");
+            });
+            // User 2 actions done
+
+
+            // Again, user 1 actions
+            config.configData["RootPath"] = rootPath;
+            // Delete created file 
+            uniqueFilePaths.ForEach(f => repo.Delete(f));
+            // User 1 actions done
+
+
+            // Again, user 2 actions
+            config.configData["RootPath"] = testRootPath;
+            // Pull changes
+            string msg = "В следующих удаленных файлах были сделаны изменения."
+                + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
+            repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
+
+            //            Assert.IsFalse(File.Exists(uniqueFilePath));
         }
     }
 }
