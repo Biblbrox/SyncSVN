@@ -136,7 +136,10 @@ namespace RepositoryLib
         }
 
         /// <summary>
+<<<<<<< HEAD:SyncSVN/syncsvn.cs
 <<<<<<< HEAD
+=======
+>>>>>>> develop:SyncSVN/SyncSVN.cs
         /// Return last revision number
         /// </summary>
         /// <returns></returns>
@@ -195,10 +198,15 @@ namespace RepositoryLib
             return entries;
         }
 
+<<<<<<< HEAD:SyncSVN/syncsvn.cs
 =======
         /// Checkout last revision of remote repository
         /// </summary>
 >>>>>>> 4d5088394b67ca434099993e93ad79e83b5f6073
+=======
+        /// Checkout last revision of remote repository
+        /// </summary>
+>>>>>>> develop:SyncSVN/SyncSVN.cs
         public void Checkout()
         {
             var svnFolder = Config.configData["RootPath"];
@@ -435,6 +443,7 @@ namespace RepositoryLib
             }
         }
 
+<<<<<<< HEAD:SyncSVN/syncsvn.cs
 <<<<<<< HEAD
 =======
         /// <summary>
@@ -501,6 +510,9 @@ namespace RepositoryLib
 
 
 >>>>>>> 4d5088394b67ca434099993e93ad79e83b5f6073
+=======
+
+>>>>>>> develop:SyncSVN/SyncSVN.cs
         /// <summary>
         /// Push changes to svn repository. 
         /// If conflicts occurs onConflict will be called.
@@ -609,11 +621,16 @@ namespace RepositoryLib
         }
 
         /// <summary>
+<<<<<<< HEAD:SyncSVN/syncsvn.cs
 <<<<<<< HEAD
         /// Delete entry(file or directory)
 =======
         /// Delete entry(dir or folder). If folder delete recursively
 >>>>>>> 4d5088394b67ca434099993e93ad79e83b5f6073
+=======
+        /// Delete entry(file or directory)
+        /// Delete entry(dir or folder). If folder delete recursively
+>>>>>>> develop:SyncSVN/SyncSVN.cs
         /// </summary>
         /// <param name="entryPath"></param>
         public static void DeleteEntry(string entryPath)
