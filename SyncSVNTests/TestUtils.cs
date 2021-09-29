@@ -43,14 +43,12 @@ namespace SyncSVNTests
             }
         }
 
-        public static List<bool> ResolveConflictsPull(string message, List<string> conflictList)
+        public static Dictionary<string, bool> ResolveConflictsPull(string message, List<string> conflictList)
         {
             SyncSVNTestForm form = new SyncSVNTestForm(message, conflictList);
 
-            List<bool> result = new List<bool>();
+            var result = new Dictionary<string, bool>();
             form.checkedListBox1.ItemCheck += (sender, e) => {
-                SortedDictionary<string, bool> resolved = new SortedDictionary<string, bool>();
-
                 List<string> checkedItems = new List<string>();
                 foreach (var item in form.checkedListBox1.CheckedItems)
                     checkedItems.Add(item.ToString());
@@ -61,14 +59,12 @@ namespace SyncSVNTests
                     checkedItems.Remove(form.checkedListBox1.Items[e.Index].ToString());
 
                 foreach (string item in checkedItems)
-                    resolved[item] = true;
-
-                foreach (KeyValuePair<string, bool> pair in resolved)
-                    result.Add(pair.Value);
+                    result[item] = true;
             };
 
             form.button1.Click += (sender, e) => {
-                Application.Exit();
+//                Application.Exit();
+                form.Close();
             };
 
             Application.EnableVisualStyles();

@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using SharpSvn;
-using SyncSVNTestForms;
-using System.Windows.Forms;
 using static SyncSVNTests.TestUtils;
 
 namespace SyncSVNTests
@@ -48,6 +46,13 @@ namespace SyncSVNTests
             } catch (Exception e) {
                 Assert.Fail("Unable to init repository: " + e.Message + "\n");
             }
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            Directory.Delete(config.configData["RootPath"], true);
+            Directory.CreateDirectory(config.configData["RootPath"]);
         }
 
 
@@ -121,34 +126,20 @@ namespace SyncSVNTests
             CollectionAssert.AreEqual(localDirectories, directories);
         }
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            var dir = new System.IO.DirectoryInfo(config.configData["RootPath"]);
-            if (dir.Exists) {
-                setAttributesNormal(dir);
-                dir.Delete(true);
-                dir.Create();
-            }
-        }
-
-
         /// <summary>
         /// Test download specific file
         /// </summary>
         [TestMethod()]
         public void DownloadTest()
         {
-
             List<string> files = new List<string> { "asd.txt", "New_File.txt" };
-            try {
-                // Test downoad file
-                foreach (var file in files)
-                    repo.Download(file);
+            var svnFolder = config.configData["RootPath"];
 
-            } catch (Exception e) {
-                Assert.Fail("Exception occured: " + e.Message + "\n");
-            }
+            // Download files
+            files.ForEach((file) => repo.Download(file));
+
+            // Check they downloaded
+            files.ForEach((file) => Assert.IsTrue(File.Exists(Path.Combine(svnFolder, file))));
         }
 
         /// <summary>
@@ -288,11 +279,129 @@ namespace SyncSVNTests
             Assert.IsTrue(!File.Exists(conflictFile + ".mine"), "Conflicts must be resolved");
         }
 
+        [TestMethod()]
+        public void TestConflictPullMultiple()
+        {
+            string rootPath = config.configData["RootPath"];
+            string svnPath = config.configData["SvnUrl"];
+
+            repo.Pull();
+
+            // Simulate another user
+            string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
+            CreateEmptyFolder(testRootPath);
+            config.configData["RootPath"] = testRootPath;
+
+            // Delete all files in a test working directory    
+            cleanRepo();
+
+            var anotherRepo = new SVNFileRepository(config);
+
+            anotherRepo.Pull();
+
+            List<string> localFiles =
+                Directory.GetFiles(config.configData["RootPath"]).OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(config.configData["RootPath"])
+                .OfType<string>().ToList();
+
+            // Modify content of some file
+            List<string> conflictFiles = new List<string>() {
+                localFiles[0], localFiles[1], localFiles[2]
+            };
+
+            conflictFiles.ForEach(file => WriteToFile(file, "Add new line to file\n"));
+
+            anotherRepo.Push();
+            // End of another user session
+
+
+            // Make changes via default user
+            config.configData["RootPath"] = rootPath;
+            localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
+            localDirectories = Directory.GetDirectories(rootPath).OfType<string>().ToList();
+
+            // Modify content of some file
+            conflictFiles = new List<string>() {
+                localFiles[0], localFiles[1],localFiles[2]
+            };
+
+            conflictFiles.ForEach(file => WriteToFile(file, "Add another new line to file\n"));
+
+            // Now this file changed by another user and local user both.
+            // Try to pull changes from repo
+            string msg = "В следующих удаленных файлах были сделаны изменения."
+                + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
+            repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
+
+            // Check that conflict resolved
+            conflictFiles.ForEach(file => {
+                Assert.IsTrue(!File.Exists(file + ".mine"), "Conflicts must be resolved");
+            });
+        }
+
         /// <summary>
         /// Test resolving conflicts while push changes from repository
         /// </summary>
         [TestMethod()]
         public void TestConflictPush()
+        {
+            string rootPath = config.configData["RootPath"];
+            string svnPath = config.configData["SvnUrl"];
+
+            repo.Pull();
+
+            // Simulate another user
+            string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
+            CreateEmptyFolder(testRootPath);
+            config.configData["RootPath"] = testRootPath;
+
+            // Delete all files in test working directory    
+            cleanRepo();
+
+            var anotherRepo = new SVNFileRepository(config);
+
+            anotherRepo.Pull();
+
+            List<string> localFiles =
+                Directory.GetFiles(config.configData["RootPath"]).OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(config.configData["RootPath"])
+                .OfType<string>().ToList();
+
+            // Modify content of some file
+            var conflictFiles = new List<string>() {
+                localFiles[0], localFiles[1],localFiles[2]
+            };
+            conflictFiles.ForEach(file => WriteToFile(file, "Add new line to file\n"));
+
+            anotherRepo.Push();
+            // End of another user session
+
+
+            // Make changes via default user
+            config.configData["RootPath"] = rootPath;
+            localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
+
+            // Modify content of some file
+            conflictFiles = new List<string>() {
+                localFiles[0], localFiles[1],localFiles[2]
+            };
+            conflictFiles.ForEach(file => WriteToFile(file, "Add another new line to file\n"));
+
+            // Now this file changed by another user and local user both.
+            // Try to pull changes from repo
+            string msg = "В следующих удаленных файлах были сделаны изменения."
+                + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
+            repo.Push((List<string> list) => ResolveConflictsPull(msg, list));
+
+            // Check that conflict resolved
+            conflictFiles.ForEach(file => {
+                Assert.IsTrue(!File.Exists(file + ".mine"), "Conflicts must be resolved");
+            });
+        }
+
+
+        [TestMethod()]
+        public void TestConflictPushMultiple()
         {
             string rootPath = config.configData["RootPath"];
             string svnPath = config.configData["SvnUrl"];
@@ -342,6 +451,7 @@ namespace SyncSVNTests
             Assert.IsTrue(!File.Exists(conflictFile + ".mine"), "Conflicts must be resolved");
         }
 
+
         [TestMethod()]
         public void UploadAndDeleteTest()
         {
@@ -365,7 +475,6 @@ namespace SyncSVNTests
 
             Assert.IsFalse(File.Exists(uniqueFilePath));
         }
-
 
         /// <summary>
         /// Check for conflicts when edit deleted remotely local file
