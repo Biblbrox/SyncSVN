@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="dir_23201437cd921df78e4fff589f1d3063" kind="dir">
+    <compoundname>SyncSVN</compoundname>
+    <innerdir refid="dir_e458d7b43001cc692f9d67bdb454b0a5">obj</innerdir>
+    <innerdir refid="dir_054ca50b66a7403f8d257afddede5bca">Properties</innerdir>
+    <innerfile refid="syncsvn_8cs">syncsvn.cs</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/"/>
+  </compounddef>
+</doxygen>

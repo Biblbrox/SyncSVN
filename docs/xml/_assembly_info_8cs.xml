@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="_assembly_info_8cs" kind="file" language="C#">
+    <compoundname>AssemblyInfo.cs</compoundname>
+    <innernamespace refid="namespace_system_1_1_runtime_1_1_compiler_services">System::Runtime::CompilerServices</innernamespace>
+    <innernamespace refid="namespace_system_1_1_runtime_1_1_interop_services">System::Runtime::InteropServices</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Reflection;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Runtime.CompilerServices;</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Runtime.InteropServices;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Общие<sp/>сведения<sp/>об<sp/>этой<sp/>сборке<sp/>предоставляются<sp/>следующим<sp/>набором</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>набора<sp/>атрибутов.<sp/>Измените<sp/>значения<sp/>этих<sp/>атрибутов<sp/>для<sp/>изменения<sp/>сведений,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>связанные<sp/>со<sp/>сборкой.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">[assembly:<sp/>AssemblyTitle(</highlight><highlight class="stringliteral">&quot;SyncSVN&quot;</highlight><highlight class="normal">)]</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">[assembly:<sp/>AssemblyDescription(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)]</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">[assembly:<sp/>AssemblyConfiguration(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)]</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">[assembly:<sp/>AssemblyCompany(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)]</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">[assembly:<sp/>AssemblyProduct(</highlight><highlight class="stringliteral">&quot;SyncSVN&quot;</highlight><highlight class="normal">)]</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">[assembly:<sp/>AssemblyCopyright(</highlight><highlight class="stringliteral">&quot;Copyright<sp/>©<sp/><sp/>2021&quot;</highlight><highlight class="normal">)]</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">[assembly:<sp/>AssemblyTrademark(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)]</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">[assembly:<sp/>AssemblyCulture(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)]</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Установка<sp/>значения<sp/>False<sp/>для<sp/>параметра<sp/>ComVisible<sp/>делает<sp/>типы<sp/>в<sp/>этой<sp/>сборке<sp/>невидимыми</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>для<sp/>компонентов<sp/>COM.<sp/>Если<sp/>необходимо<sp/>обратиться<sp/>к<sp/>типу<sp/>в<sp/>этой<sp/>сборке<sp/>через</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/>COM,<sp/>задайте<sp/>атрибуту<sp/>ComVisible<sp/>значение<sp/>TRUE<sp/>для<sp/>этого<sp/>типа.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal">[assembly:<sp/>ComVisible(</highlight><highlight class="keyword">false</highlight><highlight class="normal">)]</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Следующий<sp/>GUID<sp/>служит<sp/>для<sp/>идентификации<sp/>библиотеки<sp/>типов,<sp/>если<sp/>этот<sp/>проект<sp/>будет<sp/>видимым<sp/>для<sp/>COM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal">[assembly:<sp/>Guid(</highlight><highlight class="stringliteral">&quot;7699868a-8439-4e35-99fc-7f642ddd726e&quot;</highlight><highlight class="normal">)]</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Сведения<sp/>о<sp/>версии<sp/>сборки<sp/>состоят<sp/>из<sp/>указанных<sp/>ниже<sp/>четырех<sp/>значений:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>Основной<sp/>номер<sp/>версии</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>Дополнительный<sp/>номер<sp/>версии</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>Номер<sp/>сборки</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>Редакция</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Можно<sp/>задать<sp/>все<sp/>значения<sp/>или<sp/>принять<sp/>номера<sp/>сборки<sp/>и<sp/>редакции<sp/>по<sp/>умолчанию<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//<sp/>используя<sp/>&quot;*&quot;,<sp/>как<sp/>показано<sp/>ниже:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//<sp/>[assembly:<sp/>AssemblyVersion(&quot;1.0.*&quot;)]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal">[assembly:<sp/>AssemblyVersion(</highlight><highlight class="stringliteral">&quot;1.0.0.0&quot;</highlight><highlight class="normal">)]</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">[assembly:<sp/>AssemblyFileVersion(</highlight><highlight class="stringliteral">&quot;1.0.0.0&quot;</highlight><highlight class="normal">)]</highlight></codeline>
+    </programlisting>
+    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/Properties/AssemblyInfo.cs"/>
+  </compounddef>
+</doxygen>

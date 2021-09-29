@@ -96,6 +96,7 @@
       <Project>{7699868A-8439-4E35-99FC-7F642DDD726E}</Project>
       <Name>SyncSVN</Name>
     </ProjectReference>
+    <ProjectReference Include="SyncSVNTests.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SyncSVNTestForm.resx">
