@@ -8,10 +8,8 @@ using System.Configuration;
 using System.Collections.ObjectModel;
 
 
-// подключить nuget-пакет SharpSvn.1.9-x64
 namespace RepositoryLib
 {
-//    using ConflictCallback = Func<List<string>, List<bool>>;
     using ConflictCallback = Func<List<string>, Dictionary<string, bool>>;
 
     [DisplayName("Настройки хранилища файлов (SVN)")]

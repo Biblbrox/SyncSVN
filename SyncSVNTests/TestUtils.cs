@@ -6,7 +6,7 @@ using SyncSVNTestForms;
 
 namespace SyncSVNTests
 {
-    class TestUtils
+    public class TestUtils
     {
         public static void setAttributesNormal(DirectoryInfo dir)
         {
