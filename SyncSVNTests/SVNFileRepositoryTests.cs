@@ -322,7 +322,7 @@ namespace SyncSVNTests
 
             // Modify content of some file
             conflictFiles = new List<string>() {
-                localFiles[0], localFiles[1],localFiles[2]
+                localFiles[0], localFiles[1], localFiles[2]
             };
 
             conflictFiles.ForEach(file => WriteToFile(file, "Add another new line to file\n"));
@@ -462,7 +462,7 @@ namespace SyncSVNTests
             repo.Checkout();
 
             // Create local file
-            string uniqueFileName = $@"Guid.NewGuid().txt";
+            string uniqueFileName = $@"{Guid.NewGuid()}.txt";
             string uniqueFilePath = Path.Combine(rootPath, uniqueFileName);
 
             var f = File.Create(uniqueFilePath);

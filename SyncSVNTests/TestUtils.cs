@@ -62,10 +62,7 @@ namespace SyncSVNTests
                     result[item] = true;
             };
 
-            form.button1.Click += (sender, e) => {
-//                Application.Exit();
-                form.Close();
-            };
+            form.button1.Click += (sender, e) => form.Close();
 
             Application.EnableVisualStyles();
             Application.Run(form);
