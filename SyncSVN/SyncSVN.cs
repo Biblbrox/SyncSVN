@@ -150,10 +150,6 @@ namespace RepositoryLib
         }
 
         /// <summary>
-<<<<<<< HEAD:SyncSVN/syncsvn.cs
-<<<<<<< HEAD
-=======
->>>>>>> develop:SyncSVN/SyncSVN.cs
         /// Return last revision number
         /// </summary>
         /// <returns></returns>
@@ -212,15 +208,9 @@ namespace RepositoryLib
             return entries;
         }
 
-<<<<<<< HEAD:SyncSVN/syncsvn.cs
-=======
+        /// </summary>
         /// Checkout last revision of remote repository
         /// </summary>
->>>>>>> 4d5088394b67ca434099993e93ad79e83b5f6073
-=======
-        /// Checkout last revision of remote repository
-        /// </summary>
->>>>>>> develop:SyncSVN/SyncSVN.cs
         public void Checkout()
         {
             lock (client) {
@@ -380,7 +370,7 @@ namespace RepositoryLib
                                 : SvnAccept.TheirsFull);
                     }
 
-                    if (!underSvnControl(filePath))
+                    if (!UnderSvnControl(filePath))
                         client.Add(filePath);
 
                     client.Commit(RootPath, commitArgs);
@@ -449,76 +439,6 @@ namespace RepositoryLib
             }
         }
 
-<<<<<<< HEAD:SyncSVN/syncsvn.cs
-<<<<<<< HEAD
-=======
-        /// <summary>
-        /// Get last revision number
-        /// </summary>
-        /// <returns></returns>
-        private SvnRevision getLatestRevision()
-        {
-            SvnInfoEventArgs info;
-            var svnUrl = Config.configData["SvnUrl"];
-            Uri repos = new Uri(svnUrl);
-            
-            client.GetInfo(repos, out info);
-
-            return info.Revision;
-        }
-
-        /// <summary>
-        /// Set conflict data to Conflict member
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void setConflict(object sender, SvnConflictEventArgs e)
-        {
-            Conflict.IsConflict = true;
-            if (e.ConflictAction == SvnConflictAction.Delete &&
-                e.ConflictReason == SvnConflictReason.Edited) {
-                Conflict.ConflictEntries.Add(Path.Combine(Config.configData["RootPath"], e.Path));
-                Conflict.Action = SvnConflictAction.Delete;
-                Conflict.Reason = SvnConflictReason.Edited;
-                return;
-            }
-
-
-            Conflict.IsConflict = true;
-            Conflict.ConflictEntries.Add(e.MergedFile);
-        }
-
-        /// <summary>
-        /// Get all entries(dirs and folders) which was modified compore to remote revision
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        private List<string> getModifiedEntries(string path)
-        {
-            List<string> entries = new List<string>();
-
-            lock (client) {
-                Collection<SvnStatusEventArgs> changedFiles = new Collection<SvnStatusEventArgs>();
-                client.GetStatus(path, out changedFiles);
-
-                //delete files from subversion that are not in filesystem
-                //add files to suversion , that are new in filesystem
-
-                foreach (SvnStatusEventArgs changedFile in changedFiles) {
-                    if (changedFile.LocalContentStatus == SvnStatus.Modified) {
-                        entries.Add(changedFile.Path);
-                    }
-                }
-            }
-
-            return entries;
-        }
-
-
->>>>>>> 4d5088394b67ca434099993e93ad79e83b5f6073
-=======
-
->>>>>>> develop:SyncSVN/SyncSVN.cs
         /// <summary>
         /// Push changes to svn repository. 
         /// If conflicts occurs onConflict will be called.
@@ -567,7 +487,7 @@ namespace RepositoryLib
                     
                     // Add to version control all uncontrolled files
                     foreach (var dir in localEntries)
-                        if (!underSvnControl(dir))
+                        if (!UnderSvnControl(dir))
                             client.Add(dir);
                     
                     // TODO: customize commit message
@@ -590,7 +510,7 @@ namespace RepositoryLib
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public bool underSvnControl(string filePath)
+        public bool UnderSvnControl(string filePath)
         {
             // use ThrowOnError = false to avoid exception in case the path does
             // not point to a versioned item
@@ -617,16 +537,10 @@ namespace RepositoryLib
         }
 
         /// <summary>
-<<<<<<< HEAD:SyncSVN/syncsvn.cs
-<<<<<<< HEAD
-        /// Delete entry(file or directory)
-=======
-        /// Delete entry(dir or folder). If folder delete recursively
->>>>>>> 4d5088394b67ca434099993e93ad79e83b5f6073
-=======
         /// Delete entry(file or directory)
         /// Delete entry(dir or folder). If folder delete recursively
->>>>>>> develop:SyncSVN/SyncSVN.cs
+        /// Delete entry(file or directory)
+        /// Delete entry(dir or folder). If folder delete recursively
         /// </summary>
         /// <param name="entryPath"></param>
         public static void DeleteEntry(string entryPath)
