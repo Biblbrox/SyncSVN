@@ -19,7 +19,7 @@ namespace SyncSVNTests
         private void cleanRepo()
         {
             // Delete all files in a working directory    
-            string[] files = Directory.GetFiles(config.configData["RootPath"]);
+            string[] files = Directory.GetFiles(config.ConfigData["RootPath"]);
             foreach (string file in files)
                 File.Delete(file);
         }
@@ -33,10 +33,10 @@ namespace SyncSVNTests
 
                 Console.WriteLine("Config loaded");
                 // Used config
-                Console.WriteLine("User: " + config.configData["SvnUser"]);
-                Console.WriteLine("Password: " + config.configData["SvnPassword"]);
-                Console.WriteLine("Server: " + config.configData["SvnUrl"]);
-                Console.WriteLine("Working directory: " + config.configData["RootPath"]);
+                Console.WriteLine("User: " + config.ConfigData["SvnUser"]);
+                Console.WriteLine("Password: " + config.ConfigData["SvnPassword"]);
+                Console.WriteLine("Server: " + config.ConfigData["SvnUrl"]);
+                Console.WriteLine("Working directory: " + config.ConfigData["RootPath"]);
 
 
                 // Delete all files in a working directory    
@@ -51,8 +51,8 @@ namespace SyncSVNTests
         [TestCleanup]
         public void TestCleanup()
         {
-            Directory.Delete(config.configData["RootPath"], true);
-            Directory.CreateDirectory(config.configData["RootPath"]);
+            Directory.Delete(repo.RootPath, true);
+            Directory.CreateDirectory(repo.RootPath);
         }
 
 
@@ -133,13 +133,12 @@ namespace SyncSVNTests
         public void DownloadTest()
         {
             List<string> files = new List<string> { "asd.txt", "New_File.txt" };
-            var svnFolder = config.configData["RootPath"];
 
             // Download files
-            files.ForEach((file) => repo.Download(file));
+            files.ForEach(file => repo.Download(file));
 
             // Check they downloaded
-            files.ForEach((file) => Assert.IsTrue(File.Exists(Path.Combine(svnFolder, file))));
+            files.ForEach(file => Assert.IsTrue(File.Exists(Path.Combine(repo.RootPath, file))));
         }
 
         /// <summary>
@@ -149,7 +148,7 @@ namespace SyncSVNTests
         [TestMethod()]
         public void PullTest()
         {
-            PullTestRec(config.configData["SvnUrl"], config.configData["RootPath"]);
+            PullTestRec(config.ConfigData["SvnUrl"], config.ConfigData["RootPath"]);
         }
 
         /// <summary>
@@ -160,15 +159,13 @@ namespace SyncSVNTests
         public void PushTest()
         {
             Console.WriteLine("PushTest");
-            string rootPath = config.configData["RootPath"];
-            string svnPath = config.configData["SvnUrl"];
 
             // Fetch Repository con
             repo.Pull();
 
             // Create directory
             string dirName = "dir_name_that_must_be_free_for_usage";
-            string dirPath = Path.Combine(rootPath, dirName);
+            string dirPath = Path.Combine(repo.RootPath, dirName);
             Directory.CreateDirectory(dirPath);
             // Add file in that directory
             File.Create(Path.Combine(dirPath, "file_name_that_must_be_free_for_usage.txt")).Close();
@@ -178,15 +175,15 @@ namespace SyncSVNTests
 
 
             // Remember local dirs and files
-            List<string> localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
-            List<string> localDirectories = Directory.GetDirectories(rootPath)
+            List<string> localFiles = Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(repo.RootPath)
                 .OfType<string>().ToList();
 
             for (int i = 0; i < localFiles.Count; ++i)
-                localFiles[i] = GetRelativePath(localFiles[i], rootPath);
+                localFiles[i] = GetRelativePath(localFiles[i], repo.RootPath);
 
             for (int i = 0; i < localDirectories.Count; ++i)
-                localDirectories[i] = GetRelativePath(localDirectories[i], rootPath);
+                localDirectories[i] = GetRelativePath(localDirectories[i], repo.RootPath);
 
             localDirectories.RemoveAll(dir => dir == ".svn");
             localDirectories.Sort();
@@ -201,15 +198,15 @@ namespace SyncSVNTests
 
 
             // Store new lical dirs and files
-            List<string> newLocalFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
-            List<string> newLocalDirectories = Directory.GetDirectories(rootPath)
+            List<string> newLocalFiles = Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
+            List<string> newLocalDirectories = Directory.GetDirectories(repo.RootPath)
                 .OfType<string>().ToList();
 
             for (int i = 0; i < newLocalFiles.Count; ++i)
-                newLocalFiles[i] = GetRelativePath(newLocalFiles[i], rootPath);
+                newLocalFiles[i] = GetRelativePath(newLocalFiles[i], repo.RootPath);
 
             for (int i = 0; i < newLocalDirectories.Count; ++i)
-                newLocalDirectories[i] = GetRelativePath(newLocalDirectories[i], rootPath);
+                newLocalDirectories[i] = GetRelativePath(newLocalDirectories[i], repo.RootPath);
 
             newLocalDirectories.RemoveAll(dir => dir == ".svn");
             newLocalDirectories.Sort();
@@ -229,8 +226,8 @@ namespace SyncSVNTests
         [TestMethod()]
         public void TestConflictPull()
         {
-            string rootPath = config.configData["RootPath"];
-            string svnPath = config.configData["SvnUrl"];
+            string rootPath = config.ConfigData["RootPath"];
+            string svnPath = config.ConfigData["SvnUrl"];
 
             repo.Pull();
 
@@ -238,7 +235,7 @@ namespace SyncSVNTests
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            config.configData["RootPath"] = testRootPath;
+            repo.RootPath = testRootPath;
 
             // Delete all files in a test working directory    
             cleanRepo();
@@ -248,8 +245,8 @@ namespace SyncSVNTests
             anotherRepo.Pull();
 
             List<string> localFiles =
-                Directory.GetFiles(config.configData["RootPath"]).OfType<string>().ToList();
-            List<string> localDirectories = Directory.GetDirectories(config.configData["RootPath"])
+                Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(repo.RootPath)
                 .OfType<string>().ToList();
 
             // Modify content of some file
@@ -261,9 +258,9 @@ namespace SyncSVNTests
 
 
             // Make changes via default user
-            config.configData["RootPath"] = rootPath;
-            localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
-            localDirectories = Directory.GetDirectories(rootPath).OfType<string>().ToList();
+            repo.RootPath = rootPath;
+            localFiles = Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
+            localDirectories = Directory.GetDirectories(repo.RootPath).OfType<string>().ToList();
 
             // Modify content of some file
             conflictFile = localFiles[0];
@@ -282,15 +279,16 @@ namespace SyncSVNTests
         [TestMethod()]
         public void TestConflictPullMultiple()
         {
-            string rootPath = config.configData["RootPath"];
-            string svnPath = config.configData["SvnUrl"];
+            //            string rootPath = config.configData["RootPath"];
+            //            string svnPath = config.configData["SvnUrl"];
 
+            string user1Root = repo.RootPath;
             repo.Pull();
 
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            config.configData["RootPath"] = testRootPath;
+            repo.RootPath = testRootPath;
 
             // Delete all files in a test working directory    
             cleanRepo();
@@ -300,8 +298,8 @@ namespace SyncSVNTests
             anotherRepo.Pull();
 
             List<string> localFiles =
-                Directory.GetFiles(config.configData["RootPath"]).OfType<string>().ToList();
-            List<string> localDirectories = Directory.GetDirectories(config.configData["RootPath"])
+                Directory.GetFiles(config.ConfigData["RootPath"]).OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(repo.RootPath)
                 .OfType<string>().ToList();
 
             // Modify content of some file
@@ -316,9 +314,9 @@ namespace SyncSVNTests
 
 
             // Make changes via default user
-            config.configData["RootPath"] = rootPath;
-            localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
-            localDirectories = Directory.GetDirectories(rootPath).OfType<string>().ToList();
+            repo.RootPath = user1Root;
+            localFiles = Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
+            localDirectories = Directory.GetDirectories(repo.RootPath).OfType<string>().ToList();
 
             // Modify content of some file
             conflictFiles = new List<string>() {
@@ -345,15 +343,13 @@ namespace SyncSVNTests
         [TestMethod()]
         public void TestConflictPush()
         {
-            string rootPath = config.configData["RootPath"];
-            string svnPath = config.configData["SvnUrl"];
-
+            string user1Root = repo.RootPath;
             repo.Pull();
 
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            config.configData["RootPath"] = testRootPath;
+            repo.RootPath = testRootPath;
 
             // Delete all files in test working directory    
             cleanRepo();
@@ -363,8 +359,8 @@ namespace SyncSVNTests
             anotherRepo.Pull();
 
             List<string> localFiles =
-                Directory.GetFiles(config.configData["RootPath"]).OfType<string>().ToList();
-            List<string> localDirectories = Directory.GetDirectories(config.configData["RootPath"])
+                Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(repo.RootPath)
                 .OfType<string>().ToList();
 
             // Modify content of some file
@@ -378,8 +374,8 @@ namespace SyncSVNTests
 
 
             // Make changes via default user
-            config.configData["RootPath"] = rootPath;
-            localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
+            config.ConfigData["RootPath"] = user1Root;
+            localFiles = Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
 
             // Modify content of some file
             conflictFiles = new List<string>() {
@@ -403,15 +399,13 @@ namespace SyncSVNTests
         [TestMethod()]
         public void TestConflictPushMultiple()
         {
-            string rootPath = config.configData["RootPath"];
-            string svnPath = config.configData["SvnUrl"];
-
+            string user1Root = repo.RootPath;
             repo.Pull();
 
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            config.configData["RootPath"] = testRootPath;
+            config.ConfigData["RootPath"] = testRootPath;
 
             // Delete all files in test working directory    
             cleanRepo();
@@ -421,8 +415,8 @@ namespace SyncSVNTests
             anotherRepo.Pull();
 
             List<string> localFiles =
-                Directory.GetFiles(config.configData["RootPath"]).OfType<string>().ToList();
-            List<string> localDirectories = Directory.GetDirectories(config.configData["RootPath"])
+                Directory.GetFiles(config.ConfigData["RootPath"]).OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(config.ConfigData["RootPath"])
                 .OfType<string>().ToList();
 
             // Modify content of some file
@@ -434,8 +428,8 @@ namespace SyncSVNTests
 
 
             // Make changes via default user
-            config.configData["RootPath"] = rootPath;
-            localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
+            repo.RootPath = user1Root;
+            localFiles = Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
 
             // Modify content of some file
             conflictFile = localFiles[0];
@@ -456,14 +450,11 @@ namespace SyncSVNTests
         public void UploadAndDeleteTest()
         {
             // Init repo
-            string rootPath = config.configData["RootPath"];
-            string svnPath = config.configData["SvnUrl"];
-
             repo.Checkout();
 
             // Create local file
             string uniqueFileName = $@"{Guid.NewGuid()}.txt";
-            string uniqueFilePath = Path.Combine(rootPath, uniqueFileName);
+            string uniqueFilePath = Path.Combine(repo.RootPath, uniqueFileName);
 
             var f = File.Create(uniqueFilePath);
             f.Close();
@@ -484,14 +475,13 @@ namespace SyncSVNTests
         {
             // User 1 actions
             // Init repo
-            string rootPath = config.configData["RootPath"];
-            string svnPath = config.configData["SvnUrl"];
+            string user1Root = repo.RootPath;
 
             repo.Checkout();
 
             // Create local file
             string uniqueFileName = $@"{Guid.NewGuid()}.txt";
-            string uniqueFilePath = Path.Combine(rootPath, uniqueFileName);
+            string uniqueFilePath = Path.Combine(repo.RootPath, uniqueFileName);
 
             var f = File.Create(uniqueFilePath);
             f.Close();
@@ -503,7 +493,7 @@ namespace SyncSVNTests
             // User 2 actions
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            config.configData["RootPath"] = testRootPath;
+            repo.RootPath = testRootPath;
             repo.Checkout();
             // Edit created file
             WriteToFile(Path.Combine(testRootPath, uniqueFileName), "Local edit content\n");
@@ -511,14 +501,14 @@ namespace SyncSVNTests
 
 
             // Again, user 1 actions
-            config.configData["RootPath"] = rootPath;
+            repo.RootPath = user1Root;
             // Delete created file 
             repo.Delete(uniqueFilePath);
             // User 1 actions done
 
 
             // Again, user 2 actions
-            config.configData["RootPath"] = testRootPath;
+            config.ConfigData["RootPath"] = testRootPath;
             // Pull changes
             string msg = "В следующих удаленных файлах были сделаны изменения."
                 + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
@@ -535,8 +525,7 @@ namespace SyncSVNTests
         {
             // User 1 actions
             // Init repo
-            string rootPath = config.configData["RootPath"];
-            string svnPath = config.configData["SvnUrl"];
+            string user1Root = repo.RootPath;
 
             repo.Checkout();
 
@@ -548,7 +537,7 @@ namespace SyncSVNTests
 
             List<string> uniqueFilePaths = new List<string>();
             // TODO: fix this
-            uniqueFileNames.ForEach(f => uniqueFilePaths.Add(Path.Combine(rootPath, f)));
+            uniqueFileNames.ForEach(f => uniqueFilePaths.Add(Path.Combine(repo.RootPath, f)));
 
             foreach (var path in uniqueFilePaths) {
                 var f = File.Create(path);
@@ -563,24 +552,24 @@ namespace SyncSVNTests
             // User 2 actions
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            config.configData["RootPath"] = testRootPath;
+            repo.RootPath = testRootPath;
             repo.Checkout();
             // Edit created file
             uniqueFileNames.ForEach(f => {
-                WriteToFile(Path.Combine(testRootPath, f), "Local edit content\n");
+                WriteToFile(Path.Combine(repo.RootPath, f), "Local edit content\n");
             });
             // User 2 actions done
 
 
             // Again, user 1 actions
-            config.configData["RootPath"] = rootPath;
+            repo.RootPath = user1Root;
             // Delete created file 
             uniqueFilePaths.ForEach(f => repo.Delete(f));
             // User 1 actions done
 
 
             // Again, user 2 actions
-            config.configData["RootPath"] = testRootPath;
+            config.ConfigData["RootPath"] = testRootPath;
             // Pull changes
             string msg = "В следующих удаленных файлах были сделаны изменения."
                 + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
