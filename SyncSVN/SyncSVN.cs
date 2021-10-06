@@ -149,6 +149,23 @@ namespace RepositoryLib
                 SearchOption.AllDirectories));
         }
 
+        public List<string> GetEntriesNonControl(string dirPath)
+        {
+            var res = new List<string>();
+
+            var statusArgs = new SvnStatusArgs();
+            statusArgs.Depth = SvnDepth.Infinity;
+            statusArgs.RetrieveAllEntries = true;
+            Collection<SvnStatusEventArgs> statuses;
+            client.GetStatus(dirPath, statusArgs, out statuses);
+
+            foreach (SvnStatusEventArgs statusEventArgs in statuses)
+                if (statusEventArgs.LocalContentStatus == SvnStatus.NotVersioned)
+                    res.Add(statusEventArgs.FullPath);
+
+            return res;
+        }
+
         /// <summary>
         /// Return last revision number
         /// </summary>
@@ -217,7 +234,7 @@ namespace RepositoryLib
                 try {
                     if (!Directory.Exists(RootPath))
                         return;
-
+                    
                     var checkoutArgs = new SvnCheckOutArgs {/* Depth = SvnDepth.Empty*/ };
                     client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs);
                 } catch (SvnException e) {
@@ -481,7 +498,9 @@ namespace RepositoryLib
                                 : SvnAccept.TheirsFull);
                     }
                     // TODO fix 
-                    List<string> localEntries = GetAllFilesAndDirs(RootPath);
+                    //                    List<string> localEntries = GetAllFilesAndDirs(RootPath);
+                    List<string> localEntries = GetEntriesNonControl(RootPath);
+
                     localEntries.RemoveAll(dir => dir.Trim().EndsWith(".svn"));
                     localEntries.RemoveAll(dir => ContainsSubPath(dir, ".svn"));
                     
@@ -537,8 +556,6 @@ namespace RepositoryLib
         }
 
         /// <summary>
-        /// Delete entry(file or directory)
-        /// Delete entry(dir or folder). If folder delete recursively
         /// Delete entry(file or directory)
         /// Delete entry(dir or folder). If folder delete recursively
         /// </summary>
