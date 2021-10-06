@@ -1,7 +1,6 @@
 ﻿using SharpSvn;
 using System;
 using System.Collections.Generic;
-
 using System.ComponentModel;
 using System.IO;
 using System.Configuration;
@@ -56,11 +55,18 @@ namespace RepositoryLib
             IsConflict = false;
             ConflictEntries = new List<string>();
         }
+
+        public void ResetState()
+        {
+            IsConflict = false;
+            ConflictEntries.Clear();
+        }
+
     }
 
     public class SVNFileRepository // : IFileRepository
     {
-        private SvnClient client;
+        public SvnClient client { get; }
 
         public SVNFileRepositoryConfig Config { get; private set; }
 
@@ -91,19 +97,7 @@ namespace RepositoryLib
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        //public static string GenerateFilename(string path)
-        //{
-        //    string fileName = Path.GetFileName(path);
-        //    string result = $"{DateTime.Now:yyyyMMddHHmmss}_{fileName}";
-        //    return result;
-        //}
-
-        /// <summary>
-        /// Init repository classx
+        /// Init repository class
         /// </summary>
         /// <param name="config"></param>
         //protected SVNFileRepository(SVNFileRepositoryConfig config)
@@ -145,15 +139,14 @@ namespace RepositoryLib
         }
 
         /// <summary>
-        /// Get all files and directories from folder dirPath
+        /// Get all files and directories in folder dirPath recursively
         /// </summary>
         /// <param name="dirPath"></param>
         /// <returns></returns>
-        private List<string> GetAllFilesAndDirs(string dirPath)
+        public List<string> GetAllFilesAndDirs(string dirPath)
         {
-            string[] entries = Directory.GetFileSystemEntries(dirPath, "*", 
-                SearchOption.AllDirectories);
-            return new List<string>(entries);
+            return new List<string>(Directory.GetFileSystemEntries(dirPath, "*",
+                SearchOption.AllDirectories));
         }
 
         /// <summary>
@@ -178,11 +171,13 @@ namespace RepositoryLib
         private void SetConflict(object sender, SvnConflictEventArgs e)
         {
             Conflict.IsConflict = true;
-            if (e.ConflictAction == SvnConflictAction.Delete &&
-                e.ConflictReason == SvnConflictReason.Edited) {
+            if (e.ConflictAction == SvnConflictAction.Delete
+                && e.ConflictReason == SvnConflictReason.Edited) {
+
                 Conflict.ConflictEntries.Add(Path.Combine(RootPath, e.Path));
                 Conflict.Action = SvnConflictAction.Delete;
                 Conflict.Reason = SvnConflictReason.Edited;
+
                 return;
             }
 
@@ -195,7 +190,7 @@ namespace RepositoryLib
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private List<string> getModifiedEntries(string path)
+        private List<string> GetModifiedEntries(string path)
         {
             List<string> entries = new List<string>();
 
@@ -205,7 +200,6 @@ namespace RepositoryLib
 
                 //delete files from subversion that are not in filesystem
                 //add files to suversion , that are new in filesystem
-
                 foreach (SvnStatusEventArgs changedFile in changedFiles)
                     if (changedFile.LocalContentStatus == SvnStatus.Modified)
                         entries.Add(changedFile.Path);
@@ -218,11 +212,17 @@ namespace RepositoryLib
         /// </summary>
         public void Checkout()
         {
-            if (!Directory.Exists(RootPath))
-                return;
+            lock (client) {
+                try {
+                    if (!Directory.Exists(RootPath))
+                        return;
 
-            var checkoutArgs = new SvnCheckOutArgs {/* Depth = SvnDepth.Empty*/ };
-            client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs);
+                    var checkoutArgs = new SvnCheckOutArgs {/* Depth = SvnDepth.Empty*/ };
+                    client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs);
+                } catch (SvnException e) {
+                    throw new SvnException("Unable to make checkout from repository" + e.Message);
+                }
+            }
         }
 
         /// <summary>
@@ -269,8 +269,8 @@ namespace RepositoryLib
                             client.Resolve(entry, resolve[entry] ? SvnAccept.MineFull
                                 : SvnAccept.TheirsFull);
                     }
-                } catch {
-                    throw new Exception("Unable to fetch content from repository");
+                } catch (SvnException) {
+                    throw new SvnException("Unable to fetch content from repository");
                 }
 
                 return svnPath;
@@ -291,8 +291,8 @@ namespace RepositoryLib
                     e.AcceptedFailures = e.Failures;
                     e.Save = true;
                 };
-            } catch (Exception e) {
-                throw new Exception("Unable to connect to svn server: " + e.Message);
+            } catch (SvnException e) {
+                throw new SvnException("Unable to connect to svn server: " + e.Message);
             }
 
             return client;
@@ -347,8 +347,7 @@ namespace RepositoryLib
                     if (!client.IsWorkingCopy(RootPath))
                         Checkout();
 
-                    Conflict.IsConflict = false;
-                    Conflict.ConflictEntries.Clear();
+                    Conflict.ResetState();
 
                     SvnUpdateArgs updateArgs = new SvnUpdateArgs();
                     updateArgs.Conflict += new EventHandler<SvnConflictEventArgs>(SetConflict);
@@ -374,8 +373,8 @@ namespace RepositoryLib
                         client.Add(filePath);
 
                     client.Commit(RootPath, commitArgs);
-                } catch (Exception e) {
-                    throw new Exception("Unable to upload file: " + e.Message);
+                } catch (SvnException e) {
+                    throw new SvnException("Unable to upload file: " + e.Message);
                 }
 
                 return filePath;
@@ -402,9 +401,8 @@ namespace RepositoryLib
                         var checkoutArgs = new SvnCheckOutArgs {/* Depth = SvnDepth.Empty*/ };
                         client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs);
                     }
-                    
-                    Conflict.IsConflict = false;
-                    Conflict.ConflictEntries.Clear();
+
+                    Conflict.ResetState();
                     
                     SvnUpdateArgs updateArgs = new SvnUpdateArgs();
                     updateArgs.Conflict += new EventHandler<SvnConflictEventArgs>(SetConflict);
@@ -434,8 +432,8 @@ namespace RepositoryLib
                         }
                     }
                     
-                } catch (Exception e) {
-                    throw new Exception("Unable to pull content from repository: " + e.Message);
+                } catch (SvnException e) {
+                    throw new SvnException("Unable to pull content from repository: " + e.Message);
                 }
             }
         }
@@ -462,16 +460,12 @@ namespace RepositoryLib
                         client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs); 
                     }
 
-                    Console.Write("Push changes to directory remote repository" + "\n");
                     SvnUpdateArgs updateArgs = new SvnUpdateArgs();
                     updateArgs.Conflict += new EventHandler<SvnConflictEventArgs>(SetConflict);
-                    
-                    // Clear conflict state
-                    Conflict.IsConflict = false;
-                    Conflict.ConflictEntries.Clear();
-                    
-                    client.Update(RootPath, updateArgs);
 
+                    // Clear conflict state
+                    Conflict.ResetState();
+                    client.Update(RootPath, updateArgs);
 
                     if (Conflict.IsConflict) {
                         Dictionary<string, bool> resolve = new Dictionary<string, bool>();
@@ -497,7 +491,7 @@ namespace RepositoryLib
                             client.Add(dir);
                     
                     // TODO: customize commit message
-                    var changedFiles = getModifiedEntries(RootPath);
+                    var changedFiles = GetModifiedEntries(RootPath);
                     string commitMsg = "Next files was modified: \n";
                     foreach (var entry in changedFiles)
                         commitMsg += entry + "\n";
@@ -505,8 +499,8 @@ namespace RepositoryLib
                     commitMsg += "\n";
                     var commitArgs = new SvnCommitArgs { LogMessage = commitMsg};
                     client.Commit(RootPath, commitArgs);
-                } catch (Exception e) {
-                    throw new Exception("Unable to push content to repository: " + e.Message);
+                } catch (SvnException e) {
+                    throw new SvnException("Unable to push content to repository: " + e.Message);
                 }
             }
         }
