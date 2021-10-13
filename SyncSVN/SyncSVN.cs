@@ -70,7 +70,7 @@ namespace SyncSVN
 
     public class SVNFileRepository // : IFileRepository
     {
-        public SvnClient client { get; }
+        public SvnClient Client { get; }
 
         public SVNFileRepositoryConfig Config { get; private set; }
 
@@ -115,7 +115,7 @@ namespace SyncSVN
             }
 
             Config = config;
-            client = InitSvnClient();
+            Client = InitSvnClient();
 
             Conflict = new ConflictData();
         }
@@ -195,7 +195,7 @@ namespace SyncSVN
             statusArgs.Depth = SvnDepth.Infinity;
             statusArgs.RetrieveAllEntries = true;
             Collection<SvnStatusEventArgs> statuses;
-            client.GetStatus(dirPath, statusArgs, out statuses);
+            Client.GetStatus(dirPath, statusArgs, out statuses);
 
             foreach (SvnStatusEventArgs statusEventArgs in statuses)
                 if (statusEventArgs.LocalContentStatus == SvnStatus.NotVersioned)
@@ -213,7 +213,7 @@ namespace SyncSVN
             SvnInfoEventArgs info;
             Uri repos = new Uri(SvnUrl);
 
-            client.GetInfo(repos, out info);
+            Client.GetInfo(repos, out info);
 
             return info.Revision;
         }
@@ -248,9 +248,9 @@ namespace SyncSVN
         {
             List<string> entries = new List<string>();
 
-            lock (client) {
+            lock (Client) {
                 Collection<SvnStatusEventArgs> changedFiles = new Collection<SvnStatusEventArgs>();
-                client.GetStatus(path, out changedFiles);
+                Client.GetStatus(path, out changedFiles);
 
                 //delete files from subversion that are not in filesystem
                 //add files to suversion , that are new in filesystem
@@ -267,13 +267,13 @@ namespace SyncSVN
         /// </summary>
         public void Checkout()
         {
-            lock (client) {
+            lock (Client) {
                 try {
                     if (!Directory.Exists(RootPath))
                         return;
                     
                     var checkoutArgs = new SvnCheckOutArgs {/* Depth = SvnDepth.Empty*/ };
-                    client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs);
+                    Client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs);
                 } catch (SvnException e) {
                     throw new SvnException($@"{Resources.UNABLE_CHECKOUT}: " + e.Message);
                 }
@@ -290,14 +290,14 @@ namespace SyncSVN
         /// <returns></returns>
         public string Download(string id, ConflictCallback onConflict = null)
         {
-            lock (client) {
+            lock (Client) {
                 if (!Directory.Exists(RootPath))
                     Directory.CreateDirectory(RootPath);
 
                 var svnPath = Path.Combine(RootPath, id);
 
                 try {
-                    if (!client.IsWorkingCopy(RootPath))
+                    if (!Client.IsWorkingCopy(RootPath))
                         Checkout();
 
                     SvnUpdateArgs updateArgs = new SvnUpdateArgs();
@@ -306,7 +306,7 @@ namespace SyncSVN
                     // Clear conflict state
                     Conflict.ResetState();
 
-                    client.Update(svnPath, updateArgs);
+                    Client.Update(svnPath, updateArgs);
 
                     if (Conflict.IsConflict) {
                         Dictionary<string, bool> resolve = new Dictionary<string, bool>();
@@ -318,7 +318,7 @@ namespace SyncSVN
                         }
 
                         foreach (string entry in Conflict.ConflictEntries)
-                            client.Resolve(entry, resolve[entry] ? SvnAccept.MineFull
+                            Client.Resolve(entry, resolve[entry] ? SvnAccept.MineFull
                                 : SvnAccept.TheirsFull);
                     }
                 } catch (SvnException e) {
@@ -339,16 +339,16 @@ namespace SyncSVN
             if (!Directory.Exists(path) && !File.Exists(path))
                 return;
 
-            lock (client) {
+            lock (Client) {
                 Download(path, onConflict);
 
-                client.Delete(path, new SvnDeleteArgs { Force = true });
+                Client.Delete(path, new SvnDeleteArgs { Force = true });
 
                 var args = new SvnCommitArgs {
                     LogMessage = "File " + path + " deleted"
                 };
 
-                client.Commit(RootPath, args);
+                Client.Commit(RootPath, args);
             }
         }
 
@@ -361,7 +361,7 @@ namespace SyncSVN
         /// <returns></returns>
         public string Upload(string entryPath, ConflictCallback onConflict = null)
         {
-            lock (client) {
+            lock (Client) {
                 if (!Directory.Exists(RootPath)) {
                     Directory.CreateDirectory(RootPath);
                     return string.Empty;
@@ -379,7 +379,7 @@ namespace SyncSVN
                 };
 
                 try {
-                    if (!client.IsWorkingCopy(RootPath))
+                    if (!Client.IsWorkingCopy(RootPath))
                         Checkout();
 
                     Conflict.ResetState();
@@ -387,7 +387,7 @@ namespace SyncSVN
                     SvnUpdateArgs updateArgs = new SvnUpdateArgs();
                     updateArgs.Conflict += new EventHandler<SvnConflictEventArgs>(SetConflict);
 
-                    client.Update(RootPath, updateArgs);
+                    Client.Update(RootPath, updateArgs);
 
 
                     if (Conflict.IsConflict) {
@@ -400,14 +400,14 @@ namespace SyncSVN
                         }
 
                         foreach (string entry in Conflict.ConflictEntries)
-                            client.Resolve(entry, resolve[entry] ? SvnAccept.MineFull
+                            Client.Resolve(entry, resolve[entry] ? SvnAccept.MineFull
                                 : SvnAccept.TheirsFull);
                     }
 
                     if (!UnderSvnControl(entryPath))
-                        client.Add(entryPath);
+                        Client.Add(entryPath);
 
-                    client.Commit(RootPath, commitArgs);
+                    Client.Commit(RootPath, commitArgs);
                 } catch (SvnException e) {
                     throw new SvnException($@"{Resources.UNABLE_UPLOAD}: " + e.Message);
                 }
@@ -425,16 +425,16 @@ namespace SyncSVN
         /// <param name="onConflict"></param>
         public void Pull(ConflictCallback onConflict = null)
         {
-            lock (client) {
+            lock (Client) {
                 if (!Directory.Exists(RootPath))
                     Directory.CreateDirectory(RootPath);
 
                 try {
                     // Check if folder doesn't contain repository.
                     // If it is true - clone repository
-                    if (!client.IsWorkingCopy(RootPath)) {
+                    if (!Client.IsWorkingCopy(RootPath)) {
                         var checkoutArgs = new SvnCheckOutArgs {/* Depth = SvnDepth.Empty*/ };
-                        client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs);
+                        Client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs);
                     }
 
                     Conflict.ResetState();
@@ -442,7 +442,7 @@ namespace SyncSVN
                     SvnUpdateArgs updateArgs = new SvnUpdateArgs();
                     updateArgs.Conflict += new EventHandler<SvnConflictEventArgs>(SetConflict);
                     
-                    client.Update(RootPath, updateArgs);
+                    Client.Update(RootPath, updateArgs);
 
 
                     if (Conflict.IsConflict) {
@@ -457,11 +457,11 @@ namespace SyncSVN
                             if (Conflict.Action == SvnConflictAction.Delete &&
                                 Conflict.Reason == SvnConflictReason.Edited) {
                                 if (resolve[entry])
-                                    client.Resolve(entry, SvnAccept.Working);
+                                    Client.Resolve(entry, SvnAccept.Working);
                                 else
                                     SvnExt.DeleteEntry(entry);
                             } else {
-                                client.Resolve(entry,
+                                Client.Resolve(entry,
                                     resolve[entry] ? SvnAccept.MineFull : SvnAccept.TheirsFull);
                             }
                         }
@@ -481,7 +481,7 @@ namespace SyncSVN
         /// <param name="onConflict"></param>
         public void Push(ConflictCallback onConflict = null)
         {
-            lock (client) {
+            lock (Client) {
                 if (!Directory.Exists(RootPath))
                     Directory.CreateDirectory(RootPath);
 
@@ -489,9 +489,9 @@ namespace SyncSVN
                     // Check if folder doesn't contain repository.
                     // If it is true - clone repository
                     // TODO: does this need when push?
-                    if (!client.IsWorkingCopy(RootPath)) {
+                    if (!Client.IsWorkingCopy(RootPath)) {
                         var checkoutArgs = new SvnCheckOutArgs {/* Depth = SvnDepth.Empty*/ };
-                        client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs); 
+                        Client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs); 
                     }
 
                     SvnUpdateArgs updateArgs = new SvnUpdateArgs();
@@ -499,7 +499,7 @@ namespace SyncSVN
 
                     // Clear conflict state
                     Conflict.ResetState();
-                    client.Update(RootPath, updateArgs);
+                    Client.Update(RootPath, updateArgs);
 
                     if (Conflict.IsConflict) {
                         Dictionary<string, bool> resolve = new Dictionary<string, bool>();
@@ -511,7 +511,7 @@ namespace SyncSVN
                         }
 
                         foreach (string entry in Conflict.ConflictEntries)
-                            client.Resolve(entry, resolve[entry] ? SvnAccept.MineFull
+                            Client.Resolve(entry, resolve[entry] ? SvnAccept.MineFull
                                 : SvnAccept.TheirsFull);
                     }
                     // TODO fix 
@@ -524,7 +524,7 @@ namespace SyncSVN
                     // Add to version control all uncontrolled files
                     foreach (var dir in localEntries)
                         if (!UnderSvnControl(dir))
-                            client.Add(dir);
+                            Client.Add(dir);
                     
                     // TODO: customize commit message
                     var changedFiles = GetModifiedEntries(RootPath);
@@ -534,7 +534,7 @@ namespace SyncSVN
                     
                     commitMsg += "\n";
                     var commitArgs = new SvnCommitArgs { LogMessage = commitMsg};
-                    client.Commit(RootPath, commitArgs);
+                    Client.Commit(RootPath, commitArgs);
                 } catch (SvnException e) {
                     throw new SvnException($@"{Resources.UNABLE_PUSH}: " + e.Message);
                 }
@@ -552,7 +552,7 @@ namespace SyncSVN
             // not point to a versioned item
             SvnInfoArgs svnInfoArgs = new SvnInfoArgs() { ThrowOnError = false };
             Collection<SvnInfoEventArgs> svnInfo;
-            return client.GetInfo(SvnTarget.FromString(filePath), svnInfoArgs, out svnInfo);
+            return Client.GetInfo(SvnTarget.FromString(filePath), svnInfoArgs, out svnInfo);
         }
 
         

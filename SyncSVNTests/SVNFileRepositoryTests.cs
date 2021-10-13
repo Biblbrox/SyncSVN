@@ -7,21 +7,22 @@ using System.Linq;
 using SharpSvn;
 using static SyncSVNTests.TestUtils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Net;
 
 namespace SyncSVNTests
 {
     [TestClass()]
     public class SVNFileRepositoryTests
     {
-        private SVNFileRepository repo { get; set; }
-        private SVNFileRepositoryConfig config { get; set; }
+        private SVNFileRepository Repo { get; set; }
+        private SVNFileRepositoryConfig Config { get; set; }
 
-        private void cleanRepo()
+        private void CleanRepo()
         {
             // Delete all dirs and files in a working directory    
-            if (Directory.Exists(repo.RootPath)) { 
-                Directory.Delete(repo.RootPath, true);
-                Directory.CreateDirectory(repo.RootPath);
+            if (Directory.Exists(Repo.RootPath)) { 
+                Directory.Delete(Repo.RootPath, true);
+                Directory.CreateDirectory(Repo.RootPath);
             }
         }
 
@@ -30,20 +31,20 @@ namespace SyncSVNTests
         public void TestInitialize()
         {
             try {
-                config = new SVNFileRepositoryConfig();
+                Config = new SVNFileRepositoryConfig();
 
                 Console.WriteLine("Config loaded");
 
-                repo = new SVNFileRepository(config);
+                Repo = new SVNFileRepository(Config);
 
                 // Used config
-                Console.WriteLine("User: " + repo.SvnUser);
-                Console.WriteLine("Password: " + repo.SvnPassword);
-                Console.WriteLine("Server: " + repo.SvnUrl);
-                Console.WriteLine("Working directory: " + repo.RootPath);
+                Console.WriteLine("User: " + Repo.SvnUser);
+                Console.WriteLine("Password: " + Repo.SvnPassword);
+                Console.WriteLine("Server: " + Repo.SvnUrl);
+                Console.WriteLine("Working directory: " + Repo.RootPath);
 
                 // Delete all files in a working directory    
-                cleanRepo();
+                CleanRepo();
             } catch (Exception e) {
                 Assert.Fail("Unable to init repository: " + e.Message + "\n");
             }
@@ -52,7 +53,7 @@ namespace SyncSVNTests
         [TestCleanup]
         public void TestCleanup()
         {
-            cleanRepo();
+            CleanRepo();
         }
 
 
@@ -62,13 +63,13 @@ namespace SyncSVNTests
             List<string> directories = new List<string>();
             SvnInfoEventArgs info;
             Uri repos = new Uri(DirUrl);
-            repo.client.GetInfo(repos, out info);
+            Repo.Client.GetInfo(repos, out info);
             
             Collection<SvnListEventArgs> contents;
             SvnListArgs arg = new SvnListArgs();
             arg.Revision = new SvnRevision(info.Revision); //the revision you want to check
             arg.RetrieveEntries = SvnDirEntryItems.AllFieldsV15;
-            if (repo.client.GetList(new Uri(DirUrl), arg, out contents)) {
+            if (Repo.Client.GetList(new Uri(DirUrl), arg, out contents)) {
                 foreach (SvnListEventArgs item in contents) {
                     if (item.Entry.NodeKind == SvnNodeKind.Directory)
                         directories.Add(item.Path);
@@ -84,7 +85,7 @@ namespace SyncSVNTests
 
             files.Sort();
 
-            repo.Pull();
+            Repo.Pull();
 
             string rootPath = DirLocalPath;
             List<string> localFiles = Directory.GetFiles(rootPath).OfType<string>().ToList();
@@ -127,10 +128,10 @@ namespace SyncSVNTests
             List<string> files = new List<string> { "asd.txt", "New_File.txt" };
 
             // Download files
-            files.ForEach(file => repo.Download(file));
+            files.ForEach(file => Repo.Download(file));
 
             // Check they downloaded
-            files.ForEach(file => Assert.IsTrue(File.Exists(Path.Combine(repo.RootPath, file))));
+            files.ForEach(file => Assert.IsTrue(File.Exists(Path.Combine(Repo.RootPath, file))));
         }
 
         /// <summary>
@@ -140,7 +141,7 @@ namespace SyncSVNTests
         [TestMethod()]
         public void PullTest()
         {
-            PullTestRec(repo.SvnUrl, repo.RootPath);
+            PullTestRec(Repo.SvnUrl, Repo.RootPath);
         }
 
         /// <summary>
@@ -153,38 +154,38 @@ namespace SyncSVNTests
             Console.WriteLine("PushTest");
 
             // Fetch Repository con
-            repo.Pull();
+            Repo.Pull();
 
             // Create directory
             string dirName = $@"{Guid.NewGuid()}";
-            string dirPath = Path.Combine(repo.RootPath, dirName);
+            string dirPath = Path.Combine(Repo.RootPath, dirName);
             Directory.CreateDirectory(dirPath);
             // Add file in that directory
             File.Create(Path.Combine(dirPath, $@"{Guid.NewGuid()}.txt")).Close();
 
             // Push changes
-            repo.Push();
+            Repo.Push();
 
 
             // Remember local dirs and files
-            List<string> localEntries = repo.GetAllFilesAndDirs(repo.RootPath);
+            List<string> localEntries = Repo.GetAllFilesAndDirs(Repo.RootPath);
             for (int i = 0; i < localEntries.Count; ++i)
-                localEntries[i] = GetRelativePath(localEntries[i], repo.RootPath);
+                localEntries[i] = GetRelativePath(localEntries[i], Repo.RootPath);
 
             localEntries.RemoveAll(dir => dir == ".svn");
             localEntries.Sort();
 
             // Clean local files
-            cleanRepo();
+            CleanRepo();
 
             // Fetch repo with created directory and file
-            repo.Pull();
+            Repo.Pull();
 
 
             // Store new lical dirs and files
-            var newLocalEntries = repo.GetAllFilesAndDirs(repo.RootPath);
+            var newLocalEntries = Repo.GetAllFilesAndDirs(Repo.RootPath);
             for (int i = 0; i < newLocalEntries.Count; ++i)
-                newLocalEntries[i] = GetRelativePath(newLocalEntries[i], repo.RootPath);
+                newLocalEntries[i] = GetRelativePath(newLocalEntries[i], Repo.RootPath);
 
             newLocalEntries.RemoveAll(dir => dir == ".svn");
             newLocalEntries.Sort();
@@ -200,38 +201,38 @@ namespace SyncSVNTests
         [TestMethod()]
         public void TestConflictPull()
         { 
-            string user1Root = repo.RootPath;
+            string user1Root = Repo.RootPath;
 
-            repo.Pull();
+            Repo.Pull();
 
 
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            repo.RootPath = testRootPath;
+            Repo.RootPath = testRootPath;
 
             // Delete all files in a test working directory    
-            cleanRepo();
+            CleanRepo();
 
-            repo.Pull();
+            Repo.Pull();
 
             List<string> localFiles =
-                Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
-            List<string> localDirectories = Directory.GetDirectories(repo.RootPath)
+                Directory.GetFiles(Repo.RootPath).OfType<string>().ToList();
+            List<string> localDirectories = Directory.GetDirectories(Repo.RootPath)
                 .OfType<string>().ToList();
 
             // Modify content of some file
             string conflictFile = localFiles[0];
             WriteToFile(conflictFile, "Add new line to file\n");
 
-            repo.Push();
+            Repo.Push();
             // End of another user session
 
 
             // Make changes via default user
-            repo.RootPath = user1Root;
-            localFiles = Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
-            localDirectories = Directory.GetDirectories(repo.RootPath).OfType<string>().ToList();
+            Repo.RootPath = user1Root;
+            localFiles = Directory.GetFiles(Repo.RootPath).OfType<string>().ToList();
+            localDirectories = Directory.GetDirectories(Repo.RootPath).OfType<string>().ToList();
 
             // Modify content of some file
             conflictFile = localFiles[0];
@@ -241,7 +242,7 @@ namespace SyncSVNTests
             // Try to pull changes from repo
             string msg = "В следующих удаленных файлах были сделаны изменения."
                 + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
-            repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
+            Repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
 
             // Check that conflict resolved
             Assert.IsTrue(!File.Exists(conflictFile + ".mine"), "Conflicts must be resolved");
@@ -250,24 +251,23 @@ namespace SyncSVNTests
         [TestMethod()]
         public void TestConflictPullMultiple()
         {
-            string user1Root = repo.RootPath;
-            repo.Pull();
+            string user1Root = Repo.RootPath;
+            Repo.Pull();
 
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            repo.RootPath = testRootPath;
+            Repo.RootPath = testRootPath;
 
             // Delete all files in a test working directory    
-            cleanRepo();
+            CleanRepo();
 
-            var anotherRepo = new SVNFileRepository(config);
+            var anotherRepo = new SVNFileRepository(Config);
 
             anotherRepo.Pull();
 
-            List<string> localFiles =
-                Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
-            List<string> localDirectories = Directory.GetDirectories(repo.RootPath)
+            var localFiles = Directory.GetFiles(Repo.RootPath).OfType<string>().ToList();
+            var localDirectories = Directory.GetDirectories(Repo.RootPath)
                 .OfType<string>().ToList();
 
             // Modify content of some file
@@ -282,9 +282,9 @@ namespace SyncSVNTests
 
 
             // Make changes via default user
-            repo.RootPath = user1Root;
-            localFiles = Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
-            localDirectories = Directory.GetDirectories(repo.RootPath).OfType<string>().ToList();
+            Repo.RootPath = user1Root;
+            localFiles = Directory.GetFiles(Repo.RootPath).OfType<string>().ToList();
+            localDirectories = Directory.GetDirectories(Repo.RootPath).OfType<string>().ToList();
 
             // Modify content of some file
             conflictFiles = new List<string>() {
@@ -297,7 +297,7 @@ namespace SyncSVNTests
             // Try to pull changes from repo
             string msg = "В следующих удаленных файлах были сделаны изменения."
                 + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
-            repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
+            Repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
 
             // Check that conflict resolved
             conflictFiles.ForEach(file => {
@@ -311,36 +311,35 @@ namespace SyncSVNTests
         [TestMethod()]
         public void TestConflictPushMultiple()
         {// TODO: strange
-            string user1Root = repo.RootPath;
-            repo.Pull();
+            string user1Root = Repo.RootPath;
+            Repo.Pull();
 
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            repo.RootPath = testRootPath;
+            Repo.RootPath = testRootPath;
 
             // Delete all files in test working directory    
-            cleanRepo();
+            CleanRepo();
 
 
-            repo.Pull();
+            Repo.Pull();
 
-            List<string> localFiles =
-                Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
-            List<string> localDirectories = Directory.GetDirectories(repo.RootPath)
+            var localFiles = Directory.GetFiles(Repo.RootPath).OfType<string>().ToList();
+            var localDirectories = Directory.GetDirectories(Repo.RootPath)
                 .OfType<string>().ToList();
 
             // Modify content of some file
             var conflictFiles = new List<string>() { localFiles[0], localFiles[1],localFiles[2] };
             conflictFiles.ForEach(file => WriteToFile(file, "Add new line to file\n"));
 
-            repo.Push();
+            Repo.Push();
             // End of another user session
 
 
             // Make changes via default user
-            repo.RootPath = user1Root;
-            localFiles = Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
+            Repo.RootPath = user1Root;
+            localFiles = Directory.GetFiles(Repo.RootPath).OfType<string>().ToList();
 
             // Modify content of some file
             conflictFiles = new List<string>() { localFiles[0], localFiles[1], localFiles[2] };
@@ -350,7 +349,7 @@ namespace SyncSVNTests
             // Try to pull changes from repo
             string msg = "В следующих удаленных файлах были сделаны изменения."
                 + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
-            repo.Push((List<string> list) => ResolveConflictsPull(msg, list));
+            Repo.Push((List<string> list) => ResolveConflictsPull(msg, list));
 
             // Check that conflict resolved
             conflictFiles.ForEach(file => {
@@ -362,35 +361,34 @@ namespace SyncSVNTests
         [TestMethod()]
         public void TestConflictPush()
         {
-            string user1Root = repo.RootPath;
-            repo.Pull();
+            string user1Root = Repo.RootPath;
+            Repo.Pull();
 
             // Simulate another user
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            repo.RootPath = testRootPath;
+            Repo.RootPath = testRootPath;
 
             // Delete all files in test working directory    
-            cleanRepo();
+            CleanRepo();
 
-            repo.Pull();
+            Repo.Pull();
 
-            List<string> localFiles =
-                Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
-            List<string> localDirectories = Directory.GetDirectories(repo.RootPath)
+            var localFiles = Directory.GetFiles(Repo.RootPath).OfType<string>().ToList();
+            var localDirectories = Directory.GetDirectories(Repo.RootPath)
                 .OfType<string>().ToList();
 
             // Modify content of some file
             string conflictFile = localFiles[0];
             WriteToFile(conflictFile, "Add new line to file\n");
 
-            repo.Push();
+            Repo.Push();
             // End of another user session
 
 
             // Make changes via default user
-            repo.RootPath = user1Root;
-            localFiles = Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
+            Repo.RootPath = user1Root;
+            localFiles = Directory.GetFiles(Repo.RootPath).OfType<string>().ToList();
 
             // Modify content of some file
             conflictFile = localFiles[0];
@@ -400,7 +398,7 @@ namespace SyncSVNTests
             // Try to pull changes from repo
             string msg = "В следующих удаленных файлах были сделаны изменения."
                 + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
-            repo.Push((List<string> list) => ResolveConflictsPull(msg, list));
+            Repo.Push((List<string> list) => ResolveConflictsPull(msg, list));
 
             // Check that conflict resolved
             Assert.IsTrue(!File.Exists(conflictFile + ".mine"), "Conflicts must be resolved");
@@ -411,19 +409,19 @@ namespace SyncSVNTests
         public void UploadAndDeleteTest()
         {
             // Init repo
-            repo.Checkout();
+            Repo.Checkout();
 
             // Create local file
             string uniqueFileName = $@"{Guid.NewGuid()}.txt";
-            string uniqueFilePath = Path.Combine(repo.RootPath, uniqueFileName);
+            string uniqueFilePath = Path.Combine(Repo.RootPath, uniqueFileName);
 
             var f = File.Create(uniqueFilePath);
             f.Close();
             // Push local file
-            repo.Upload(uniqueFilePath);
+            Repo.Upload(uniqueFilePath);
 
             // Remove file from server
-            repo.Delete(uniqueFilePath);
+            Repo.Delete(uniqueFilePath);
 
             Assert.IsFalse(File.Exists(uniqueFilePath));
         }
@@ -436,51 +434,50 @@ namespace SyncSVNTests
         {
             // User 1 actions
             // Init repo
-            string user1Root = repo.RootPath;
+            string user1Root = Repo.RootPath;
 
-            repo.Checkout();
+            Repo.Checkout();
 
             // Create local file
             string uniqueFileName = $@"{Guid.NewGuid()}.txt";
-            string uniqueFilePath = Path.Combine(repo.RootPath, uniqueFileName);
+            string uniqueFilePath = Path.Combine(Repo.RootPath, uniqueFileName);
 
             var f = File.Create(uniqueFilePath);
             f.Close();
             // Push local file
-            repo.Upload(uniqueFilePath);
+            Repo.Upload(uniqueFilePath);
             // User 1 actions done
 
 
             // User 2 actions
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            repo.RootPath = testRootPath;
-            repo.Checkout();
+            Repo.RootPath = testRootPath;
+            Repo.Checkout();
             // Edit created file
             WriteToFile(Path.Combine(testRootPath, uniqueFileName), "Local edit content\n");
             // User 2 actions done
 
 
             // Again, user 1 actions
-            repo.RootPath = user1Root;
+            Repo.RootPath = user1Root;
             // Delete created file 
-            repo.Delete(uniqueFilePath);
+            Repo.Delete(uniqueFilePath);
             // User 1 actions done
 
 
             // Again, user 2 actions
-            repo.RootPath = testRootPath;
+            Repo.RootPath = testRootPath;
             // Pull changes
             string msg = "В следующих удаленных файлах были сделаны изменения."
                 + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
 
-            repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
+            Repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
 
 
-            string[] files = Directory.GetFiles(repo.RootPath, "*.mine", 
+            string[] files = Directory.GetFiles(Repo.RootPath, "*.mine",
                 SearchOption.TopDirectoryOnly);
             Assert.IsFalse(files.Length > 0, "Conflicts must be resolved");
-            //            Assert.IsFalse(File.Exists(uniqueFilePath));
         }
 
         /// <summary>
@@ -491,24 +488,24 @@ namespace SyncSVNTests
         {
             // User 1 actions
             // Init repo
-            string user1Root = repo.RootPath;
+            string user1Root = Repo.RootPath;
 
-            repo.Checkout();
+            Repo.Checkout();
 
             // Create local file
-            List<string> uniqueFileNames = new List<string>() {
+            var uniqueFileNames = new List<string>() {
                 $@"{Guid.NewGuid()}.txt", $@"{Guid.NewGuid()}.txt", $@"{Guid.NewGuid()}.txt"
             };
 
-            List<string> uniqueFilePaths = new List<string>();
+            var uniqueFilePaths = new List<string>();
             // TODO: fix this
-            uniqueFileNames.ForEach(f => uniqueFilePaths.Add(Path.Combine(repo.RootPath, f)));
+            uniqueFileNames.ForEach(f => uniqueFilePaths.Add(Path.Combine(Repo.RootPath, f)));
 
             foreach (var path in uniqueFilePaths) {
                 var f = File.Create(path);
                 f.Close();
                 // Push local file
-                repo.Upload(path);
+                Repo.Upload(path);
             }
 
             // User 1 actions done
@@ -517,30 +514,30 @@ namespace SyncSVNTests
             // User 2 actions
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
             CreateEmptyFolder(testRootPath);
-            repo.RootPath = testRootPath;
-            repo.Checkout();
+            Repo.RootPath = testRootPath;
+            Repo.Checkout();
             // Edit created file
             uniqueFileNames.ForEach(f => {
-                WriteToFile(Path.Combine(repo.RootPath, f), "Local edit content\n");
+                WriteToFile(Path.Combine(Repo.RootPath, f), "Local edit content\n");
             });
             // User 2 actions done
 
 
             // Again, user 1 actions
-            repo.RootPath = user1Root;
+            Repo.RootPath = user1Root;
             // Delete created file 
-            uniqueFilePaths.ForEach(f => repo.Delete(f));
+            uniqueFilePaths.ForEach(f => Repo.Delete(f));
             // User 1 actions done
 
 
             // Again, user 2 actions
-            repo.RootPath = testRootPath;
+            Repo.RootPath = testRootPath;
             // Pull changes
             string msg = "В следующих удаленных файлах были сделаны изменения."
                 + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
-            repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
+            Repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
 
-            string[] files = Directory.GetFiles(repo.RootPath, "*.mine",
+            string[] files = Directory.GetFiles(Repo.RootPath, "*.mine",
                 SearchOption.TopDirectoryOnly);
             Assert.IsFalse(files.Length > 0, "Conflicts must be resolved");
         }
@@ -552,35 +549,35 @@ namespace SyncSVNTests
         public void DeleteModifiedRemotlyTest()
         {
             // First user
-            repo.Pull();
-            var user1Root = repo.RootPath;
+            Repo.Pull();
+            var user1Root = Repo.RootPath;
             // Create local file
             string uniqueFileName = $@"{Guid.NewGuid()}.txt";
-            string uniqueFilePath = Path.Combine(repo.RootPath, uniqueFileName);
+            string uniqueFilePath = Path.Combine(Repo.RootPath, uniqueFileName);
 
             var f = File.Create(uniqueFilePath);
             f.Close();
             // Push local file
-            repo.Upload(uniqueFilePath);
+            Repo.Upload(uniqueFilePath);
 
             // Second user
-            repo.RootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
-            CreateEmptyFolder(repo.RootPath);
-            repo.Checkout();
-            uniqueFilePath = Path.Combine(repo.RootPath, uniqueFileName);
+            Repo.RootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
+            CreateEmptyFolder(Repo.RootPath);
+            Repo.Checkout();
+            uniqueFilePath = Path.Combine(Repo.RootPath, uniqueFileName);
             WriteToFile(uniqueFilePath, "Local edit content\n");
-            repo.Upload(uniqueFilePath);
+            Repo.Upload(uniqueFilePath);
 
             // First user
-            repo.RootPath = user1Root;
-            uniqueFilePath = Path.Combine(repo.RootPath, uniqueFileName);
+            Repo.RootPath = user1Root;
+            uniqueFilePath = Path.Combine(Repo.RootPath, uniqueFileName);
             string msg = "Select files";
-            repo.Delete(uniqueFilePath, (List<string> list) => ResolveConflictsPull(msg, list));
+            Repo.Delete(uniqueFilePath, (List<string> list) => ResolveConflictsPull(msg, list));
             // Check for conflicts
 
-            string[] files = Directory.GetFiles(repo.RootPath, "*.mine",
+            string[] files = Directory.GetFiles(Repo.RootPath, "*.mine",
                 SearchOption.TopDirectoryOnly);
-            Assert.IsFalse(files.Length > 0, "Conflicts must be resolved");
+            Assert.IsFalse(files.Length > 0, "All conflicts must be resolved");
         }
 
 
@@ -592,15 +589,15 @@ namespace SyncSVNTests
         {
             // User 1 actions
             string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
-            string defaultPath = repo.RootPath;
-            repo.RootPath = testRootPath;
-            repo.Checkout();
+            string defaultPath = Repo.RootPath;
+            Repo.RootPath = testRootPath;
+            Repo.Checkout();
 
             // User 2 actions
-            repo.RootPath = defaultPath;
-            repo.Checkout();
+            Repo.RootPath = defaultPath;
+            Repo.Checkout();
             var folderName = $@"{Guid.NewGuid()}";
-            var folder = Directory.CreateDirectory(Path.Combine(repo.RootPath, folderName));
+            var folder = Directory.CreateDirectory(Path.Combine(Repo.RootPath, folderName));
 
             var fileNames = new List<string> {
                 $@"{Guid.NewGuid()}.txt",
@@ -621,23 +618,23 @@ namespace SyncSVNTests
 
             // Create extra file not in created early directory
             var extraFileName = $@"{Guid.NewGuid()}.txt"; 
-            var extraFile = File.Create(Path.Combine(repo.RootPath, extraFileName));
+            var extraFile = File.Create(Path.Combine(Repo.RootPath, extraFileName));
             extraFile.Close();
 
-            repo.Upload(folder.FullName);
-            repo.Upload(extraFile.Name);
+            Repo.Upload(folder.FullName);
+            Repo.Upload(extraFile.Name);
 
             // User 1 actions. He want to download directory without that file
-            repo.RootPath = testRootPath;
-            repo.Download(Path.Combine(repo.RootPath, folderName));
+            Repo.RootPath = testRootPath;
+            Repo.Download(Path.Combine(Repo.RootPath, folderName));
 
-            string dirPath = Path.Combine(repo.RootPath, folderName);
+            string dirPath = Path.Combine(Repo.RootPath, folderName);
             Assert.IsTrue(Directory.Exists(dirPath), "Updated directory must be exists");
             fileNames.ForEach(name => {
                 Assert.IsTrue(File.Exists(Path.Combine(dirPath, name)),
                     "Files in updated folder must be exists");
             });
-            Assert.IsFalse(File.Exists(Path.Combine(repo.RootPath, extraFileName)),
+            Assert.IsFalse(File.Exists(Path.Combine(Repo.RootPath, extraFileName)),
                 "That file must not be updated");
         }
 
@@ -647,19 +644,82 @@ namespace SyncSVNTests
         [TestMethod]
         public void RemoteExistsTest()
         {
-            repo.Checkout();
+            Repo.Checkout();
             string uniqueFile = $@"{Guid.NewGuid()}.txt";
-            var f = File.Create(Path.Combine(repo.RootPath, uniqueFile));
+            var f = File.Create(Path.Combine(Repo.RootPath, uniqueFile));
             f.Close();
 
-            repo.Upload(Path.Combine(repo.RootPath, uniqueFile));
+            Repo.Upload(Path.Combine(Repo.RootPath, uniqueFile));
 
             // Check if method works at all
-            Assert.IsFalse(SvnExt.RemoteExists(repo.client, repo.SvnUrl, uniqueFile + "aaaa"),
+            Assert.IsFalse(SvnExt.RemoteExists(Repo.Client, Repo.SvnUrl, uniqueFile + "aaaa"),
                 "This should not be happened");
 
-            Assert.IsTrue(SvnExt.RemoteExists(repo.client, repo.SvnUrl, uniqueFile),
-                $@"File {uniqueFile} doens't exists remotely");
+            Assert.IsTrue(SvnExt.RemoteExists(Repo.Client, Repo.SvnUrl, uniqueFile),
+                $@"File {uniqueFile} doesn't exists remotely");
+        }
+
+        /// <summary>
+        /// Generic test for binary file
+        /// </summary>
+        [TestMethod]
+        public void CheckBinaryFilesPush()
+        {
+            Repo.Checkout();
+
+            string binFileName = "binFile.bin";
+            string binaryPath = Path.Combine(Repo.RootPath, binFileName);
+            
+            using (var client = new WebClient()) {
+                string link = "http://downloads.sourceforge.net/gnuwin32/wget-1.11.4-1-setup.exe";
+                client.DownloadFile(link, binaryPath);
+            }
+
+
+            string user1Root = Repo.RootPath;
+            Repo.Pull();
+
+            // Simulate another user
+            string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
+            CreateEmptyFolder(testRootPath);
+            Repo.RootPath = testRootPath;
+
+            // Delete all files in a test working directory    
+            CleanRepo();
+
+            var anotherRepo = new SVNFileRepository(Config);
+
+            anotherRepo.Pull();
+
+            var localFiles = Directory.GetFiles(Repo.RootPath).OfType<string>().ToList();
+            var localDirectories = Directory.GetDirectories(Repo.RootPath)
+                .OfType<string>().ToList();
+
+            // Modify content of some file
+            string conflictFile = Path.Combine(Repo.RootPath, binFileName);
+            WriteToFile(conflictFile, "Add new line to file\n");
+
+            anotherRepo.Push();
+            // End of another user session
+
+
+            // Make changes via default user
+            Repo.RootPath = user1Root;
+            localFiles = Directory.GetFiles(Repo.RootPath).OfType<string>().ToList();
+            localDirectories = Directory.GetDirectories(Repo.RootPath).OfType<string>().ToList();
+
+            // Modify content of some file
+            conflictFile = Path.Combine(Repo.RootPath, binFileName);
+            WriteToFile(conflictFile, "Add another new line to file\n");
+
+            // Now this file changed by another user and local user both.
+            // Try to pull changes from repo
+            string msg = "В следующих удаленных файлах были сделаны изменения."
+                + "Отметьте локальные файлы, которые вы хотите заменить удаленными";
+            Repo.Pull((List<string> list) => ResolveConflictsPull(msg, list));
+
+            // Check that conflict resolved
+            Assert.IsTrue(!File.Exists(conflictFile + ".mine"), "Conflicts must be resolved");
         }
     }
 }
