@@ -2,16 +2,22 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Resources;
 using System.IO;
+using System.Windows;
 using System.Configuration;
 using System.Collections.ObjectModel;
+using SyncSVN.Properties;
 
 
-namespace RepositoryLib
+//namespace RepositoryLib
+namespace SyncSVN
 {
     using ConflictCallback = Func<List<string>, Dictionary<string, bool>>;
 
-    [DisplayName("Настройки хранилища файлов (SVN)")]
+    /// <summary>
+    /// Config class. Config loaded from standard App.Config
+    /// </summary>
     public class SVNFileRepositoryConfig
     {
         public SVNFileRepositoryConfig()
@@ -27,14 +33,13 @@ namespace RepositoryLib
         {
             try {
                 var appSettings = ConfigurationManager.AppSettings;
-
                 if (appSettings.Count == 0)
-                    throw new ConfigurationErrorsException("Application settings file doesn't exists");
+                    throw new ArgumentException(Resources.CONFIG_NOT_FOUND);
                 else
                     foreach (var key in appSettings.AllKeys)
                         ConfigData.Add(key, appSettings[key].ToString());
             } catch (ConfigurationException e) {
-                throw new ConfigurationErrorsException("Error reading app settings: " + e.Message);
+                throw new ArgumentException($@"{Resources.CONFIG_ERROR_READ}: " + e.Message);
             }
         }
 
@@ -102,11 +107,40 @@ namespace RepositoryLib
         //protected SVNFileRepository(SVNFileRepositoryConfig config)
         public SVNFileRepository(SVNFileRepositoryConfig config)
         {
+            if (   !config.ConfigData.ContainsKey("RootPath")
+                || !config.ConfigData.ContainsKey("SvnUrl")
+                || !config.ConfigData.ContainsKey("SvnPassword")
+                || !config.ConfigData.ContainsKey("SvnUser")) {
+                throw new ArgumentException(Resources.CONFIG_FIELDS_NOT_FOUND);
+            }
+
             Config = config;
             client = InitSvnClient();
 
             Conflict = new ConflictData();
         }
+
+        /// <summary>
+        /// Initialize svn client
+        /// </summary>
+        /// <returns></returns>
+        public SvnClient InitSvnClient()
+        {
+            SvnClient client = null;
+            try {
+                client = new SvnClient();
+                client.Authentication.ForceCredentials(SvnUser, SvnPassword);
+                client.Authentication.SslServerTrustHandlers += (s, e) => {
+                    e.AcceptedFailures = e.Failures;
+                    e.Save = true;
+                };
+            } catch (SvnException e) {
+                throw new SvnException($@"{Resources.UNABLE_CONNECT}: " + e.Message);
+            }
+
+            return client;
+        }
+
 
         /// <summary>
         /// Get relative path to entry folder
@@ -241,7 +275,7 @@ namespace RepositoryLib
                     var checkoutArgs = new SvnCheckOutArgs {/* Depth = SvnDepth.Empty*/ };
                     client.CheckOut(new SvnUriTarget(SvnUrl), RootPath, checkoutArgs);
                 } catch (SvnException e) {
-                    throw new SvnException("Unable to make checkout from repository" + e.Message);
+                    throw new SvnException($@"{Resources.UNABLE_CHECKOUT}: " + e.Message);
                 }
             }
         }
@@ -289,33 +323,12 @@ namespace RepositoryLib
                             client.Resolve(entry, resolve[entry] ? SvnAccept.MineFull
                                 : SvnAccept.TheirsFull);
                     }
-                } catch (SvnException) {
-                    throw new SvnException("Unable to fetch content from repository");
+                } catch (SvnException e) {
+                    throw new SvnException($@"{Resources.UNABLE_DOWNLOAD}: " + e.Message);
                 }
 
                 return svnPath;
             }
-        }
-
-        /// <summary>
-        /// Initialize svn client
-        /// </summary>
-        /// <returns></returns>
-        public SvnClient InitSvnClient()
-        {
-            SvnClient client = null;
-            try {
-                client = new SvnClient();
-                client.Authentication.ForceCredentials(SvnUser, SvnPassword);
-                client.Authentication.SslServerTrustHandlers += (s, e) => {
-                    e.AcceptedFailures = e.Failures;
-                    e.Save = true;
-                };
-            } catch (SvnException e) {
-                throw new SvnException("Unable to connect to svn server: " + e.Message);
-            }
-
-            return client;
         }
 
         /// <summary>
@@ -398,7 +411,7 @@ namespace RepositoryLib
 
                     client.Commit(RootPath, commitArgs);
                 } catch (SvnException e) {
-                    throw new SvnException("Unable to upload file: " + e.Message);
+                    throw new SvnException($@"{Resources.UNABLE_UPLOAD}: " + e.Message);
                 }
 
                 return filePath;
@@ -457,7 +470,7 @@ namespace RepositoryLib
                     }
                     
                 } catch (SvnException e) {
-                    throw new SvnException("Unable to pull content from repository: " + e.Message);
+                    throw new SvnException($@"{Resources.UNABLE_PULL}: " + e.Message);
                 }
             }
         }
@@ -525,7 +538,7 @@ namespace RepositoryLib
                     var commitArgs = new SvnCommitArgs { LogMessage = commitMsg};
                     client.Commit(RootPath, commitArgs);
                 } catch (SvnException e) {
-                    throw new SvnException("Unable to push content to repository: " + e.Message);
+                    throw new SvnException($@"{Resources.UNABLE_PUSH}: " + e.Message);
                 }
             }
         }

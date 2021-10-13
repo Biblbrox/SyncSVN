@@ -61,11 +61,83 @@ namespace SyncSVN.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Unable to read config file.
+        /// </summary>
+        public static string CONFIG_ERROR_READ {
+            get {
+                return ResourceManager.GetString("CONFIG_ERROR_READ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Config file doens&apos;t contain requested fileds.
+        /// </summary>
+        public static string CONFIG_FIELDS_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CONFIG_FIELDS_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Application settings file doesn&apos;t exists.
         /// </summary>
-        public static string APP_SETTINGS_NOT_FOUND {
+        public static string CONFIG_NOT_FOUND {
             get {
-                return ResourceManager.GetString("APP_SETTINGS_NOT_FOUND", resourceCulture);
+                return ResourceManager.GetString("CONFIG_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unable to make checkout from repository.
+        /// </summary>
+        public static string UNABLE_CHECKOUT {
+            get {
+                return ResourceManager.GetString("UNABLE_CHECKOUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unable to connect to svn server.
+        /// </summary>
+        public static string UNABLE_CONNECT {
+            get {
+                return ResourceManager.GetString("UNABLE_CONNECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unable to download file.
+        /// </summary>
+        public static string UNABLE_DOWNLOAD {
+            get {
+                return ResourceManager.GetString("UNABLE_DOWNLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unable to pull content from repository.
+        /// </summary>
+        public static string UNABLE_PULL {
+            get {
+                return ResourceManager.GetString("UNABLE_PULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unable push content to repository.
+        /// </summary>
+        public static string UNABLE_PUSH {
+            get {
+                return ResourceManager.GetString("UNABLE_PUSH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unable to upload file.
+        /// </summary>
+        public static string UNABLE_UPLOAD {
+            get {
+                return ResourceManager.GetString("UNABLE_UPLOAD", resourceCulture);
             }
         }
     }
