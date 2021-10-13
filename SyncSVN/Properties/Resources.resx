@@ -117,7 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="APP_SETTINGS_NOT_FOUND" xml:space="preserve">
+  <data name="CONFIG_ERROR_READ" xml:space="preserve">
+    <value>Unable to read config file</value>
+  </data>
+  <data name="CONFIG_FIELDS_NOT_FOUND" xml:space="preserve">
+    <value>Config file doens't contain requested fileds</value>
+  </data>
+  <data name="CONFIG_NOT_FOUND" xml:space="preserve">
     <value>Application settings file doesn't exists</value>
+  </data>
+  <data name="UNABLE_CHECKOUT" xml:space="preserve">
+    <value>Unable to make checkout from repository</value>
+  </data>
+  <data name="UNABLE_CONNECT" xml:space="preserve">
+    <value>Unable to connect to svn server</value>
+  </data>
+  <data name="UNABLE_DOWNLOAD" xml:space="preserve">
+    <value>Unable to download file</value>
+  </data>
+  <data name="UNABLE_PULL" xml:space="preserve">
+    <value>Unable to pull content from repository</value>
+  </data>
+  <data name="UNABLE_PUSH" xml:space="preserve">
+    <value>Unable push content to repository</value>
+  </data>
+  <data name="UNABLE_UPLOAD" xml:space="preserve">
+    <value>Unable to upload file</value>
   </data>
 </root>

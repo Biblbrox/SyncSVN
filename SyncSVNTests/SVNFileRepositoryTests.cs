@@ -33,13 +33,14 @@ namespace SyncSVNTests
                 config = new SVNFileRepositoryConfig();
 
                 Console.WriteLine("Config loaded");
-                // Used config
-                Console.WriteLine("User: " + config.ConfigData["SvnUser"]);
-                Console.WriteLine("Password: " + config.ConfigData["SvnPassword"]);
-                Console.WriteLine("Server: " + config.ConfigData["SvnUrl"]);
-                Console.WriteLine("Working directory: " + config.ConfigData["RootPath"]);
 
                 repo = new SVNFileRepository(config);
+
+                // Used config
+                Console.WriteLine("User: " + repo.SvnUser);
+                Console.WriteLine("Password: " + repo.SvnPassword);
+                Console.WriteLine("Server: " + repo.SvnUrl);
+                Console.WriteLine("Working directory: " + repo.RootPath);
 
                 // Delete all files in a working directory    
                 cleanRepo();
@@ -580,6 +581,85 @@ namespace SyncSVNTests
             string[] files = Directory.GetFiles(repo.RootPath, "*.mine",
                 SearchOption.TopDirectoryOnly);
             Assert.IsFalse(files.Length > 0, "Conflicts must be resolved");
+        }
+
+
+        /// <summary>
+        /// Download folder test
+        /// </summary>
+        [TestMethod]
+        public void DownloadFolderTest()
+        {
+            // User 1 actions
+            string testRootPath = Path.Combine(Directory.GetCurrentDirectory(), "testRootPath");
+            string defaultPath = repo.RootPath;
+            repo.RootPath = testRootPath;
+            repo.Checkout();
+
+            // User 2 actions
+            repo.RootPath = defaultPath;
+            repo.Checkout();
+            var folderName = $@"{Guid.NewGuid()}";
+            var folder = Directory.CreateDirectory(Path.Combine(repo.RootPath, folderName));
+
+            var fileNames = new List<string> {
+                $@"{Guid.NewGuid()}.txt",
+                $@"{Guid.NewGuid()}.txt",
+                $@"{Guid.NewGuid()}.txt"
+            };
+
+            var files = new List<string>{
+                Path.Combine(folder.FullName, fileNames[0]),
+                Path.Combine(folder.FullName, fileNames[1]),
+                Path.Combine(folder.FullName, fileNames[2])
+            };
+
+            files.ForEach(path => {
+                var file = File.Create(path);
+                file.Close();
+            });
+
+            // Create extra file not in created early directory
+            var extraFileName = $@"{Guid.NewGuid()}.txt"; 
+            var extraFile = File.Create(Path.Combine(repo.RootPath, extraFileName));
+            extraFile.Close();
+
+            repo.Upload(folder.FullName);
+            repo.Upload(extraFile.Name);
+
+            // User 1 actions. He want to download directory without that file
+            repo.RootPath = testRootPath;
+            repo.Download(Path.Combine(repo.RootPath, folderName));
+
+            string dirPath = Path.Combine(repo.RootPath, folderName);
+            Assert.IsTrue(Directory.Exists(dirPath), "Updated directory must be exists");
+            fileNames.ForEach(name => {
+                Assert.IsTrue(File.Exists(Path.Combine(dirPath, name)),
+                    "Files in updated folder must be exists");
+            });
+            Assert.IsFalse(File.Exists(Path.Combine(repo.RootPath, extraFileName)),
+                "That file must not be updated");
+        }
+
+        /// <summary>
+        /// Check if remote file created early exists
+        /// </summary>
+        [TestMethod]
+        public void RemoteExistsTest()
+        {
+            repo.Checkout();
+            string uniqueFile = $@"{Guid.NewGuid()}.txt";
+            var f = File.Create(Path.Combine(repo.RootPath, uniqueFile));
+            f.Close();
+
+            repo.Upload(Path.Combine(repo.RootPath, uniqueFile));
+
+            // Check if method works at all
+            Assert.IsFalse(SvnExt.RemoteExists(repo.client, repo.SvnUrl, uniqueFile + "aaaa"),
+                "This should not be happened");
+
+            Assert.IsTrue(SvnExt.RemoteExists(repo.client, repo.SvnUrl, uniqueFile),
+                $@"File {uniqueFile} doens't exists remotely");
         }
     }
 }

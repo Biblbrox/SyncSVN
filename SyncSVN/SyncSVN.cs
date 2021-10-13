@@ -295,8 +295,6 @@ namespace SyncSVN
                     Directory.CreateDirectory(RootPath);
 
                 var svnPath = Path.Combine(RootPath, id);
-//                if (File.Exists(svnPath))
-//                    return svnPath;
 
                 try {
                     if (!client.IsWorkingCopy(RootPath))
@@ -308,7 +306,7 @@ namespace SyncSVN
                     // Clear conflict state
                     Conflict.ResetState();
 
-                    client.Update(RootPath, updateArgs);
+                    client.Update(svnPath, updateArgs);
 
                     if (Conflict.IsConflict) {
                         Dictionary<string, bool> resolve = new Dictionary<string, bool>();
@@ -358,10 +356,10 @@ namespace SyncSVN
         /// <summary>
         /// Upload file to svn server
         /// </summary>
-        /// <param name="filePath"></param>
+        /// <param name="entryPath"></param>
         /// <param name="onConflict"></param>
         /// <returns></returns>
-        public string Upload(string filePath, ConflictCallback onConflict = null)
+        public string Upload(string entryPath, ConflictCallback onConflict = null)
         {
             lock (client) {
                 if (!Directory.Exists(RootPath)) {
@@ -369,7 +367,7 @@ namespace SyncSVN
                     return string.Empty;
                 }
 
-                if (!File.Exists(filePath))
+                if (!File.Exists(entryPath) && !Directory.Exists(entryPath))
                     return string.Empty;
 
                 // TODO: Check if file under repository path
@@ -377,7 +375,7 @@ namespace SyncSVN
 
                 var checkoutArgs = new SvnCheckOutArgs { Depth = SvnDepth.Empty };
                 var commitArgs = new SvnCommitArgs {
-                    LogMessage = $"Add file {filePath} to repository" 
+                    LogMessage = $"Add file {entryPath} to repository" 
                 };
 
                 try {
@@ -406,15 +404,15 @@ namespace SyncSVN
                                 : SvnAccept.TheirsFull);
                     }
 
-                    if (!UnderSvnControl(filePath))
-                        client.Add(filePath);
+                    if (!UnderSvnControl(entryPath))
+                        client.Add(entryPath);
 
                     client.Commit(RootPath, commitArgs);
                 } catch (SvnException e) {
                     throw new SvnException($@"{Resources.UNABLE_UPLOAD}: " + e.Message);
                 }
 
-                return filePath;
+                return entryPath;
             }
         }
 
@@ -608,12 +606,13 @@ namespace SyncSVN
         /// <returns></returns>
         public static bool RemoteExists(this SvnClient client, string svnUrl, string relPath)
         {
-            Uri targetUri = new Uri(new Uri(svnUrl), relPath);
-            var target = SvnTarget.FromUri(targetUri);
-            Collection<SvnInfoEventArgs> info;
-            bool result = client.GetInfo(target, new SvnInfoArgs { ThrowOnError = false }, out info);
-
-            return result && info.Count != 0;
+            lock (client) {
+                Uri targetUri = new Uri(new Uri(svnUrl), relPath);
+                var target = SvnTarget.FromUri(targetUri);
+                Collection<SvnInfoEventArgs> info;
+                bool result = client.GetInfo(target, new SvnInfoArgs { ThrowOnError = false }, out info);
+                return result && info.Count != 0;
+            }
         }
     }
 }
