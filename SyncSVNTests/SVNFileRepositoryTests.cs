@@ -139,9 +139,7 @@ namespace SyncSVNTests
         [TestMethod()]
         public void PullTest()
         {
-            PullTestRec(config.ConfigData["SvnUrl"], config.ConfigData["RootPath"]);
-
-
+            PullTestRec(repo.SvnUrl, repo.RootPath);
         }
 
         /// <summary>
@@ -267,7 +265,7 @@ namespace SyncSVNTests
             anotherRepo.Pull();
 
             List<string> localFiles =
-                Directory.GetFiles(config.ConfigData["RootPath"]).OfType<string>().ToList();
+                Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
             List<string> localDirectories = Directory.GetDirectories(repo.RootPath)
                 .OfType<string>().ToList();
 
@@ -378,7 +376,7 @@ namespace SyncSVNTests
 
             List<string> localFiles =
                 Directory.GetFiles(repo.RootPath).OfType<string>().ToList();
-            List<string> localDirectories = Directory.GetDirectories(config.ConfigData["RootPath"])
+            List<string> localDirectories = Directory.GetDirectories(repo.RootPath)
                 .OfType<string>().ToList();
 
             // Modify content of some file
