@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="48" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="48" bodyend="-1"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="51" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_repository_lib_1_1_conflict_data_1a8202691af8fb63bc8dde6584959ff8ed" prot="public" static="no" mutable="no">
         <type>SvnConflictType</type>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="49" column="32" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="49" bodyend="-1"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="52" column="32" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_repository_lib_1_1_conflict_data_1a1bff02dfdf93ec9cc29d6be09e3815e1" prot="public" static="no" mutable="no">
         <type>SvnConflictAction</type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="50" column="34" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="50" bodyend="-1"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="53" column="34" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_repository_lib_1_1_conflict_data_1ae1e02134aeefde02e55feafad4529a2b" prot="public" static="no" mutable="no">
         <type>SvnConflictReason</type>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="51" column="34" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="51" bodyend="-1"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="54" column="34" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_repository_lib_1_1_conflict_data_1ae463dd5e47666aac8deb8c46a594f546" prot="public" static="no" mutable="no">
         <type>List&lt; string &gt;</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="52" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="52" bodyend="-1"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="55" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" bodystart="55" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -81,14 +81,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="54" column="16" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="54" bodyend="58"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="57" column="16" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" bodystart="57" bodyend="61"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="45" column="11" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="46" bodyend="59"/>
+    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="48" column="11" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" bodystart="49" bodyend="62"/>
     <listofallmembers>
       <member refid="class_repository_lib_1_1_conflict_data_1a1bff02dfdf93ec9cc29d6be09e3815e1" prot="public" virt="non-virtual"><scope>RepositoryLib::ConflictData</scope><name>Action</name></member>
       <member refid="class_repository_lib_1_1_conflict_data_1a61da4f65a9c740e3347d50adcbb23ade" prot="public" virt="non-virtual"><scope>RepositoryLib::ConflictData</scope><name>ConflictData</name></member>

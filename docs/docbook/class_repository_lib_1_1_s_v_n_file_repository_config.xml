@@ -5,7 +5,9 @@
 <simplesect>
     <title>Public Member Functions    </title>
         <itemizedlist>
-            <listitem><para><anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_config_1a7d6de437eba4a63759330551d3b7a555"/>void <emphasis role="strong">parseConfigFile</emphasis> ()</para>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_s_v_n_file_repository_config_1ad18c178138503233ee09448238eb0aae"/>void <emphasis role="strong">ParseConfigFile</emphasis> ()</para>
+
+<para>Parse configures from App.Config </para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -19,4 +21,4 @@
 </simplesect>
 <para>
 The documentation for this class was generated from the following file:</para>
-syncsvn.cs</section>
+C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs</section>

@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="42" column="33" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="42" bodyend="42"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="45" column="33" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" bodystart="45" bodyend="45"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -29,30 +29,31 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="20" column="16" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="20" bodyend="25"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="20" column="16" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" bodystart="20" bodyend="25"/>
       </memberdef>
-      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_config_1a7d6de437eba4a63759330551d3b7a555" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="class_repository_lib_1_1_s_v_n_file_repository_config_1ad18c178138503233ee09448238eb0aae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void RepositoryLib.SVNFileRepositoryConfig.parseConfigFile</definition>
+        <definition>void RepositoryLib.SVNFileRepositoryConfig.ParseConfigFile</definition>
         <argsstring>()</argsstring>
-        <name>parseConfigFile</name>
+        <name>ParseConfigFile</name>
         <briefdescription>
+<para>Parse configures from App.Config </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="27" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="27" bodyend="40"/>
+        <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="30" column="21" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" bodystart="30" bodyend="43"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" line="18" column="11" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/syncsvn.cs" bodystart="19" bodyend="43"/>
+    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="18" column="11" bodyfile="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" bodystart="19" bodyend="46"/>
     <listofallmembers>
       <member refid="class_repository_lib_1_1_s_v_n_file_repository_config_1aefa5c9ccc01656e3fbacf1dffce00207" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepositoryConfig</scope><name>configData</name></member>
-      <member refid="class_repository_lib_1_1_s_v_n_file_repository_config_1a7d6de437eba4a63759330551d3b7a555" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepositoryConfig</scope><name>parseConfigFile</name></member>
+      <member refid="class_repository_lib_1_1_s_v_n_file_repository_config_1ad18c178138503233ee09448238eb0aae" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepositoryConfig</scope><name>ParseConfigFile</name></member>
       <member refid="class_repository_lib_1_1_s_v_n_file_repository_config_1a1c6fc3bba053bf58ca5f421e690d2742" prot="public" virt="non-virtual"><scope>RepositoryLib::SVNFileRepositoryConfig</scope><name>SVNFileRepositoryConfig</name></member>
     </listofallmembers>
   </compounddef>

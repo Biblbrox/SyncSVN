@@ -5,7 +5,7 @@
   <option  id='PROJECT_NUMBER' default='yes' type='string'><value><![CDATA[]]></value></option>
   <option  id='PROJECT_BRIEF' default='yes' type='string'><value><![CDATA[]]></value></option>
   <option  id='PROJECT_LOGO' default='yes' type='string'><value><![CDATA[]]></value></option>
-  <option  id='OUTPUT_DIRECTORY' default='no' type='string'><value><![CDATA[C:\Users\belya\source\repos\SyncSVN\Docs]]></value></option>
+  <option  id='OUTPUT_DIRECTORY' default='no' type='string'><value><![CDATA[C:\Users\belya\FromGit\SyncSVN\Docs]]></value></option>
   <option  id='CREATE_SUBDIRS' default='yes' type='bool'><value>NO</value></option>
   <option  id='ALLOW_UNICODE_NAMES' default='yes' type='bool'><value>NO</value></option>
   <option  id='OUTPUT_LANGUAGE' default='yes' type='string'><value>English</value></option>
@@ -26,7 +26,7 @@
   </option>
   <option  id='ALWAYS_DETAILED_SEC' default='yes' type='bool'><value>NO</value></option>
   <option  id='INLINE_INHERITED_MEMB' default='yes' type='bool'><value>NO</value></option>
-  <option  id='FULL_PATH_NAMES' default='no' type='bool'><value>NO</value></option>
+  <option  id='FULL_PATH_NAMES' default='yes' type='bool'><value>YES</value></option>
   <option  id='STRIP_FROM_PATH' default='yes' type='stringlist'>
   </option>
   <option  id='STRIP_FROM_INC_PATH' default='yes' type='stringlist'>
@@ -65,12 +65,12 @@
   <option  id='LOOKUP_CACHE_SIZE' default='yes' type='int'><value>0</value></option>
   <option  id='NUM_PROC_THREADS' default='yes' type='int'><value>1</value></option>
   <option  id='EXTRACT_ALL' default='yes' type='bool'><value>NO</value></option>
-  <option  id='EXTRACT_PRIVATE' default='yes' type='bool'><value>NO</value></option>
+  <option  id='EXTRACT_PRIVATE' default='no' type='bool'><value>YES</value></option>
   <option  id='EXTRACT_PRIV_VIRTUAL' default='yes' type='bool'><value>NO</value></option>
   <option  id='EXTRACT_PACKAGE' default='yes' type='bool'><value>NO</value></option>
-  <option  id='EXTRACT_STATIC' default='yes' type='bool'><value>NO</value></option>
+  <option  id='EXTRACT_STATIC' default='no' type='bool'><value>YES</value></option>
   <option  id='EXTRACT_LOCAL_CLASSES' default='yes' type='bool'><value>YES</value></option>
-  <option  id='EXTRACT_LOCAL_METHODS' default='yes' type='bool'><value>NO</value></option>
+  <option  id='EXTRACT_LOCAL_METHODS' default='no' type='bool'><value>YES</value></option>
   <option  id='EXTRACT_ANON_NSPACES' default='yes' type='bool'><value>NO</value></option>
   <option  id='RESOLVE_UNNAMED_PARAMS' default='yes' type='bool'><value>YES</value></option>
   <option  id='HIDE_UNDOC_MEMBERS' default='yes' type='bool'><value>NO</value></option>
@@ -167,7 +167,7 @@
     <value><![CDATA[*.qsf]]></value>
     <value><![CDATA[*.ice]]></value>
   </option>
-  <option  id='RECURSIVE' default='no' type='bool'><value>YES</value></option>
+  <option  id='RECURSIVE' default='yes' type='bool'><value>NO</value></option>
   <option  id='EXCLUDE' default='yes' type='stringlist'>
   </option>
   <option  id='EXCLUDE_SYMLINKS' default='yes' type='bool'><value>NO</value></option>

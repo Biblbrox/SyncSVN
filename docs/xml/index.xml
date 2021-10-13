@@ -9,39 +9,65 @@
     <member refid="class_repository_lib_1_1_conflict_data_1a61da4f65a9c740e3347d50adcbb23ade" kind="function"><name>ConflictData</name></member>
   </compound>
   <compound refid="class_repository_lib_1_1_svn_ext" kind="class"><name>RepositoryLib::SvnExt</name>
+    <member refid="class_repository_lib_1_1_svn_ext_1a7b217fb3b66aa98b5ee0eda30de15970" kind="variable"><name>develop</name></member>
+    <member refid="class_repository_lib_1_1_svn_ext_1a6685310412b9151dbab6dcc6f2ee2acc" kind="variable"><name>true</name></member>
     <member refid="class_repository_lib_1_1_svn_ext_1afb88df31bc3e43183e94ccc34c500061" kind="function"><name>GetUrl</name></member>
-    <member refid="class_repository_lib_1_1_svn_ext_1a70b47ab82e79003e48fe6aefe2b1838e" kind="function"><name>DeleteEntry</name></member>
     <member refid="class_repository_lib_1_1_svn_ext_1a5502b80e96961e2548097455711ccd12" kind="function"><name>IsWorkingCopy</name></member>
-    <member refid="class_repository_lib_1_1_svn_ext_1aab97df8a915c0ac59081667a79868868" kind="function"><name>RemoteExists</name></member>
+    <member refid="class_repository_lib_1_1_svn_ext_1a737a72d72c5463c2cd5df4660ee50478" kind="function"><name>RemoteExists</name></member>
+    <member refid="class_repository_lib_1_1_svn_ext_1a7f362f373359c9afa33fc9c36af6256c" kind="function"><name>if</name></member>
+    <member refid="class_repository_lib_1_1_svn_ext_1a3516e92d0c79e473664979a158397c0c" kind="function"><name>Delete</name></member>
   </compound>
   <compound refid="class_repository_lib_1_1_s_v_n_file_repository" kind="class"><name>RepositoryLib::SVNFileRepository</name>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_1aa5cf306e7e7bf1f4d88016e4addddd7a" kind="variable"><name>client</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1ab1e54645c7bdfa021e1531fd20f1c07d" kind="variable"><name>develop</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a58462ebda889bd64b1578c5be3f61250" kind="variable"><name>svnUrl</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a7bc010bb0b36a08a019c47dfdb8aecce" kind="variable"><name>checkoutArgs</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1abe8d75433743a231a397233c80902f7f" kind="variable"><name>develop</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a21892a0fdf41e3e31d6bc1124e3b1736" kind="variable"><name>try</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a76d1fd7eb34ff9b1cac30c8a4c121c23" kind="variable"><name>updateArgs</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a67558da127b252024672f1ac6a1100db" kind="variable"><name>Conflict</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a5d8b7a3a582540e096611bbc96b5e4fb" kind="variable"><name>IsConflict</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1aa6ea4ad9cf787b524f0b4324b73703c3" kind="variable"><name>localEntries</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1aa1e8c48215a0b6e464f1b5d71c206d00" kind="variable"><name>changedFiles</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1ad8ecad832f9926773d55d5b0dfa7406f" kind="variable"><name>commitMsg</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a55d8d048ce028face4ccf8d8657a2f02" kind="variable"><name>commitMsg</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1ac4e16f283289d0eb9c85d4c6a633352c" kind="variable"><name>commitArgs</name></member>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a6db015b912b29e2b0c1d0b0070501af8" kind="property"><name>Config</name></member>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a7cbaf71b240883207dfa64dc52618ca4" kind="property"><name>Conflict</name></member>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a7a5e8e36d27f042453b0e414cb685342" kind="function"><name>GenerateFilename</name></member>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a1a14d7e753a170ef18c701e4243b8039" kind="function"><name>SVNFileRepository</name></member>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a0f2044e2e8625796bc786160e7b6723a" kind="function"><name>ContainsSubPath</name></member>
-    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a07798acd56492fc9c40ae32e4111776f" kind="function"><name>Checkout</name></member>
-    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a18624c1e1fbf259be20bceb8dd37760a" kind="function"><name>Download</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a227649161aaa91fe2d01450940fc383d" kind="function"><name>Download</name></member>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a7d77a19f0b97e0a8ad668cbfe04c0533" kind="function"><name>InitSvnClient</name></member>
-    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1afceee5dd6c7a39b96ef2ce93358779c1" kind="function"><name>Delete</name></member>
-    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1af85d771c1a6a742c07db25c6e4098f66" kind="function"><name>Upload</name></member>
-    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a8868d109ae99ac8d7d925284f371b123" kind="function"><name>Pull</name></member>
-    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1aed16c002ba67155cae7ec95fff77864d" kind="function"><name>Push</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a78e84186a15dbe923bd1ebbf0b9210a8" kind="function"><name>Delete</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a286a3756eb2afe7e9efefa3985dbdcd9" kind="function"><name>Upload</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a79265189b4b22aaf7de7364f43a69495" kind="function"><name>Pull</name></member>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a05f9ec0fa14ef3493962e67ac4ae7f17" kind="function"><name>underSvnControl</name></member>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_1abb2d09255391481a1b16925b8736dbdd" kind="function"><name>Dispose</name></member>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_1aa51954e313721b94c72e5bcc4260a6ba" kind="function"><name>GetRelativePath</name></member>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a6cc2e8a75e002dd2ead27a36d3d9f3b8" kind="function"><name>GetAllFilesAndDirs</name></member>
-    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1ad96f7f5f034266a2346f889659032554" kind="function"><name>getLatestRevision</name></member>
-    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a75bc7eff0eed1eb88266129525662a8b" kind="function"><name>setConflict</name></member>
-    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a47c823923a37201fa63b6f384ccdd9ee" kind="function"><name>getModifiedEntries</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a4c0cf36cf57622ec54f534cd80302782" kind="function"><name>CheckOut</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1ac08adefb418e76a2892a45cfdef05645" kind="function"><name>if</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a71f1c4ac256c0952c058620711884628" kind="function"><name>Write</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a05ea79b8827893258a8bf071fa999b27" kind="function"><name>Clear</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a9978b9b998bfea62c2f09cf814f52361" kind="function"><name>Update</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a1c170e8395b1e3d35acf64e3d508469d" kind="function"><name>if</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1aa5b254c5f0415d7d70db24a64b533fef" kind="function"><name>RemoveAll</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a32f2e5f49ffb57793fcb2cb31d031a55" kind="function"><name>RemoveAll</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a5a598f7161b6b231ba3b4fba55dc6e11" kind="function"><name>foreach</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a9db4b44f2ab3a9757ce5f9aceb8fa90a" kind="function"><name>foreach</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a0741b24c0fe5a14abc16c2bfb5ad4a6b" kind="function"><name>Commit</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_1a4afc1f5d9d590d0fa1e417a8d898742a" kind="function"><name>catch</name></member>
   </compound>
   <compound refid="class_repository_lib_1_1_s_v_n_file_repository_config" kind="class"><name>RepositoryLib::SVNFileRepositoryConfig</name>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_config_1aefa5c9ccc01656e3fbacf1dffce00207" kind="property"><name>configData</name></member>
     <member refid="class_repository_lib_1_1_s_v_n_file_repository_config_1a1c6fc3bba053bf58ca5f421e690d2742" kind="function"><name>SVNFileRepositoryConfig</name></member>
-    <member refid="class_repository_lib_1_1_s_v_n_file_repository_config_1a7d6de437eba4a63759330551d3b7a555" kind="function"><name>parseConfigFile</name></member>
+    <member refid="class_repository_lib_1_1_s_v_n_file_repository_config_1ad18c178138503233ee09448238eb0aae" kind="function"><name>ParseConfigFile</name></member>
+  </compound>
+  <compound refid="namespace_conflict_callback" kind="namespace"><name>ConflictCallback</name>
   </compound>
   <compound refid="namespace_repository_lib" kind="namespace"><name>RepositoryLib</name>
+    <member refid="namespace_repository_lib_1a457bc19d317f3deb119dd0dbb68ce83b" kind="typedef"><name>ConflictCallback</name></member>
   </compound>
   <compound refid="namespace_sharp_svn" kind="namespace"><name>SharpSvn</name>
   </compound>
@@ -57,52 +83,14 @@
   </compound>
   <compound refid="namespace_system_1_1_i_o" kind="namespace"><name>System::IO</name>
   </compound>
-  <compound refid="namespace_system_1_1_linq" kind="namespace"><name>System::Linq</name>
+  <compound refid="_sync_s_v_n_8cs" kind="file"><name>SyncSVN.cs</name>
   </compound>
-  <compound refid="namespace_system_1_1_reflection" kind="namespace"><name>System::Reflection</name>
+  <compound refid="dir_da92606663f4ecb03aa66c183f15dac3" kind="dir"><name>C:/Users/belya/source/repos</name>
   </compound>
-  <compound refid="namespace_system_1_1_runtime_1_1_compiler_services" kind="namespace"><name>System::Runtime::CompilerServices</name>
+  <compound refid="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b" kind="dir"><name>C:/Users/belya/source</name>
   </compound>
-  <compound refid="namespace_system_1_1_runtime_1_1_interop_services" kind="namespace"><name>System::Runtime::InteropServices</name>
+  <compound refid="dir_9434b76fdb6b9ee874e43f0b23c0f8ae" kind="dir"><name>C:/Users/belya/source/repos/SyncSVN</name>
   </compound>
-  <compound refid="namespace_system_1_1_text" kind="namespace"><name>System::Text</name>
-  </compound>
-  <compound refid="namespace_system_1_1_threading_1_1_tasks" kind="namespace"><name>System::Threading::Tasks</name>
-  </compound>
-  <compound refid="_8_n_e_t_framework_00_version_0av4_87_82_8_assembly_attributes_8cs" kind="file"><name>.NETFramework,Version=v4.7.2.AssemblyAttributes.cs</name>
-  </compound>
-  <compound refid="_debug_2_8_n_e_t_framework_00_version_0av4_88_8_assembly_attributes_8cs" kind="file"><name>Debug/.NETFramework,Version=v4.8.AssemblyAttributes.cs</name>
-  </compound>
-  <compound refid="_release_2_8_n_e_t_framework_00_version_0av4_88_8_assembly_attributes_8cs" kind="file"><name>Release/.NETFramework,Version=v4.8.AssemblyAttributes.cs</name>
-  </compound>
-  <compound refid="x64_2_debug_2_8_n_e_t_framework_00_version_0av4_88_8_assembly_attributes_8cs" kind="file"><name>x64/Debug/.NETFramework,Version=v4.8.AssemblyAttributes.cs</name>
-  </compound>
-  <compound refid="x86_2_debug_2_8_n_e_t_framework_00_version_0av4_88_8_assembly_attributes_8cs" kind="file"><name>x86/Debug/.NETFramework,Version=v4.8.AssemblyAttributes.cs</name>
-  </compound>
-  <compound refid="x86_2_release_2_8_n_e_t_framework_00_version_0av4_88_8_assembly_attributes_8cs" kind="file"><name>x86/Release/.NETFramework,Version=v4.8.AssemblyAttributes.cs</name>
-  </compound>
-  <compound refid="_assembly_info_8cs" kind="file"><name>AssemblyInfo.cs</name>
-  </compound>
-  <compound refid="syncsvn_8cs" kind="file"><name>syncsvn.cs</name>
-  </compound>
-  <compound refid="dir_b109bbe0af043e8e617ed60f4142b82d" kind="dir"><name>Debug</name>
-  </compound>
-  <compound refid="dir_ba928f21ff6710a89cf75a927bb7b585" kind="dir"><name>Debug</name>
-  </compound>
-  <compound refid="dir_495d840d67b3777a36dcef745b047889" kind="dir"><name>Debug</name>
-  </compound>
-  <compound refid="dir_e458d7b43001cc692f9d67bdb454b0a5" kind="dir"><name>obj</name>
-  </compound>
-  <compound refid="dir_054ca50b66a7403f8d257afddede5bca" kind="dir"><name>Properties</name>
-  </compound>
-  <compound refid="dir_20b3a751dc148e4db974888265d11bec" kind="dir"><name>Release</name>
-  </compound>
-  <compound refid="dir_3fcdda66f0cedaf4fa539f58777ba2c1" kind="dir"><name>Release</name>
-  </compound>
-  <compound refid="dir_23201437cd921df78e4fff589f1d3063" kind="dir"><name>SyncSVN</name>
-  </compound>
-  <compound refid="dir_5390456ccd11d0b18e4044834d0a2f59" kind="dir"><name>x64</name>
-  </compound>
-  <compound refid="dir_4d29ff3e500622203e8109301b0a794e" kind="dir"><name>x86</name>
+  <compound refid="dir_f8a73d5b1a60080b1fe9c82347df4bb2" kind="dir"><name>C:/Users/belya/source/repos/SyncSVN/SyncSVN</name>
   </compound>
 </doxygenindex>

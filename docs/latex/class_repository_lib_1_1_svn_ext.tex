@@ -1,0 +1,78 @@
+\hypertarget{class_repository_lib_1_1_svn_ext}{}\doxysection{Repository\+Lib.\+Svn\+Ext Class Reference}
+\label{class_repository_lib_1_1_svn_ext}\index{RepositoryLib.SvnExt@{RepositoryLib.SvnExt}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_repository_lib_1_1_svn_ext_afb88df31bc3e43183e94ccc34c500061}\label{class_repository_lib_1_1_svn_ext_afb88df31bc3e43183e94ccc34c500061}} 
+static string {\bfseries Get\+Url} (this Svn\+Client client, string folder)
+\item 
+static bool \mbox{\hyperlink{class_repository_lib_1_1_svn_ext_a5502b80e96961e2548097455711ccd12}{Is\+Working\+Copy}} (this Svn\+Client client, string path)
+\begin{DoxyCompactList}\small\item\em Check if local folder is working copy of repository \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_repository_lib_1_1_svn_ext_a737a72d72c5463c2cd5df4660ee50478}{Remote\+Exists}} (this Svn\+Client client, \mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_config}{SVNFile\+Repository\+Config}} Config, string rel\+Path)
+\begin{DoxyCompactList}\small\item\em Check if remote file exists \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_repository_lib_1_1_svn_ext_a7f362f373359c9afa33fc9c36af6256c}\label{class_repository_lib_1_1_svn_ext_a7f362f373359c9afa33fc9c36af6256c}} 
+{\bfseries if} ((attr \&File\+Attributes.\+Directory)==File\+Attributes.\+Directory) Directory.\+Delete(entry\+Path
+\item 
+\mbox{\Hypertarget{class_repository_lib_1_1_svn_ext_a3516e92d0c79e473664979a158397c0c}\label{class_repository_lib_1_1_svn_ext_a3516e92d0c79e473664979a158397c0c}} 
+else File. {\bfseries Delete} (entry\+Path)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_repository_lib_1_1_svn_ext_a7b217fb3b66aa98b5ee0eda30de15970}\label{class_repository_lib_1_1_svn_ext_a7b217fb3b66aa98b5ee0eda30de15970}} 
+$<$$<$$<$$<$$<$$<$$<$ HEAD\+:\+Sync\+SVN/syncsvn.\+cs$<$$<$$<$$<$$<$$<$$<$ HEAD=======$>$ $>$ $>$ $>$ $>$ $>$ $>$ 4d5088394b67ca434099993e93ad79e83b5f6073=======$>$ $>$ $>$ $>$ $>$ $>$ {\bfseries develop}\+:Sync\+SVN/Sync\+SVN.\+cs public static void Delete\+Entry(string entry\+Path) \{ File\+Attributes attr = File.\+Get\+Attributes(entry\+Path)
+\item 
+\mbox{\Hypertarget{class_repository_lib_1_1_svn_ext_a6685310412b9151dbab6dcc6f2ee2acc}\label{class_repository_lib_1_1_svn_ext_a6685310412b9151dbab6dcc6f2ee2acc}} 
+{\bfseries true}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_repository_lib_1_1_svn_ext_a5502b80e96961e2548097455711ccd12}\label{class_repository_lib_1_1_svn_ext_a5502b80e96961e2548097455711ccd12}} 
+\index{RepositoryLib.SvnExt@{RepositoryLib.SvnExt}!IsWorkingCopy@{IsWorkingCopy}}
+\index{IsWorkingCopy@{IsWorkingCopy}!RepositoryLib.SvnExt@{RepositoryLib.SvnExt}}
+\doxysubsubsection{\texorpdfstring{IsWorkingCopy()}{IsWorkingCopy()}}
+{\footnotesize\ttfamily static bool Repository\+Lib.\+Svn\+Ext.\+Is\+Working\+Copy (\begin{DoxyParamCaption}\item[{this Svn\+Client}]{client,  }\item[{string}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if local folder is working copy of repository 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client} & \\
+\hline
+{\em path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_repository_lib_1_1_svn_ext_a737a72d72c5463c2cd5df4660ee50478}\label{class_repository_lib_1_1_svn_ext_a737a72d72c5463c2cd5df4660ee50478}} 
+\index{RepositoryLib.SvnExt@{RepositoryLib.SvnExt}!RemoteExists@{RemoteExists}}
+\index{RemoteExists@{RemoteExists}!RepositoryLib.SvnExt@{RepositoryLib.SvnExt}}
+\doxysubsubsection{\texorpdfstring{RemoteExists()}{RemoteExists()}}
+{\footnotesize\ttfamily static bool Repository\+Lib.\+Svn\+Ext.\+Remote\+Exists (\begin{DoxyParamCaption}\item[{this Svn\+Client}]{client,  }\item[{\mbox{\hyperlink{class_repository_lib_1_1_s_v_n_file_repository_config}{SVNFile\+Repository\+Config}}}]{Config,  }\item[{string}]{rel\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if remote file exists 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client} & \\
+\hline
+{\em rel\+Path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/belya/source/repos/\+Sync\+SVN/\+Sync\+SVN/Sync\+SVN.\+cs\end{DoxyCompactItemize}

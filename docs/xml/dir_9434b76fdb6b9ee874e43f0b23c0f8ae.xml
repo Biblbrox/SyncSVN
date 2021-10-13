@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
-  <compounddef id="namespace_system_1_1_collections_1_1_object_model" kind="namespace" language="C#">
-    <compoundname>System::Collections::ObjectModel</compoundname>
+  <compounddef id="dir_9434b76fdb6b9ee874e43f0b23c0f8ae" kind="dir">
+    <compoundname>C:/Users/belya/source/repos/SyncSVN</compoundname>
+    <innerdir refid="dir_f8a73d5b1a60080b1fe9c82347df4bb2">C:/Users/belya/source/repos/SyncSVN/SyncSVN</innerdir>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs" line="8" column="37"/>
+    <location file="C:/Users/belya/source/repos/SyncSVN/"/>
   </compounddef>
 </doxygen>

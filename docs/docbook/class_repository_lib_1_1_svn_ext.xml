@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_repository_lib_1_1_svn_ext" xml:lang="en-US">
+<title>RepositoryLib.SvnExt Class Reference</title>
+<indexterm><primary>RepositoryLib.SvnExt</primary></indexterm>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_svn_ext_1afb88df31bc3e43183e94ccc34c500061"/>static string <emphasis role="strong">GetUrl</emphasis> (this SvnClient client, string folder)</para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_repository_lib_1_1_svn_ext_1a5502b80e96961e2548097455711ccd12">IsWorkingCopy</link> (this SvnClient client, string path)</para>
+
+<para>Check if local folder is working copy of repository </para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_repository_lib_1_1_svn_ext_1a737a72d72c5463c2cd5df4660ee50478">RemoteExists</link> (this SvnClient client, <link linkend="_class_repository_lib_1_1_s_v_n_file_repository_config">SVNFileRepositoryConfig</link> Config, string relPath)</para>
+
+<para>Check if remote file exists </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_svn_ext_1a7f362f373359c9afa33fc9c36af6256c"/><emphasis role="strong">if</emphasis> ((attr &amp;FileAttributes.Directory)==FileAttributes.Directory) Directory.Delete(entryPath</para>
+</listitem>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_svn_ext_1a3516e92d0c79e473664979a158397c0c"/>else File. <emphasis role="strong">Delete</emphasis> (entryPath)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_svn_ext_1a7b217fb3b66aa98b5ee0eda30de15970"/>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:SyncSVN/syncsvn.cs&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD=======&gt; &gt; &gt; &gt; &gt; &gt; &gt; 4d5088394b67ca434099993e93ad79e83b5f6073=======&gt; &gt; &gt; &gt; &gt; &gt; <emphasis role="strong">develop</emphasis>:SyncSVN/SyncSVN.cs public static void DeleteEntry(string entryPath) { FileAttributes attr = File.GetAttributes(entryPath)</para>
+</listitem>
+            <listitem><para><anchor xml:id="_class_repository_lib_1_1_svn_ext_1a6685310412b9151dbab6dcc6f2ee2acc"/><emphasis role="strong">true</emphasis></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_repository_lib_1_1_svn_ext_1a5502b80e96961e2548097455711ccd12"/><section>
+    <title>IsWorkingCopy()</title>
+<indexterm><primary>IsWorkingCopy</primary><secondary>RepositoryLib.SvnExt</secondary></indexterm>
+<indexterm><primary>RepositoryLib.SvnExt</primary><secondary>IsWorkingCopy</secondary></indexterm>
+<para><computeroutput>static bool RepositoryLib.SvnExt.IsWorkingCopy (this SvnClient client, string path)<computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>Check if local folder is working copy of repository </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>client</entry><entry></entry>
+                            </row>
+                            <row>
+<entry>path</entry><entry></entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para></para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_class_repository_lib_1_1_svn_ext_1a737a72d72c5463c2cd5df4660ee50478"/><section>
+    <title>RemoteExists()</title>
+<indexterm><primary>RemoteExists</primary><secondary>RepositoryLib.SvnExt</secondary></indexterm>
+<indexterm><primary>RepositoryLib.SvnExt</primary><secondary>RemoteExists</secondary></indexterm>
+<para><computeroutput>static bool RepositoryLib.SvnExt.RemoteExists (this SvnClient client, <link linkend="_class_repository_lib_1_1_s_v_n_file_repository_config">SVNFileRepositoryConfig</link> Config, string relPath)<computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>Check if remote file exists </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>client</entry><entry></entry>
+                            </row>
+                            <row>
+<entry>relPath</entry><entry></entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para></para>
+</formalpara>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs</section>
+</section>

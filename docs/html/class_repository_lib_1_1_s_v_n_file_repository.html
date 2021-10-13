@@ -70,6 +70,8 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#properties">Properties</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_repository_lib_1_1_s_v_n_file_repository-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">RepositoryLib.SVNFileRepository Class Reference</div></div>
 </div><!--header-->
@@ -83,29 +85,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0f2044e2e8625796bc786160e7b6723a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a0f2044e2e8625796bc786160e7b6723a">ContainsSubPath</a> (string pathToFile, string subPath)</td></tr>
 <tr class="memdesc:a0f2044e2e8625796bc786160e7b6723a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if path contain subpath  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#a0f2044e2e8625796bc786160e7b6723a">More...</a><br /></td></tr>
 <tr class="separator:a0f2044e2e8625796bc786160e7b6723a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07798acd56492fc9c40ae32e4111776f"><td class="memItemLeft" align="right" valign="top"><a id="a07798acd56492fc9c40ae32e4111776f" name="a07798acd56492fc9c40ae32e4111776f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Checkout</b> ()</td></tr>
-<tr class="memdesc:a07798acd56492fc9c40ae32e4111776f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checkout last revision of remote repository <br /></td></tr>
-<tr class="separator:a07798acd56492fc9c40ae32e4111776f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18624c1e1fbf259be20bceb8dd37760a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a18624c1e1fbf259be20bceb8dd37760a">Download</a> (string id, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</td></tr>
-<tr class="memdesc:a18624c1e1fbf259be20bceb8dd37760a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Download file from repository If onConflict is null all local changes will be overwriten by remote changes If onConflict is set then all entries marked as true will not be overwriten  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#a18624c1e1fbf259be20bceb8dd37760a">More...</a><br /></td></tr>
-<tr class="separator:a18624c1e1fbf259be20bceb8dd37760a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a227649161aaa91fe2d01450940fc383d"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a227649161aaa91fe2d01450940fc383d">Download</a> (string id, ConflictCallback onConflict=null)</td></tr>
+<tr class="memdesc:a227649161aaa91fe2d01450940fc383d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Download file from repository If onConflict is null all local changes will be overwriten by remote changes If onConflict is set then all entries marked as true will not be overwriten  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#a227649161aaa91fe2d01450940fc383d">More...</a><br /></td></tr>
+<tr class="separator:a227649161aaa91fe2d01450940fc383d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d77a19f0b97e0a8ad668cbfe04c0533"><td class="memItemLeft" align="right" valign="top">SvnClient&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a7d77a19f0b97e0a8ad668cbfe04c0533">InitSvnClient</a> ()</td></tr>
 <tr class="memdesc:a7d77a19f0b97e0a8ad668cbfe04c0533"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize svn client  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#a7d77a19f0b97e0a8ad668cbfe04c0533">More...</a><br /></td></tr>
 <tr class="separator:a7d77a19f0b97e0a8ad668cbfe04c0533"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afceee5dd6c7a39b96ef2ce93358779c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#afceee5dd6c7a39b96ef2ce93358779c1">Delete</a> (string path, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</td></tr>
-<tr class="memdesc:afceee5dd6c7a39b96ef2ce93358779c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete file entry from repository  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#afceee5dd6c7a39b96ef2ce93358779c1">More...</a><br /></td></tr>
-<tr class="separator:afceee5dd6c7a39b96ef2ce93358779c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af85d771c1a6a742c07db25c6e4098f66"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#af85d771c1a6a742c07db25c6e4098f66">Upload</a> (string filePath, Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</td></tr>
-<tr class="memdesc:af85d771c1a6a742c07db25c6e4098f66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upload file to svn server  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#af85d771c1a6a742c07db25c6e4098f66">More...</a><br /></td></tr>
-<tr class="separator:af85d771c1a6a742c07db25c6e4098f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8868d109ae99ac8d7d925284f371b123"><td class="memItemLeft" align="right" valign="top"><a id="a8868d109ae99ac8d7d925284f371b123" name="a8868d109ae99ac8d7d925284f371b123"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Pull</b> (Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</td></tr>
-<tr class="memdesc:a8868d109ae99ac8d7d925284f371b123"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pull changes from svn server. If onConflict is null all local changes will be overwriten by remote changes If onConflict is set then all entries which marked as true will not be overwriten by remote changes. <br /></td></tr>
-<tr class="separator:a8868d109ae99ac8d7d925284f371b123"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed16c002ba67155cae7ec95fff77864d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#aed16c002ba67155cae7ec95fff77864d">Push</a> (Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt; onConflict=null)</td></tr>
-<tr class="memdesc:aed16c002ba67155cae7ec95fff77864d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Push changes to svn repository. If conflicts occurs onConflict will be called. All local entities marked as true will overwrite remote entities.  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#aed16c002ba67155cae7ec95fff77864d">More...</a><br /></td></tr>
-<tr class="separator:aed16c002ba67155cae7ec95fff77864d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78e84186a15dbe923bd1ebbf0b9210a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a78e84186a15dbe923bd1ebbf0b9210a8">Delete</a> (string path, ConflictCallback onConflict=null)</td></tr>
+<tr class="memdesc:a78e84186a15dbe923bd1ebbf0b9210a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete file entry from repository  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#a78e84186a15dbe923bd1ebbf0b9210a8">More...</a><br /></td></tr>
+<tr class="separator:a78e84186a15dbe923bd1ebbf0b9210a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a286a3756eb2afe7e9efefa3985dbdcd9"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a286a3756eb2afe7e9efefa3985dbdcd9">Upload</a> (string filePath, ConflictCallback onConflict=null)</td></tr>
+<tr class="memdesc:a286a3756eb2afe7e9efefa3985dbdcd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upload file to svn server  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#a286a3756eb2afe7e9efefa3985dbdcd9">More...</a><br /></td></tr>
+<tr class="separator:a286a3756eb2afe7e9efefa3985dbdcd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79265189b4b22aaf7de7364f43a69495"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a79265189b4b22aaf7de7364f43a69495">Pull</a> (ConflictCallback onConflict=null)</td></tr>
+<tr class="memdesc:a79265189b4b22aaf7de7364f43a69495"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pull changes from svn server. If onConflict is null all local changes will be overwriten by remote changes If onConflict is set then all entries which marked as true will not be overwriten by remote changes.  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#a79265189b4b22aaf7de7364f43a69495">More...</a><br /></td></tr>
+<tr class="separator:a79265189b4b22aaf7de7364f43a69495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05f9ec0fa14ef3493962e67ac4ae7f17"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a05f9ec0fa14ef3493962e67ac4ae7f17">underSvnControl</a> (string filePath)</td></tr>
 <tr class="memdesc:a05f9ec0fa14ef3493962e67ac4ae7f17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if file is under svn  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#a05f9ec0fa14ef3493962e67ac4ae7f17">More...</a><br /></td></tr>
 <tr class="separator:a05f9ec0fa14ef3493962e67ac4ae7f17"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,8 +115,100 @@ Static Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a6db015b912b29e2b0c1d0b0070501af8"><td class="memItemLeft" align="right" valign="top"><a id="a6db015b912b29e2b0c1d0b0070501af8" name="a6db015b912b29e2b0c1d0b0070501af8"></a>
-<a class="el" href="class_repository_lib_1_1_s_v_n_file_repository_config.html">SVNFileRepositoryConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Config</b><code> [get]</code></td></tr>
+<a class="el" href="class_repository_lib_1_1_s_v_n_file_repository_config.html">SVNFileRepositoryConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Config</b><code> [getprivate set]</code></td></tr>
 <tr class="separator:a6db015b912b29e2b0c1d0b0070501af8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cbaf71b240883207dfa64dc52618ca4"><td class="memItemLeft" align="right" valign="top"><a id="a7cbaf71b240883207dfa64dc52618ca4" name="a7cbaf71b240883207dfa64dc52618ca4"></a>
+<a class="el" href="class_repository_lib_1_1_conflict_data.html">ConflictData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Conflict</b><code> [getset]</code></td></tr>
+<tr class="separator:a7cbaf71b240883207dfa64dc52618ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aa51954e313721b94c72e5bcc4260a6ba"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#aa51954e313721b94c72e5bcc4260a6ba">GetRelativePath</a> (string filespec, string folder)</td></tr>
+<tr class="memdesc:aa51954e313721b94c72e5bcc4260a6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get relative path to entry folder  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#aa51954e313721b94c72e5bcc4260a6ba">More...</a><br /></td></tr>
+<tr class="separator:aa51954e313721b94c72e5bcc4260a6ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc2e8a75e002dd2ead27a36d3d9f3b8"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a6cc2e8a75e002dd2ead27a36d3d9f3b8">GetAllFilesAndDirs</a> (string dirPath)</td></tr>
+<tr class="memdesc:a6cc2e8a75e002dd2ead27a36d3d9f3b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all files and directories from folder dirPath  <a href="class_repository_lib_1_1_s_v_n_file_repository.html#a6cc2e8a75e002dd2ead27a36d3d9f3b8">More...</a><br /></td></tr>
+<tr class="separator:a6cc2e8a75e002dd2ead27a36d3d9f3b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c0cf36cf57622ec54f534cd80302782"><td class="memItemLeft" align="right" valign="top"><a id="a4c0cf36cf57622ec54f534cd80302782" name="a4c0cf36cf57622ec54f534cd80302782"></a>
+client.&#160;</td><td class="memItemRight" valign="bottom"><b>CheckOut</b> (new SvnUriTarget(svnUrl), svnFolder, checkoutArgs)</td></tr>
+<tr class="separator:a4c0cf36cf57622ec54f534cd80302782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac08adefb418e76a2892a45cfdef05645"><td class="memItemLeft" align="right" valign="top"><a id="ac08adefb418e76a2892a45cfdef05645" name="ac08adefb418e76a2892a45cfdef05645"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> (!Directory.Exists(svnFolder)) Directory.CreateDirectory(svnFolder)</td></tr>
+<tr class="separator:ac08adefb418e76a2892a45cfdef05645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71f1c4ac256c0952c058620711884628"><td class="memItemLeft" align="right" valign="top"><a id="a71f1c4ac256c0952c058620711884628" name="a71f1c4ac256c0952c058620711884628"></a>
+Console.&#160;</td><td class="memItemRight" valign="bottom"><b>Write</b> (&quot;Local directory: &quot;+svnFolder)</td></tr>
+<tr class="separator:a71f1c4ac256c0952c058620711884628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05ea79b8827893258a8bf071fa999b27"><td class="memItemLeft" align="right" valign="top"><a id="a05ea79b8827893258a8bf071fa999b27" name="a05ea79b8827893258a8bf071fa999b27"></a>
+Conflict.ConflictEntries.&#160;</td><td class="memItemRight" valign="bottom"><b>Clear</b> ()</td></tr>
+<tr class="separator:a05ea79b8827893258a8bf071fa999b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9978b9b998bfea62c2f09cf814f52361"><td class="memItemLeft" align="right" valign="top"><a id="a9978b9b998bfea62c2f09cf814f52361" name="a9978b9b998bfea62c2f09cf814f52361"></a>
+client.&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> (svnFolder, updateArgs)</td></tr>
+<tr class="separator:a9978b9b998bfea62c2f09cf814f52361"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c170e8395b1e3d35acf64e3d508469d"><td class="memItemLeft" align="right" valign="top"><a id="a1c170e8395b1e3d35acf64e3d508469d" name="a1c170e8395b1e3d35acf64e3d508469d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> (Conflict.IsConflict)</td></tr>
+<tr class="separator:a1c170e8395b1e3d35acf64e3d508469d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5b254c5f0415d7d70db24a64b533fef"><td class="memItemLeft" align="right" valign="top"><a id="aa5b254c5f0415d7d70db24a64b533fef" name="aa5b254c5f0415d7d70db24a64b533fef"></a>
+localEntries.&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveAll</b> (dir=&gt; dir.Trim().EndsWith(&quot;.svn&quot;))</td></tr>
+<tr class="separator:aa5b254c5f0415d7d70db24a64b533fef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32f2e5f49ffb57793fcb2cb31d031a55"><td class="memItemLeft" align="right" valign="top"><a id="a32f2e5f49ffb57793fcb2cb31d031a55" name="a32f2e5f49ffb57793fcb2cb31d031a55"></a>
+localEntries.&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveAll</b> (dir=&gt; <a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a0f2044e2e8625796bc786160e7b6723a">ContainsSubPath</a>(dir, &quot;.svn&quot;))</td></tr>
+<tr class="separator:a32f2e5f49ffb57793fcb2cb31d031a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a598f7161b6b231ba3b4fba55dc6e11"><td class="memItemLeft" align="right" valign="top"><a id="a5a598f7161b6b231ba3b4fba55dc6e11" name="a5a598f7161b6b231ba3b4fba55dc6e11"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>foreach</b> (var dir in localEntries) if(!<a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a05f9ec0fa14ef3493962e67ac4ae7f17">underSvnControl</a>(dir)) client.Add(dir)</td></tr>
+<tr class="separator:a5a598f7161b6b231ba3b4fba55dc6e11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9db4b44f2ab3a9757ce5f9aceb8fa90a"><td class="memItemLeft" align="right" valign="top"><a id="a9db4b44f2ab3a9757ce5f9aceb8fa90a" name="a9db4b44f2ab3a9757ce5f9aceb8fa90a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>foreach</b> (var entry in changedFiles) commitMsg+</td></tr>
+<tr class="separator:a9db4b44f2ab3a9757ce5f9aceb8fa90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0741b24c0fe5a14abc16c2bfb5ad4a6b"><td class="memItemLeft" align="right" valign="top"><a id="a0741b24c0fe5a14abc16c2bfb5ad4a6b" name="a0741b24c0fe5a14abc16c2bfb5ad4a6b"></a>
+client.&#160;</td><td class="memItemRight" valign="bottom"><b>Commit</b> (svnFolder, commitArgs)</td></tr>
+<tr class="separator:a0741b24c0fe5a14abc16c2bfb5ad4a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4afc1f5d9d590d0fa1e417a8d898742a"><td class="memItemLeft" align="right" valign="top"><a id="a4afc1f5d9d590d0fa1e417a8d898742a" name="a4afc1f5d9d590d0fa1e417a8d898742a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>catch</b> (Exception e)</td></tr>
+<tr class="separator:a4afc1f5d9d590d0fa1e417a8d898742a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aa5cf306e7e7bf1f4d88016e4addddd7a"><td class="memItemLeft" align="right" valign="top"><a id="aa5cf306e7e7bf1f4d88016e4addddd7a" name="aa5cf306e7e7bf1f4d88016e4addddd7a"></a>
+SvnClient&#160;</td><td class="memItemRight" valign="bottom"><b>client</b></td></tr>
+<tr class="separator:aa5cf306e7e7bf1f4d88016e4addddd7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e54645c7bdfa021e1531fd20f1c07d"><td class="memItemLeft" align="right" valign="top"><a id="ab1e54645c7bdfa021e1531fd20f1c07d" name="ab1e54645c7bdfa021e1531fd20f1c07d"></a>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:SyncSVN/syncsvn.cs&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD=======&gt; &gt; &gt; &gt; &gt; &gt; &gt; develop:SyncSVN/SyncSVN.cs private SvnRevision getLatestRevision() { SvnInfoEventArgs info;var svnUrl=Config.configData[&quot;SvnUrl&quot;];Uri repos=new Uri(svnUrl);client.GetInfo(repos, out info);return info.Revision;} private void setConflict(object sender, SvnConflictEventArgs e) { Conflict.IsConflict=true;if(e.ConflictAction==SvnConflictAction.Delete &amp;&amp;e.ConflictReason==SvnConflictReason.Edited) { Conflict.ConflictEntries.Add(Path.Combine(Config.configData[&quot;RootPath&quot;], e.Path));Conflict.Action=SvnConflictAction.Delete;Conflict.Reason=SvnConflictReason.Edited;return;} Conflict.IsConflict=true;Conflict.ConflictEntries.Add(e.MergedFile);} private List&lt; string &gt; getModifiedEntries(string path) { List&lt; string &gt; entries=new List&lt; string &gt;();lock(client) { Collection&lt; SvnStatusEventArgs &gt; changedFiles=new Collection&lt; SvnStatusEventArgs &gt;();client.GetStatus(path, out changedFiles);foreach(SvnStatusEventArgs changedFile in changedFiles) if(changedFile.LocalContentStatus==SvnStatus.Modified) entries.Add(changedFile.Path);} return entries;}&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:SyncSVN/syncsvn.cs=======&gt; &gt; &gt; &gt; &gt; &gt; &gt; 4d5088394b67ca434099993e93ad79e83b5f6073=======&gt; &gt; &gt; &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>develop</b>:SyncSVN/SyncSVN.cs public void Checkout() { var svnFolder = Config.configData[&quot;RootPath&quot;]</td></tr>
+<tr class="separator:ab1e54645c7bdfa021e1531fd20f1c07d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58462ebda889bd64b1578c5be3f61250"><td class="memItemLeft" align="right" valign="top"><a id="a58462ebda889bd64b1578c5be3f61250" name="a58462ebda889bd64b1578c5be3f61250"></a>
+var&#160;</td><td class="memItemRight" valign="bottom"><b>svnUrl</b> = Config.configData[&quot;SvnUrl&quot;]</td></tr>
+<tr class="separator:a58462ebda889bd64b1578c5be3f61250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bc010bb0b36a08a019c47dfdb8aecce"><td class="memItemLeft" align="right" valign="top"><a id="a7bc010bb0b36a08a019c47dfdb8aecce" name="a7bc010bb0b36a08a019c47dfdb8aecce"></a>
+var&#160;</td><td class="memItemRight" valign="bottom"><b>checkoutArgs</b> = new SvnCheckOutArgs { }</td></tr>
+<tr class="separator:a7bc010bb0b36a08a019c47dfdb8aecce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe8d75433743a231a397233c80902f7f"><td class="memItemLeft" align="right" valign="top"><a id="abe8d75433743a231a397233c80902f7f" name="abe8d75433743a231a397233c80902f7f"></a>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:SyncSVN/syncsvn.cs&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD=======private SvnRevision getLatestRevision() { SvnInfoEventArgs info;var svnUrl=Config.configData[&quot;SvnUrl&quot;];Uri repos=new Uri(svnUrl);client.GetInfo(repos, out info);return info.Revision;} private void setConflict(object sender, SvnConflictEventArgs e) { Conflict.IsConflict=true;if(e.ConflictAction==SvnConflictAction.Delete &amp;&amp;e.ConflictReason==SvnConflictReason.Edited) { Conflict.ConflictEntries.Add(Path.Combine(Config.configData[&quot;RootPath&quot;], e.Path));Conflict.Action=SvnConflictAction.Delete;Conflict.Reason=SvnConflictReason.Edited;return;} Conflict.IsConflict=true;Conflict.ConflictEntries.Add(e.MergedFile);} private List&lt; string &gt; getModifiedEntries(string path) { List&lt; string &gt; entries=new List&lt; string &gt;();lock(client) { Collection&lt; SvnStatusEventArgs &gt; changedFiles=new Collection&lt; SvnStatusEventArgs &gt;();client.GetStatus(path, out changedFiles);foreach(SvnStatusEventArgs changedFile in changedFiles) { if(changedFile.LocalContentStatus==SvnStatus.Modified) { entries.Add(changedFile.Path);} } } return entries;} &gt; &gt; &gt; &gt; &gt; &gt; &gt; 4d5088394b67ca434099993e93ad79e83b5f6073=======&gt; &gt; &gt; &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>develop</b>:SyncSVN/SyncSVN.cs public void Push(ConflictCallback onConflict = null) { lock (client) { var svnFolder = Config.configData[&quot;RootPath&quot;]</td></tr>
+<tr class="separator:abe8d75433743a231a397233c80902f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21892a0fdf41e3e31d6bc1124e3b1736"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a21892a0fdf41e3e31d6bc1124e3b1736">try</a></td></tr>
+<tr class="separator:a21892a0fdf41e3e31d6bc1124e3b1736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76d1fd7eb34ff9b1cac30c8a4c121c23"><td class="memItemLeft" align="right" valign="top"><a id="a76d1fd7eb34ff9b1cac30c8a4c121c23" name="a76d1fd7eb34ff9b1cac30c8a4c121c23"></a>
+SvnUpdateArgs&#160;</td><td class="memItemRight" valign="bottom"><b>updateArgs</b> = new SvnUpdateArgs()</td></tr>
+<tr class="separator:a76d1fd7eb34ff9b1cac30c8a4c121c23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67558da127b252024672f1ac6a1100db"><td class="memItemLeft" align="right" valign="top"><a id="a67558da127b252024672f1ac6a1100db" name="a67558da127b252024672f1ac6a1100db"></a>
+updateArgs.&#160;</td><td class="memItemRight" valign="bottom"><b>Conflict</b> = new EventHandler&lt;SvnConflictEventArgs&gt;(setConflict)</td></tr>
+<tr class="separator:a67558da127b252024672f1ac6a1100db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d8b7a3a582540e096611bbc96b5e4fb"><td class="memItemLeft" align="right" valign="top"><a id="a5d8b7a3a582540e096611bbc96b5e4fb" name="a5d8b7a3a582540e096611bbc96b5e4fb"></a>
+Conflict.&#160;</td><td class="memItemRight" valign="bottom"><b>IsConflict</b> = false</td></tr>
+<tr class="separator:a5d8b7a3a582540e096611bbc96b5e4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6ea4ad9cf787b524f0b4324b73703c3"><td class="memItemLeft" align="right" valign="top"><a id="aa6ea4ad9cf787b524f0b4324b73703c3" name="aa6ea4ad9cf787b524f0b4324b73703c3"></a>
+List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>localEntries</b> = <a class="el" href="class_repository_lib_1_1_s_v_n_file_repository.html#a6cc2e8a75e002dd2ead27a36d3d9f3b8">GetAllFilesAndDirs</a>(svnFolder)</td></tr>
+<tr class="separator:aa6ea4ad9cf787b524f0b4324b73703c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1e8c48215a0b6e464f1b5d71c206d00"><td class="memItemLeft" align="right" valign="top"><a id="aa1e8c48215a0b6e464f1b5d71c206d00" name="aa1e8c48215a0b6e464f1b5d71c206d00"></a>
+var&#160;</td><td class="memItemRight" valign="bottom"><b>changedFiles</b> = getModifiedEntries(svnFolder)</td></tr>
+<tr class="separator:aa1e8c48215a0b6e464f1b5d71c206d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8ecad832f9926773d55d5b0dfa7406f"><td class="memItemLeft" align="right" valign="top"><a id="ad8ecad832f9926773d55d5b0dfa7406f" name="ad8ecad832f9926773d55d5b0dfa7406f"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>commitMsg</b> = &quot;Next files was modified: \n&quot;</td></tr>
+<tr class="separator:ad8ecad832f9926773d55d5b0dfa7406f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55d8d048ce028face4ccf8d8657a2f02"><td class="memItemLeft" align="right" valign="top"><a id="a55d8d048ce028face4ccf8d8657a2f02" name="a55d8d048ce028face4ccf8d8657a2f02"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>commitMsg</b> = &quot;\n&quot;</td></tr>
+<tr class="separator:a55d8d048ce028face4ccf8d8657a2f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4e16f283289d0eb9c85d4c6a633352c"><td class="memItemLeft" align="right" valign="top"><a id="ac4e16f283289d0eb9c85d4c6a633352c" name="ac4e16f283289d0eb9c85d4c6a633352c"></a>
+var&#160;</td><td class="memItemRight" valign="bottom"><b>commitArgs</b> = new SvnCommitArgs { LogMessage = commitMsg}</td></tr>
+<tr class="separator:ac4e16f283289d0eb9c85d4c6a633352c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1a14d7e753a170ef18c701e4243b8039" name="a1a14d7e753a170ef18c701e4243b8039"></a>
@@ -190,8 +276,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="afceee5dd6c7a39b96ef2ce93358779c1" name="afceee5dd6c7a39b96ef2ce93358779c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afceee5dd6c7a39b96ef2ce93358779c1">&#9670;&nbsp;</a></span>Delete()</h2>
+<a id="a78e84186a15dbe923bd1ebbf0b9210a8" name="a78e84186a15dbe923bd1ebbf0b9210a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78e84186a15dbe923bd1ebbf0b9210a8">&#9670;&nbsp;</a></span>Delete()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,7 +291,7 @@ Properties</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt;&#160;</td>
+          <td class="paramtype">ConflictCallback&#160;</td>
           <td class="paramname"><em>onConflict</em> = <code>null</code>&#160;</td>
         </tr>
         <tr>
@@ -220,14 +306,15 @@ Properties</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td></td></tr>
+    <tr><td class="paramname">onConflict</td><td></td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a18624c1e1fbf259be20bceb8dd37760a" name="a18624c1e1fbf259be20bceb8dd37760a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18624c1e1fbf259be20bceb8dd37760a">&#9670;&nbsp;</a></span>Download()</h2>
+<a id="a227649161aaa91fe2d01450940fc383d" name="a227649161aaa91fe2d01450940fc383d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a227649161aaa91fe2d01450940fc383d">&#9670;&nbsp;</a></span>Download()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -241,7 +328,7 @@ Properties</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt;&#160;</td>
+          <td class="paramtype">ConflictCallback&#160;</td>
           <td class="paramname"><em>onConflict</em> = <code>null</code>&#160;</td>
         </tr>
         <tr>
@@ -299,6 +386,87 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a id="a6cc2e8a75e002dd2ead27a36d3d9f3b8" name="a6cc2e8a75e002dd2ead27a36d3d9f3b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cc2e8a75e002dd2ead27a36d3d9f3b8">&#9670;&nbsp;</a></span>GetAllFilesAndDirs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt; string &gt; RepositoryLib.SVNFileRepository.GetAllFilesAndDirs </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>dirPath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get all files and directories from folder dirPath </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dirPath</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="aa51954e313721b94c72e5bcc4260a6ba" name="aa51954e313721b94c72e5bcc4260a6ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa51954e313721b94c72e5bcc4260a6ba">&#9670;&nbsp;</a></span>GetRelativePath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string RepositoryLib.SVNFileRepository.GetRelativePath </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>filespec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>folder</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get relative path to entry folder </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filespec</td><td></td></tr>
+    <tr><td class="paramname">folder</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
 <a id="a7d77a19f0b97e0a8ad668cbfe04c0533" name="a7d77a19f0b97e0a8ad668cbfe04c0533"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7d77a19f0b97e0a8ad668cbfe04c0533">&#9670;&nbsp;</a></span>InitSvnClient()</h2>
 
@@ -319,23 +487,23 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="aed16c002ba67155cae7ec95fff77864d" name="aed16c002ba67155cae7ec95fff77864d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed16c002ba67155cae7ec95fff77864d">&#9670;&nbsp;</a></span>Push()</h2>
+<a id="a79265189b4b22aaf7de7364f43a69495" name="a79265189b4b22aaf7de7364f43a69495"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79265189b4b22aaf7de7364f43a69495">&#9670;&nbsp;</a></span>Pull()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void RepositoryLib.SVNFileRepository.Push </td>
+          <td class="memname">void RepositoryLib.SVNFileRepository.Pull </td>
           <td>(</td>
-          <td class="paramtype">Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt;&#160;</td>
+          <td class="paramtype">ConflictCallback&#160;</td>
           <td class="paramname"><em>onConflict</em> = <code>null</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Push changes to svn repository. If conflicts occurs onConflict will be called. All local entities marked as true will overwrite remote entities. </p>
+<p>Pull changes from svn server. If onConflict is null all local changes will be overwriten by remote changes If onConflict is set then all entries which marked as true will not be overwriten by remote changes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">onConflict</td><td></td></tr>
@@ -372,8 +540,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="af85d771c1a6a742c07db25c6e4098f66" name="af85d771c1a6a742c07db25c6e4098f66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af85d771c1a6a742c07db25c6e4098f66">&#9670;&nbsp;</a></span>Upload()</h2>
+<a id="a286a3756eb2afe7e9efefa3985dbdcd9" name="a286a3756eb2afe7e9efefa3985dbdcd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a286a3756eb2afe7e9efefa3985dbdcd9">&#9670;&nbsp;</a></span>Upload()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -387,7 +555,7 @@ Properties</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Func&lt; List&lt; string &gt;, List&lt; bool &gt; &gt;&#160;</td>
+          <td class="paramtype">ConflictCallback&#160;</td>
           <td class="paramname"><em>onConflict</em> = <code>null</code>&#160;</td>
         </tr>
         <tr>
@@ -401,7 +569,8 @@ Properties</h2></td></tr>
 <p>Upload file to svn server </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td></td></tr>
+    <tr><td class="paramname">filePath</td><td></td></tr>
+    <tr><td class="paramname">onConflict</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -409,8 +578,41 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a21892a0fdf41e3e31d6bc1124e3b1736" name="a21892a0fdf41e3e31d6bc1124e3b1736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21892a0fdf41e3e31d6bc1124e3b1736">&#9670;&nbsp;</a></span>try</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RepositoryLib.SVNFileRepository.try</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">                    </div>
+<div class="line">                    </div>
+<div class="line">                    </div>
+<div class="line">                    <span class="keywordflow">if</span> (!client.IsWorkingCopy(svnFolder)) {</div>
+<div class="line">                        var checkoutArgs = <span class="keyword">new</span> SvnCheckOutArgs { };</div>
+<div class="line">                        client.CheckOut(<span class="keyword">new</span> SvnUriTarget(svnUrl), svnFolder, checkoutArgs); </div>
+<div class="line">                    }</div>
+<div class="line"> </div>
+<div class="line">                    Console.Write(<span class="stringliteral">&quot;Push changes to directory remote repository&quot;</span> + <span class="stringliteral">&quot;\n&quot;</span>)</div>
+</div><!-- fragment -->
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>syncsvn.cs</li>
+<li>C:/Users/belya/source/repos/SyncSVN/SyncSVN/SyncSVN.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

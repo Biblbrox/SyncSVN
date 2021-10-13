@@ -10,6 +10,7 @@
 <chapter>
     <title>Class Documentation</title>
     <xi:include href="class_repository_lib_1_1_conflict_data.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_repository_lib_1_1_svn_ext.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_repository_lib_1_1_s_v_n_file_repository.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_repository_lib_1_1_s_v_n_file_repository_config.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </chapter>
