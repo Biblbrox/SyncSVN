@@ -61,7 +61,6 @@ namespace RepositoryLib
             IsConflict = false;
             ConflictEntries.Clear();
         }
-
     }
 
     public class SVNFileRepository // : IFileRepository
@@ -149,6 +148,11 @@ namespace RepositoryLib
                 SearchOption.AllDirectories));
         }
 
+        /// <summary>
+        /// Return entries that not under vcs
+        /// </summary>
+        /// <param name="dirPath"></param>
+        /// <returns></returns>
         public List<string> GetEntriesNonControl(string dirPath)
         {
             var res = new List<string>();
@@ -187,7 +191,6 @@ namespace RepositoryLib
         /// <param name="e"></param>
         private void SetConflict(object sender, SvnConflictEventArgs e)
         {
-            Conflict.IsConflict = true;
             if (e.ConflictAction == SvnConflictAction.Delete
                 && e.ConflictReason == SvnConflictReason.Edited) {
 
@@ -258,8 +261,8 @@ namespace RepositoryLib
                     Directory.CreateDirectory(RootPath);
 
                 var svnPath = Path.Combine(RootPath, id);
-                if (File.Exists(svnPath))
-                    return svnPath;
+//                if (File.Exists(svnPath))
+//                    return svnPath;
 
                 try {
                     if (!client.IsWorkingCopy(RootPath))
@@ -269,8 +272,7 @@ namespace RepositoryLib
                     updateArgs.Conflict += new EventHandler<SvnConflictEventArgs>(SetConflict);
 
                     // Clear conflict state
-                    Conflict.IsConflict = false;
-                    Conflict.ConflictEntries.Clear();
+                    Conflict.ResetState();
 
                     client.Update(RootPath, updateArgs);
 
@@ -322,15 +324,19 @@ namespace RepositoryLib
         /// <param name="path"></param>
         /// <param name="onConflict"></param>
         public void Delete(string path, ConflictCallback onConflict = null)
-        {
+        { // TODO: check conflicts
             if (!Directory.Exists(path) && !File.Exists(path))
                 return;
 
             lock (client) {
+                Download(path, onConflict);
+
                 client.Delete(path, new SvnDeleteArgs { Force = true });
 
-                var args = new SvnCommitArgs();
-                args.LogMessage = "File " + path + " deleted";
+                var args = new SvnCommitArgs {
+                    LogMessage = "File " + path + " deleted"
+                };
+
                 client.Commit(RootPath, args);
             }
         }
@@ -540,6 +546,7 @@ namespace RepositoryLib
 
         
     }
+
     public static class SvnExt
     {
         public static string GetUrl(this SvnClient client, string folder)
@@ -556,7 +563,6 @@ namespace RepositoryLib
         }
 
         /// <summary>
-        /// Delete entry(file or directory)
         /// Delete entry(dir or folder). If folder delete recursively
         /// </summary>
         /// <param name="entryPath"></param>
